@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：details
  */
-import {getQueryString} from '../../libs/js/utils'
+import {getQueryString, pageLoadingHide} from '../../libs/js/utils'
 import {getTime, get, timestampToTime, formatDateMore, Animation} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
@@ -11,14 +11,14 @@ let url = '/info/news'
 const htmlPath = ''
 
 $(function () {
-    $('#pageLoading').show()
     // 改变页面title
     let getDetails = (id, channelId) => {
         get(url + '/getbyid', {
             id: id,
             channelId: channelId
         }, (data) => {
-            $('#pageLoading').hide()
+            pageLoadingHide()
+
             let cont = data.obj
             $('title').html(cont.current.title)
             // 设置时间
@@ -58,11 +58,16 @@ $(function () {
     const $articleTitle = $('#articleTitle')
 
     $('.details-header').on('click', '.share-btn', function () {
-        $shareBox.show()
         $shareTime.text($(this).data('time'))
         $articleTitle.text($('#flashNewsTime').html())
         $shareCon.text($('#flashNewsTime').data('synopsis'))
+
         setTimeout(function () {
+            $shareBox.show()
+            const conHeight = parseInt($shareBox.find('.share-cont').height())
+            const conPadding = parseInt($shareBox.find('.share-box').css('padding-top'))
+            $shareBox.height(conPadding + conHeight)
+
             html2canvas(document.getElementById('shareBox')).then(canvas => {
                 let imgUri = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)

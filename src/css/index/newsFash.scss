@@ -3,8 +3,7 @@
  * Time：2017-08-29 19:30
  * Description：index
  */
-@import "../../libs/scss/rem";
-@import "../../libs/scss/normalize";
+@import "../../../libs/scss/rem";
 
 .news-fash {
     width: 100%;
@@ -87,7 +86,7 @@
                 top: rem(-50);
                 width: rem(80);
                 height: rem(26);
-                background: url("../img/share.png") no-repeat;
+                background: url("../../img/share.png") no-repeat;
                 background-size: 100%;
             }
         }

@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：index
  */
-// import { pageLoadingHide } from '../../libs/js/utils'
+import {pageLoadingHide} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
@@ -25,16 +25,16 @@ const navIndex = [
         title: '快讯',
         channelId: ''
     }, {
-        title: '新手指南',
+        title: '新手',
         channelId: '2'
     }, {
-        title: '新币动态',
+        title: '新币',
         channelId: '3'
     }, {
-        title: '火星精编',
+        title: '火星',
         channelId: '4'
     }, {
-        title: '火星编译',
+        title: '火星',
         channelId: '5'
     }
 ]
@@ -184,9 +184,16 @@ $(function () {
         const idNum = $(this).data('type')
 
         $shareTime.text(formatDateMore($('#flashNewsTime' + idNum).data('time')))
-        $shareCon.text($('#flashNewsCon' + idNum).html())
+        const conArr = $('#flashNewsCon' + idNum).html().split('】')
+        $('#articleTitle').text(conArr[0].split('【')[1])
+        $shareCon.text(conArr[1])
+
         setTimeout(function () {
             $shareBox.show()
+            const conHeight = parseInt($shareBox.find('.share-cont').height())
+            const conPadding = parseInt($shareBox.find('.share-box').css('padding-top'))
+            $shareBox.height(conPadding + conHeight)
+
             html2canvas(document.getElementById('shareBox')).then(canvas => {
                 let imgUri = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)
@@ -194,7 +201,6 @@ $(function () {
             })
         }, 100)
     })
-
     $imgConMask.click(function () {
         $shareBox.hide()
         $imgWrap.hide()
@@ -257,7 +263,8 @@ function getNewsList(channelId, currentPage, type, recommend) {
         async: false,
         data: data,
         success: function (data) {
-            $('#pageLoading').hide()
+            pageLoadingHide()
+
             if (data.obj.inforList.length !== 0) {
                 // 设置当前频道下一页数字
                 const $listBox = $('#listBox' + channelId)
@@ -376,6 +383,7 @@ function getFlashNewsList(queryTime) {
         }
     })
 }
+
 // 小于10加0
 function timeNum(t) {
     if (t < 10) {
