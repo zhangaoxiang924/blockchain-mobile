@@ -1,0 +1,134 @@
+<%- include('../../libs/html/util-m/header', {
+title: '火星财经-24小时全天候区块链金融门户',
+description: '火星财经是集新闻、资讯、行情、数据等区块链信息等专业服务平台，致力于为区块链创业者以及数字货币投资者提供最新最及时的项目报道、投资顾问、项目分析、市场行情',
+keywords: '区块链，区块链项目，区块链是什么，区块链概念股，区块链论坛，区块链社区，区块链服务，区块链培训，区块链资讯，区块链活动，区块链市场，区块链投资，区块链百科，虚拟币，数字货币，挖矿，虚拟币是什么，数字货币是什么，怎么挖矿，挖矿是什么，coinmarketcap，比特币，比特币今日价格，比特币交易平台，莱特币，以太坊',
+plugin: ['https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/css/swiper.min.css'],
+private: ['../css/index.css', '../css/blockchain.css']
+}) %>
+
+<div class="swiper-container wrap-box" id="hxwrap">
+    <div class="huoxing-top" id="huoxingTop"><img src="../img/top.jpg" alt=""></div>
+    <div class="swiper-pagination body-wrap" id="hxWrapPage"></div>
+    <div class="swiper-wrapper overall-box" id="overAllBox">
+        <div class="swiper-slide out-box white-bg">
+            <div class="page-con-wrap" id="pageConWrap0">
+                <div class="swiper-container banner" id="newsWrap">
+                    <div class="swiper-wrapper newsWrap"></div>
+                    <!--<div class="swiper-pagination" id="newsWrapPage"></div>-->
+                </div>
+                <div class="currency-price" id="coinList">
+                    <div class="price-list">
+                        <div class="price-number">
+                            <h3>比特币</h3>
+                            <p>-19.00%</p>
+                        </div>
+                        <h2>$78902.00</h2>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-number">
+                            <h3>比特币</h3>
+                            <p>-19.00%</p>
+                        </div>
+                        <h2>$78902.00</h2>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-number">
+                            <h3>比特币</h3>
+                            <p>-19.00%</p>
+                        </div>
+                        <h2>$78902.00</h2>
+                    </div>
+                </div>
+                <div class="news-box">
+                    <h6><span></span>今日新闻</h6>
+
+                    <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                    <div class="list-box" id="listBox0" data-page="1"></div>
+                    <div class="btn-more" data-type="0">加载更多</div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box">
+            <div class="news-fash page-con-wrap" id="pageConWrapLive">
+                <div class="fash-title"><img src="../img/time.png" alt=""></div>
+                <div class="lives-box"></div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box white-bg">
+            <div class="blockchain page-con-wrap" id="pageConWrap1">
+
+                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                <div class="blockchain-box" id="listBox1" data-page="1"></div>
+                <div class="btn-more" data-type="1">加载更多</div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box white-bg">
+            <div class="blockchain page-con-wrap" id="pageConWrap2">
+
+                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                <div class="blockchain-box" id="listBox2" data-page="1"></div>
+                <div class="btn-more" data-type="2">加载更多</div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box white-bg">
+            <div class="btb page-con-wrap" id="pageConWrap3">
+
+                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                <div class="btb-box" id="listBox3" data-page="1"></div>
+                <div class="btn-more" data-type="3">加载更多</div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box white-bg">
+            <div class="btb page-con-wrap" id="pageConWrap4">
+
+                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                <div class="btb-box" id="listBox4" data-page="1"></div>
+                <div class="btn-more" data-type="4">加载更多</div>
+            </div>
+        </div>
+        <div class="swiper-slide out-box white-bg">
+            <div class="btb page-con-wrap" id="pageConWrap5">
+
+                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
+                <div class="btb-box" id="listBox5" data-page="1"></div>
+                <div class="btn-more" data-type="5">加载更多</div>
+            </div>
+        </div>
+    </div>
+    <div class="back-top"></div>
+</div>
+
+<div class="share-box" id="shareBox">
+    <img class="share-bg" src="../img/share.jpg"/>
+    <div class="share-cont">
+        <div class="title-time"><img src="../img/time-t.png" alt=""><span id="shareTime">2018-01-25  22:10</span></div>
+        <!--<div class="label">实时快讯</div>-->
+        <div class="share-introduce" id="shareCon">
+            越来越多国家的政府开始对比特币进行监管，而下一个可能对加密货币严加看管的国家，可能是英国。据彭博，英国首相特蕾莎·梅已经开始认真考虑限制比特币，因为她担心加密货币被犯罪分子使用。梅表示，应该认真对待像比特币这样的加密货币，需要对这些加密货币采取一定行动，因为它们被可以被广泛应用，包括犯罪分子。
+        </div>
+        <div class="share-bottom">
+            <div class="share-ewm"><img src="../img/huoxing24.jpg" alt=""></div>
+            <div class="share-ewm-right">
+                <p>长按二维码关注微信公众号</p>
+                <p>第一时间掌握最新资讯</p>
+            </div>
+            <div style="clear: both"></div>
+            <div class="domain">
+                <p>「火星财经」官网</p>
+                <p>www.huoxing24.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="img-wrap" id="imgWrap">
+    <div class="img-con-mask" id="imgConMask"></div>
+    <div class="img-con"><img id="imgCon" src="../img/share.jpg" alt=""></div>
+    <div class="img-tips">长按图片转发给朋友</div>
+</div>
+
+<%- include('../../libs/html/util-m/footer', {
+plugin: ['https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/js/swiper.min.js'],
+private: ['../js/index.js'],
+statistics: 'https://s22.cnzz.com/z_stat.php?id=1272858809&web_id=1272858809'
+}) %>
