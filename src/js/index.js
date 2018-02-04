@@ -31,10 +31,10 @@ const navIndex = [
         title: '新币',
         channelId: '3'
     }, {
-        title: '火星',
+        title: '精编',
         channelId: '4'
     }, {
-        title: '火星',
+        title: '编译',
         channelId: '5'
     }
 ]
