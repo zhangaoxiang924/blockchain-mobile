@@ -34,7 +34,7 @@
         }
 
         span {
-            margin: 0 rem(25);
+            margin: 0 rem(19);
 
             &:first-child {
                 color: #00b0ff;
@@ -78,6 +78,20 @@
                 line-height: rem(38);
                 margin: 0;
                 word-wrap: break-word;
+
+                &.red {
+                    color: red;
+                }
+
+                a {
+                    color: #00b0ff;
+                    font-size: rem(20);
+                    display: none;
+
+                    &.block {
+                        display: inline-block;
+                    }
+                }
             }
 
             .share {

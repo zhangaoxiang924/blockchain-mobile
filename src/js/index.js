@@ -3,8 +3,8 @@
  * Time：2018-01-29
  * Description：index
  */
-import {pageLoadingHide} from '../../libs/js/utils'
-import {getTime, sevenDays, timestampToTime, formatDateMore, Animation} from '../js/public/public'
+import { pageLoadingHide } from '../../libs/js/utils'
+import { getTime, sevenDays, timestampToTime, formatDateMore, Animation } from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
@@ -54,14 +54,18 @@ $(function () {
         let daySplit = d.split('-')[2]
         dayStr += `<span>${daySplit}</span>`
     })
-
     $('.fash-title').append(dayStr)
     $('.fash-title span').eq(0).addClass('active')
     $('.fash-title span').on('click', function () {
         $(this).addClass('active').siblings().removeClass('active')
-        let date = new Date(dayArr[$(this).index() - 1])
-        let time = Date.parse(date)
-        getFlashNewsList(time)
+        if ($(this).index() === 1) {
+            getFlashNewsList('', 30, 1, 1, 2)
+            $('.btn-more-flash').css('display', 'block')
+        } else {
+            let date = new Date(dayArr[$(this).index() - 2])
+            let time = Date.parse(date)
+            getFlashNewsList(time, 200, 1, 0, 2)
+        }
     })
 
     let swiper = new Swiper('#hxwrap', {
@@ -107,9 +111,9 @@ $(function () {
                     if (this.activeIndex !== 1) {
                         getNewsList(type, 1)
                     } else {
-                        let flashTime = new Date(sevenDays()[0])
-                        let flashTimestamp = Date.parse(flashTime)
-                        getFlashNewsList(flashTimestamp)
+                        /* let flashTime = new Date(sevenDays()[0])
+                         let flashTimestamp = Date.parse(flashTime) */
+                        getFlashNewsList('', 30, 1, 1)
                     }
                 }
 
@@ -236,7 +240,7 @@ $(function () {
     })
 })
 
-function calculateHeight(channelId) {
+function calculateHeight (channelId) {
     const $overAllBox = $('#overAllBox')
     const windowHeight = parseInt($(window).height())
 
@@ -249,7 +253,7 @@ function calculateHeight(channelId) {
     }
 }
 
-function getNewsList(channelId, currentPage, type, recommend) {
+function getNewsList (channelId, currentPage, type, recommend) {
     let data = {
         currentPage: currentPage,
         pageSize: 20,
@@ -343,8 +347,9 @@ function getNewsList(channelId, currentPage, type, recommend) {
         }
     })
 }
-
-function getFlashNewsList(queryTime) {
+let flashCurrentPage = null
+let flashPage = $('.btn-more-flash').data('type')
+function getFlashNewsList (queryTime, pageSize, currentPage, type, more) {
     $.ajax({
         type: 'GET',
         url: url2 + '/showlives',
@@ -352,7 +357,8 @@ function getFlashNewsList(queryTime) {
         async: false,
         data: {
             queryTime: queryTime,
-            pageSize: 200
+            pageSize: pageSize,
+            currentPage: currentPage
         },
         success: function (data) {
             let dataArr = data.obj.inforList
@@ -363,21 +369,29 @@ function getFlashNewsList(queryTime) {
             let time = getTime(timestamp, dataArr.publishTime)
             $('.news-fash .time').html(time)
             let livesList = ''
-
+            flashCurrentPage = data.obj.pageCount
             dataArr.map(function (d, i) {
                 let time = (timestampToTime(d.createdTime).split(' ')[1]).split(':')
+                let year = (timestampToTime(d.createdTime).split(' ')[0]).split('-')
+                let allTime = type === 1 ? `${year[1] + '-' + timeNum(year[2])} ${timeNum(time[0])}:${timeNum(time[1])}` : `${timeNum(time[0])}:${timeNum(time[1])}`
                 const idName = i.toString() + data.obj.currentPage
+                let status = d.tag === 2 ? 'red' : ''
+                let url = d.url ? d.url : ''
+                let originalUrl = url !== '' ? 'block' : ''
                 livesList += `<div class="new-fash-list">
-                                    <div class="time-flash" data-time=${d.createdTime} id=${'flashNewsTime' + idName}><img src="../img/time-t.png" alt="">${timeNum(time[0])}:${timeNum(time[1])}</div>
+                                    <div class="time-flash" data-time=${d.createdTime} id=${'flashNewsTime' + idName}><img src="../img/time-t.png" alt="">${allTime}</div>
                                     <div class="text-flash clearfix">
-                                        <p id=${'flashNewsCon' + idName}>${d.content}</p>
+                                        <p class=${status}><span id=${'flashNewsCon' + idName} >${d.content}</span><a href=${url} class=${originalUrl}>「查看原文」</a></p>
                                         <div class="share" data-type=${idName} data-time=${d.createdTime}></div>
                                     </div>
                                     <div style="clear: both"></div>
                                 </div>`
             })
-
-            $('.lives-box').html(livesList)
+            if (more === 2) {
+                $('.lives-box').html(livesList)
+            } else {
+                $('.lives-box').append(livesList)
+            }
 
             calculateHeight('Live')
         },
@@ -387,8 +401,15 @@ function getFlashNewsList(queryTime) {
     })
 }
 
+$('.btn-more-flash').on('click', function () {
+    flashPage++
+    if (flashPage > flashCurrentPage) {
+        return false
+    }
+    getFlashNewsList('', 30, flashPage, 1)
+})
 // 小于10加0
-function timeNum(t) {
+function timeNum (t) {
     if (t < 10) {
         t = '0' + t
     }
