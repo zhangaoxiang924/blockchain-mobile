@@ -202,7 +202,10 @@ $(function () {
             const conPadding = parseInt($shareBox.find('.share-box').css('padding-top'))
             $shareBox.height(conPadding + conHeight)
 
-            html2canvas(document.getElementById('shareBox')).then(canvas => {
+            html2canvas(document.getElementById('shareBox'), {
+                /* dpi: window.devicePixelRatio * 2,
+                scale: 1 * 2 */
+            }).then(canvas => {
                 let imgUri = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)
                 $imgWrap.show()
