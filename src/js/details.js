@@ -3,13 +3,15 @@
  * Time：2018-01-29
  * Description：details
  */
-import {getQueryString, pageLoadingHide} from '../../libs/js/utils'
+import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
 import {getTime, get, timestampToTime, formatDateMore, Animation} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
 const htmlPath = ''
-
+if (isPc()) {
+    window.location.href = 'http://www.huoxing24.com'
+}
 $(function () {
     // 改变页面title
     let getDetails = (id, channelId) => {

@@ -3,9 +3,13 @@
  * Time：2018-01-29
  * Description：index
  */
-import { pageLoadingHide } from '../../libs/js/utils'
+import { pageLoadingHide, isPc } from '../../libs/js/utils'
 import { getTime, sevenDays, timestampToTime, formatDateMore, Animation } from '../js/public/public'
 import html2canvas from 'html2canvas'
+
+if (isPc()) {
+    window.location.href = 'http://www.huoxing24.com'
+}
 
 let url = '/info/news'
 let url2 = '/info/lives'
