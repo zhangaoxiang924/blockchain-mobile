@@ -3,8 +3,8 @@
  * Time：2018-01-29
  * Description：index
  */
-import { pageLoadingHide, isPc } from '../../libs/js/utils'
-import { getTime, sevenDays, timestampToTime, formatDateMore, Animation } from '../js/public/public'
+import {pageLoadingHide, isPc} from '../../libs/js/utils'
+import {getTime, sevenDays, timestampToTime, formatDateMore, Animation} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 if (isPc()) {
@@ -21,24 +21,23 @@ const navIndex = [
     {
         title: '最新',
         channelId: '0'
-    },
-    {
-        title: '新闻',
-        channelId: '1'
     }, {
         title: '快讯',
         channelId: ''
     }, {
-        title: '新手',
+        title: '新闻',
+        channelId: '1'
+    }, {
+        title: '行业',
         channelId: '2'
     }, {
-        title: '新币',
+        title: '产品',
         channelId: '3'
     }, {
-        title: '精编',
+        title: '观点',
         channelId: '4'
     }, {
-        title: '编译',
+        title: '新手',
         channelId: '5'
     }
 ]
@@ -80,9 +79,9 @@ $(function () {
                 if (index === 0) {
                     return '<span class="' + className + ' column-nav" data-type="' + navIndex[0].channelId + '">' + navIndex[0].title + '<i class="active"></i></span>'
                 } else if (index === 1) {
-                    return '<span class="' + className + ' column-nav">' + navIndex[2].title + '<i></i></span>'
+                    return '<span class="' + className + ' column-nav">' + navIndex[1].title + '<i></i></span>'
                 } else if (index === 2) {
-                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[1].channelId + '">' + navIndex[1].title + '<i></i></span>'
+                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[2].channelId + '">' + navIndex[2].title + '<i></i></span>'
                 } else if (index === 3) {
                     return '<span class="' + className + ' column-nav" data-type="' + navIndex[3].channelId + '">' + navIndex[3].title + '<i></i></span>'
                 } else if (index === 4) {
@@ -244,7 +243,7 @@ $(function () {
     })
 })
 
-function calculateHeight (channelId) {
+function calculateHeight(channelId) {
     const $overAllBox = $('#overAllBox')
     const windowHeight = parseInt($(window).height())
 
@@ -257,7 +256,7 @@ function calculateHeight (channelId) {
     }
 }
 
-function getNewsList (channelId, currentPage, type, recommend) {
+function getNewsList(channelId, currentPage, type, recommend) {
     let data = {
         currentPage: currentPage,
         pageSize: 20,
@@ -351,9 +350,11 @@ function getNewsList (channelId, currentPage, type, recommend) {
         }
     })
 }
+
 let flashCurrentPage = null
 let flashPage = $('.btn-more-flash').data('type')
-function getFlashNewsList (queryTime, pageSize, currentPage, type, more) {
+
+function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
     $.ajax({
         type: 'GET',
         url: url2 + '/showlives',
@@ -412,8 +413,9 @@ $('.btn-more-flash').on('click', function () {
     }
     getFlashNewsList('', 30, flashPage, 1)
 })
+
 // 小于10加0
-function timeNum (t) {
+function timeNum(t) {
     if (t < 10) {
         t = '0' + t
     }
