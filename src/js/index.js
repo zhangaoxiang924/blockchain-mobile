@@ -39,6 +39,9 @@ const navIndex = [
     }, {
         title: '新手',
         channelId: '5'
+    }, {
+        title: '技术',
+        channelId: '6'
     }
 ]
 
@@ -92,6 +95,8 @@ $(function () {
                     return '<span class="' + className + ' column-nav" data-type="' + navIndex[6].channelId + '">' + navIndex[6].title + '<i></i></span>'
                 } else if (index === 7) {
                     return '<span class="' + className + ' column-nav" data-type="' + navIndex[7].channelId + '">' + navIndex[7].title + '<i></i></span>'
+                } else if (index === 8) {
+                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[6].channelId + '">' + navIndex[6].title + '<i></i></span>'
                 }
             }
         },
@@ -263,14 +268,16 @@ function getNewsList(channelId, currentPage, type, recommend) {
         channelId: channelId
     }
     if (recommend) {
-        data = Object.assign({}, data, {recommend: 1})
+        data = {
+            pageSize: 4,
+            recommend: 1
+        }
     }
 
     $.ajax({
         type: 'GET',
         url: url + '/shownews',
         dataType: 'json',
-        async: false,
         data: data,
         success: function (data) {
             pageLoadingHide()
@@ -293,7 +300,12 @@ function getNewsList(channelId, currentPage, type, recommend) {
                 // list html string
                 let newsList = ''
 
-                dataArr.map(function (d, i) {
+                for (let i = 0; i < dataArr.length; i++) {
+                    const d = dataArr[i]
+                    if (recommend && i >= 4) {
+                        break
+                    }
+
                     // banner
                     let img = JSON.parse(d.coverPic)
                     swiperSlide += `<div class="swiper-slide">
@@ -331,7 +343,7 @@ function getNewsList(channelId, currentPage, type, recommend) {
                     } else {
                         newsList += htmlStr
                     }
-                })
+                }
 
                 if (recommend) {
                     // banner
