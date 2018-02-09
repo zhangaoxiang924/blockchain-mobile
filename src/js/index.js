@@ -389,7 +389,7 @@ function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
             currentPage: currentPage
         },
         success: function (data) {
-            pageLoadingHide();
+            pageLoadingHide()
 
             let dataArr = data.obj.inforList
             let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
