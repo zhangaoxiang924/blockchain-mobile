@@ -99,7 +99,7 @@ body,
             position: relative;
             display: block;
             float: left;
-            width: rem(620/8);
+            width: rem(620/9);
             height: 100%;
             background: none;
 
@@ -387,4 +387,17 @@ body,
             height: rem(110);
         }
     }
+}
+
+/* app快讯页面 */
+.lives-page {
+    margin: 0;
+
+    .fash-title {
+        margin-top: 0;
+    }
+}
+
+.swiper-wrapper.overall-box.lives-page.active {
+    margin-top: 0;
 }

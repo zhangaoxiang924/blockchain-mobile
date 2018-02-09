@@ -42,16 +42,25 @@ const navIndex = [
     }, {
         title: '技术',
         channelId: '6'
+    }, {
+        title: '游戏',
+        channelId: '7'
     }
 ]
 
 $(function () {
-    $('#pageLoading').show()
-    // 初始化新闻列表
-    getNewsList(0, 1)
+    if ($('#livesPage').length === 0) {
+        // 初始化新闻列表
+        getNewsList(0, 1)
 
-    // 获取banner
-    getNewsList(0, 1, 'getBanner', true)
+        // 获取banner
+        getNewsList(0, 1, 'getBanner', true)
+    }
+
+    // app快讯页面 默认列表
+    if ($('#livesPage').length !== 0) {
+        getFlashNewsList('', 30, 1, 1)
+    }
 
     // 快讯时间
     let dayArr = sevenDays()
@@ -96,7 +105,9 @@ $(function () {
                 } else if (index === 7) {
                     return '<span class="' + className + ' column-nav" data-type="' + navIndex[7].channelId + '">' + navIndex[7].title + '<i></i></span>'
                 } else if (index === 8) {
-                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[6].channelId + '">' + navIndex[6].title + '<i></i></span>'
+                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[8].channelId + '">' + navIndex[8].title + '<i></i></span>'
+                } else if (index === 9) {
+                    return '<span class="' + className + ' column-nav" data-type="' + navIndex[9].channelId + '">' + navIndex[9].title + '<i></i></span>'
                 }
             }
         },
@@ -378,6 +389,8 @@ function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
             currentPage: currentPage
         },
         success: function (data) {
+            pageLoadingHide();
+
             let dataArr = data.obj.inforList
             let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
             let serve = originalDate + (3600000 * 8)
