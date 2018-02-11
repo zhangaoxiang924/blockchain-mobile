@@ -33,7 +33,9 @@ private: ['../css/public.css', '../css/index.css']
     <div class="back-top"></div>
 </div>
 
-<%- include('./include/share') %>
+<%- include('./include/share', {
+app: true
+}) %>
 <%- include('../../libs/html/util-m/footer', {
 plugin: ['../js/swiper.min.js'],
 private: ['../js/index.js'],

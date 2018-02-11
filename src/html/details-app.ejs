@@ -45,7 +45,9 @@ private: ['../css/public.css', '../css/details.css']
     </div>
 </div>
 
-<%- include('./include/share') %>
+<%- include('./include/share', {
+app: true
+}) %>
 <%- include('../../libs/html/util-m/footer', {
 plugin: [''],
 private: ['../js/details.js'],
