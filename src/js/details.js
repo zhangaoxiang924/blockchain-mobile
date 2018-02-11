@@ -38,7 +38,7 @@ $(function () {
 
             const timer = compareCalendar('2018-02-10', formatDateMore(cont.current.createTime).split(' ')[0])
             const $detailsSynopsis = $('#detailsSynopsis')
-            if (!timer) {
+            if (timer) {
                 $detailsSynopsis.addClass('active').children('p').text(synopsis)
             }
 
