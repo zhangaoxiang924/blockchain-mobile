@@ -51,7 +51,14 @@
     }
 }
 
-.page-app img {
+/* app禁止长按图片保存 */
+.page-app,
+.page-app .img-con-mask,
+.page-app .img-con img,
+.page-app .img-con {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     user-select: none;
 }
 

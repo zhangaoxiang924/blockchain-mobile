@@ -4,7 +4,7 @@
  * Description：details
  */
 import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
-import {getTime, get, timestampToTime, formatDateMore, Animation} from '../js/public/public'
+import {getTime, get, timestampToTime, formatDateMore, Animation, compareCalendar} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
@@ -19,10 +19,13 @@ $(function () {
             id: id,
             channelId: channelId
         }, (data) => {
+            console.log(data)
+
             pageLoadingHide()
 
             let cont = data.obj
             $('title').html(cont.current.title)
+
             // 设置时间
             let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
             let serve = originalDate + (3600000 * 8)
@@ -32,13 +35,20 @@ $(function () {
             let shadeTime = timestampToTime(timestamp)
             newsCorrelation(cont.current.tags, 5, cont.current.id)
             let synopsis = data.obj.current.synopsis
+
+            const timer = compareCalendar('2018-02-10', formatDateMore(cont.current.createTime).split(' ')[0])
+            const $detailsSynopsis = $('#detailsSynopsis')
+            if (!timer) {
+                $detailsSynopsis.addClass('active').children('p').text(synopsis)
+            }
+
             let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
                             <div class="list-text">
                                 <div class="author clearfix">
                                     <sapn>${cont.current.author}</sapn>
                                 </div>
                                 <div class="time clearfix"><span>${time}</span></div>
-                                <div 
+                                <div
                                 class="share-btn"
                                 data-synopsis="${synopsis}"
                                 data-time="${formatDateMore(cont.current.publishTime)}"></div>

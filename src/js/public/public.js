@@ -15,6 +15,66 @@ const formatDateMore = (time) => {
     return `${y}-${m}-${d} ${h}:${mn}`
 }
 
+// 比较日前大小
+const compareDate = (checkStartDate, checkEndDate) => {
+    let arys1 = []
+    let arys2 = []
+    if (checkStartDate != null && checkEndDate != null) {
+        arys1 = checkStartDate.split('-')
+        const sdate = new Date(arys1[0], parseInt(arys1[1] - 1), arys1[2])
+        arys2 = checkEndDate.split('-')
+        const edate = new Date(arys2[0], parseInt(arys2[1] - 1), arys2[2])
+        if (sdate > edate) {
+            console.log('日期开始时间大于结束时间')
+            return false
+        } else {
+            console.log('通过')
+            return true
+        }
+    }
+}
+
+// 判断日期，时间大小
+const compareTime = (startDate, endDate) => {
+    if (startDate.length > 0 && endDate.length > 0) {
+        const startDateTemp = startDate.split(' ')
+        const endDateTemp = endDate.split(' ')
+
+        const arrStartDate = startDateTemp[0].split('-')
+        const arrEndDate = endDateTemp[0].split('-')
+
+        const arrStartTime = startDateTemp[1].split(':')
+        const arrEndTime = endDateTemp[1].split(':')
+
+        const allStartDate = new Date(arrStartDate[0], arrStartDate[1], arrStartDate[2], arrStartTime[0], arrStartTime[1], arrStartTime[2])
+        const allEndDate = new Date(arrEndDate[0], arrEndDate[1], arrEndDate[2], arrEndTime[0], arrEndTime[1], arrEndTime[2])
+
+        if (allStartDate.getTime() >= allEndDate.getTime()) {
+            console.log('startTime不能大于endTime，不能通过')
+            return false
+        } else {
+            console.log('startTime小于endTime，所以通过了')
+            return true
+        }
+    } else {
+        console.log('时间不能为空')
+        return false
+    }
+}
+
+// 比较日期，时间大小
+const compareCalendar = (startDate, endDate) => {
+    if (startDate.indexOf(' ') !== -1 && endDate.indexOf(' ') !== -1) {
+        // 包含时间，日期
+        console.log(startDate)
+        console.log(endDate)
+        return compareTime(startDate, endDate)
+    } else {
+        // 不包含时间，只包含日期
+        return compareDate(startDate, endDate)
+    }
+}
+
 const get = (url, data, fn) => {
     $.ajax({
         type: 'GET',
@@ -101,4 +161,4 @@ const Animation = () => {
     }, 10)
 }
 
-export { get, getTime, sevenDays, timestampToTime, formatDateMore, Animation }
+export {get, getTime, sevenDays, timestampToTime, formatDateMore, Animation, compareCalendar, compareTime}

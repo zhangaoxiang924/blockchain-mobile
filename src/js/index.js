@@ -24,10 +24,10 @@ const navIndex = [
     }, {
         title: '快讯',
         channelId: ''
-    }, {
+    }, /* {
         title: '新闻',
         channelId: '1'
-    }, {
+    }, */{
         title: '行业',
         channelId: '2'
     }, {
