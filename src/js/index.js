@@ -24,24 +24,18 @@ const navIndex = [
     }, {
         title: '快讯',
         channelId: ''
-    }, /* {
-        title: '新闻',
-        channelId: '1'
-    }, */{
-        title: '行业',
+    }, {
+        title: '产业',
         channelId: '2'
-    }, {
-        title: '产品',
-        channelId: '3'
-    }, {
-        title: '观点',
-        channelId: '4'
-    }, {
-        title: '新手',
-        channelId: '5'
     }, {
         title: '技术',
         channelId: '6'
+    }, {
+        title: '项目',
+        channelId: '3'
+    }, {
+        title: '人物',
+        channelId: '4'
     }, {
         title: '游戏',
         channelId: '7'

@@ -90,14 +90,6 @@ private: ['../css/public.css', '../css/index.css']
             </div>
         </div>
         <div class="swiper-slide out-box white-bg">
-            <div class="btb page-con-wrap" id="pageConWrap5">
-
-                <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
-                <div class="btb-box" id="listBox5" data-page="1"></div>
-                <div class="btn-more" data-type="5">加载更多</div>
-            </div>
-        </div>
-        <div class="swiper-slide out-box white-bg">
             <div class="btb page-con-wrap" id="pageConWrap6">
 
                 <!--频道分类，频道变化修改list-box的id与btn-more的data-type-->
@@ -118,7 +110,7 @@ private: ['../css/public.css', '../css/index.css']
 </div>
 
 <%- include('./include/share', {
-app: true
+app: false
 }) %>
 <%- include('../../libs/html/util-m/footer', {
 plugin: ['../js/swiper.min.js'],
