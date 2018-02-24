@@ -14,7 +14,7 @@ if (isPc()) {
 let url = '/info/news'
 let url2 = '/info/lives'
 let url3 = '/market/coin'
-const htmlPath = ''
+const htmlPath = '/html'
 
 // 频道分类数组
 const navIndex = [

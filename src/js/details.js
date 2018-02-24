@@ -8,7 +8,7 @@ import {getTime, get, timestampToTime, formatDateMore, Animation, compareCalenda
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
-const htmlPath = ''
+const htmlPath = '/html'
 if (isPc()) {
     window.location.href = 'http://www.huoxing24.com'
 }
@@ -61,6 +61,31 @@ $(function () {
     }
     getDetails(getQueryString('id'), getQueryString('channelId'))
 
+    // 超出字数显示省略号
+    const cutString = (str, len) => {
+        // length属性读出来的汉字长度为1
+        if (str.length * 2 <= len) {
+            return str
+        }
+        let strlen = 0
+        let s = ''
+        for (let i = 0; i < str.length; i++) {
+            s = s + str.charAt(i)
+            if (str.charCodeAt(i) > 128) {
+                strlen = strlen + 2
+                if (strlen >= len) {
+                    return s.substring(0, s.length - 1) + '...'
+                }
+            } else {
+                strlen = strlen + 1
+                if (strlen >= len) {
+                    return s.substring(0, s.length - 2) + '...'
+                }
+            }
+        }
+        return s
+    }
+
     const $shareBox = $('#shareBox')
     const $shareTime = $('#shareTime')
     const $shareCon = $('#shareCon')
@@ -109,7 +134,7 @@ $(function () {
                 let img = JSON.parse(d.coverPic)
                 newsList += `<div class="news-list-more ">
                                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
-                                    <div class="title">${d.title}</div>
+                                    <div class="title">${cutString(d.title, 60)}</div>
                                     <div class="list-text">
                                         <div class="author clearfix"><span>${d.author}</span></div>
                                         <div class="time clearfix"><span>${time}</span></div>
