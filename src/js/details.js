@@ -10,7 +10,12 @@ import html2canvas from 'html2canvas'
 let url = '/info/news'
 const htmlPath = '/html'
 if (isPc()) {
-    window.location.href = 'http://www.huoxing24.com'
+    let href = window.location.href
+    if (href.indexOf('details') !== -1) {
+        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}/${getQueryString('channelId')}`
+    } else {
+        window.location.href = 'http://www.huoxing24.com'
+    }
 }
 $(function () {
     // 改变页面title
