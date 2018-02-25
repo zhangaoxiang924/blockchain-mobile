@@ -8,7 +8,7 @@ import {getTime, get, timestampToTime, formatDateMore, Animation, compareCalenda
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
-const htmlPath = '/html'
+const htmlPath = ''
 if (isPc()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
