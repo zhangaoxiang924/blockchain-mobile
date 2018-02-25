@@ -39,6 +39,9 @@ const navIndex = [
     }, {
         title: '游戏',
         channelId: '7'
+    }, {
+        title: '八点',
+        channelId: '8'
     }
 ]
 
@@ -109,7 +112,7 @@ $(function () {
             slideChangeTransitionStart: function () {
                 $('.body-wrap .swiper-pagination-bullet').eq(this.activeIndex).children('i').addClass('active').parent().siblings().children('i').removeClass('active')
 
-                if (this.activeIndex === 6) {
+                if (this.activeIndex >= 1) {
                     $('#hxWrapPage').addClass('active')
                 } else {
                     $('#hxWrapPage').removeClass('active')

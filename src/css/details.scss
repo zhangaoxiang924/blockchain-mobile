@@ -79,7 +79,8 @@
             line-height: rem(40);
 
             .author,
-            .time {
+            .time,
+            .read-number {
                 color: #bdbdbd;
                 float: left;
                 font-size: rem(18);
@@ -90,10 +91,20 @@
                 }
             }
 
+            .read-number {
+                position: absolute;
+                right: rem(100);
+                padding-left: rem(25);
+                background: url("../img/read-number.png") no-repeat left;
+                background-size: auto rem(22);
+                height: rem(36);
+                line-height: rem(40);
+            }
+
             .share-btn {
                 position: absolute;
                 right: 0;
-                top: rem(5);
+                top: rem(8);
                 width: rem(78);
                 height: rem(24);
                 background: url("../img/detail-share.png") no-repeat;
@@ -102,7 +113,7 @@
 
             .time {
                 position: absolute;
-                right: rem(100);
+                left: rem(0);
 
                 span {
                     float: right;
@@ -276,7 +287,7 @@
         background: url("../img/details-synopsis-bg.png") no-repeat left rem(45);
         background-size: rem(36) rem(26);
         border-top: 1px solid #f5f5f5;
-        color: #757575;
+        color: #a6a6a6;
         font-size: rem(26);
         line-height: rem(46);
     }

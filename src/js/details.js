@@ -42,12 +42,20 @@ $(function () {
                 $detailsSynopsis.addClass('active').children('p').text(synopsis)
             }
 
+            // 作者信息备份
+            let author = `<div class="author clearfix">
+                                    <sapn>${cont.current.author}</sapn>
+                                </div>`
+            author = ''
+
+            let readNumber = `<div class="read-number">${cont.current.readCounts}</div>`
+            readNumber = ''
+
             let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
                             <div class="list-text">
-                                <div class="author clearfix">
-                                    <sapn>${cont.current.author}</sapn>
-                                </div>
+                                ${author}
                                 <div class="time clearfix"><span>${time}</span></div>
+                                ${readNumber}
                                 <div
                                 class="share-btn"
                                 data-synopsis="${synopsis}"
