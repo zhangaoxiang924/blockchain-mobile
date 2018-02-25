@@ -4,7 +4,15 @@
  * Description：details
  */
 import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
-import {getTime, get, timestampToTime, formatDateMore, Animation, compareCalendar} from '../js/public/public'
+import {
+    getTime,
+    get,
+    timestampToTime,
+    formatDateMore,
+    Animation,
+    compareCalendar,
+    scrollDirect
+} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
@@ -18,6 +26,18 @@ if (isPc()) {
     }
 }
 $(function () {
+    const $huoxingTop = $('#huoxingTop')
+    scrollDirect(function (direction) {
+        if (direction === 'down') {
+            if (parseFloat($(window).scrollTop()) >= 600) {
+                $huoxingTop.addClass('active')
+            }
+        }
+        if (direction === 'up') {
+            $huoxingTop.removeClass('active')
+        }
+    })
+
     // 改变页面title
     let getDetails = (id, channelId) => {
         get(url + '/getbyid', {

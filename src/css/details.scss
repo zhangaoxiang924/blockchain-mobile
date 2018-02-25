@@ -37,6 +37,11 @@
         width: 100%;
         height: rem(75);
         z-index: 7779;
+        transition: all 0.5s ease 0s;
+
+        &.active {
+            transform: translateY(rem(-75));
+        }
 
         .back-prev-page {
             position: absolute;

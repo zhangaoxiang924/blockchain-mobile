@@ -66,8 +66,6 @@ const compareTime = (startDate, endDate) => {
 const compareCalendar = (startDate, endDate) => {
     if (startDate.indexOf(' ') !== -1 && endDate.indexOf(' ') !== -1) {
         // 包含时间，日期
-        console.log(startDate)
-        console.log(endDate)
         return compareTime(startDate, endDate)
     } else {
         // 不包含时间，只包含日期
@@ -161,4 +159,45 @@ const Animation = () => {
     }, 10)
 }
 
-export {get, getTime, sevenDays, timestampToTime, formatDateMore, Animation, compareCalendar, compareTime}
+// 滚动方向
+const scrollDirect = (fn) => {
+    let beforeScrollTop = document.body.scrollTop
+
+    fn = fn || function () {
+    }
+
+    window.addEventListener('scroll', function (event) {
+        // const event = event || window.event
+        const afterScrollTop = parseFloat($(window).scrollTop())
+        const delta = afterScrollTop - beforeScrollTop
+        beforeScrollTop = afterScrollTop
+
+        const scrollTop = $(this).scrollTop()
+        const scrollHeight = $(document).height()
+        const windowHeight = $(this).height()
+        if (scrollTop + windowHeight > scrollHeight - 10) { // 滚动到底部执行事件
+            fn('up')
+            return
+        }
+        if (afterScrollTop < 10 || afterScrollTop > $(document.body).height - 10) {
+            fn('up')
+        } else {
+            if (Math.abs(delta) < 10) {
+                return false
+            }
+            fn(delta > 0 ? 'down' : 'up')
+        }
+    }, false)
+}
+
+export {
+    get,
+    getTime,
+    sevenDays,
+    timestampToTime,
+    formatDateMore,
+    Animation,
+    compareCalendar,
+    compareTime,
+    scrollDirect
+}
