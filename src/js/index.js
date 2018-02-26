@@ -4,7 +4,7 @@
  * Description：index
  */
 import {pageLoadingHide, isPc} from '../../libs/js/utils'
-import {getTime, sevenDays, timestampToTime, formatDateMore, Animation} from '../js/public/public'
+import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
 
 if (isPc()) {
@@ -163,33 +163,21 @@ $(function () {
     })
 
     // 获取汇率
-    $.ajax({
-        type: 'GET',
-        url: url3 + '/total',
-        dataType: 'json',
-        async: false,
-        success: function (data) {
-            $.ajax({
-                type: 'GET',
-                url: url3 + '/financerate',
-                dataType: 'json',
-                async: false,
-                success: function (dataIn) {
-                    let coinStr = ''
-                    data.data.coin.map(function (d, i) {
-                        coinStr += `<div class="price-list">
+    ajaxGet(url3 + '/total', {}, function (data) {
+        ajaxGet(url3 + '/financerate', {}, function (dataIn) {
+            let coinStr = ''
+            data.data.coin.map(function (d, i) {
+                coinStr += `<div class="price-list">
                             <div class="price-number">
                                 <h3>${d.cn_name}</h3>
                                 <p>${d.percent_change_24h}%</p>
                             </div>
                             <h2>￥${parseInt(dataIn.data.legal_rate.CNY * d.price_usd)}</h2>
                         </div>`
-                    })
-
-                    $('#coinList').html(coinStr)
-                }
             })
-        }
+
+            $('#coinList').html(coinStr)
+        })
     })
 
     // 快讯分享
@@ -218,7 +206,7 @@ $(function () {
                 /* dpi: window.devicePixelRatio * 2,
                 scale: 1 * 2 */
             }).then(canvas => {
-                let imgUri = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream') // 获取生成的图片的url
+                let imgUri = canvas.toDataURL('image/jpeg') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)
                 $imgWrap.show()
             })

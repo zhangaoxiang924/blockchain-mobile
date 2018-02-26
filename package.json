@@ -53,8 +53,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "dom-to-image": "^2.6.0",
     "echarts": "^3.8.5",
-    "html2canvas": "^1.0.0-alpha.9"
+    "html2canvas": "^1.0.0-alpha.10"
   }
 }
