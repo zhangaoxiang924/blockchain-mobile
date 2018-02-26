@@ -192,4 +192,13 @@ $(function () {
     $('.back-top').on('click', function () {
         Animation()
     })
+
+    // 返回按钮点击跳转
+    $('.back-prev-page').on('click', () => {
+        if (getQueryString('share')) {
+            window.location.href = 'http://m.huoxing24.com/'
+        } else {
+            history.go(-1)
+        }
+    })
 })
