@@ -74,7 +74,7 @@ const compareCalendar = (startDate, endDate) => {
 }
 
 const ajaxGet = (url, data, fn) => {
-    const str = `<div class="lk-loading  active" id="pageLoading">
+    const ajaxLoadingStr = `<div class="lk-loading ajax active" id="ajaxLoading">
     <div class="lk-loading-center">
         <div class="lk-loading-center-absolute">
             <div class="round round-one"></div>
@@ -84,12 +84,9 @@ const ajaxGet = (url, data, fn) => {
     </div>
 </div>`
 
-    if ($('#pageLoading').length === 0) {
-        $('body').append(str)
+    if ($('#ajaxLoading').length === 0) {
+        $('body').append(ajaxLoadingStr)
     }
-
-    const $pageLoading = $('#pageLoading')
-    $pageLoading.addClass('active')
 
     $.ajax({
         type: 'GET',
@@ -100,7 +97,7 @@ const ajaxGet = (url, data, fn) => {
             console.log('error')
         },
         success: function (data) {
-            $pageLoading.removeClass('active')
+            $('#ajaxLoading').remove()
             fn.call(window, data, url)
         }
     })

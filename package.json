@@ -54,6 +54,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "echarts": "^3.8.5",
-    "html2canvas": "^1.0.0-alpha.10"
+    "html2canvas": "^1.0.0-alpha.10",
+    "sweetalert2": "^7.12.15"
   }
 }

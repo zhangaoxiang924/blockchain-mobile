@@ -73,8 +73,7 @@ $(function () {
                                 </div>`
             author = ''
 
-            let readNumber = `<div class="read-number">${cont.current.readCounts}</div>`
-            readNumber = ''
+            let readNumber = `<div class="read-number">${cont.current.hotCounts}</div>`
 
             let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
                             <div class="list-text">
@@ -191,14 +190,5 @@ $(function () {
     })
     $('.back-top').on('click', function () {
         Animation()
-    })
-
-    // 返回按钮点击跳转
-    $('.back-prev-page').on('click', () => {
-        if (getQueryString('share')) {
-            window.location.href = 'http://m.huoxing24.com/'
-        } else {
-            history.go(-1)
-        }
     })
 })

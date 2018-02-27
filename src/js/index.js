@@ -6,6 +6,7 @@
 import {pageLoadingHide, isPc} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
+import swal from 'sweetalert2'
 
 if (isPc()) {
     window.location.href = 'http://www.huoxing24.com'
@@ -14,7 +15,7 @@ if (isPc()) {
 let url = '/info/news'
 let url2 = '/info/lives'
 let url3 = '/market/coin'
-const htmlPath = '/html'
+const htmlPath = ''
 
 // 频道分类数组
 const navIndex = [
@@ -270,48 +271,43 @@ function getNewsList(channelId, currentPage, type, recommend) {
         }
     }
 
-    $.ajax({
-        type: 'GET',
-        url: url + '/shownews',
-        dataType: 'json',
-        data: data,
-        success: function (data) {
-            pageLoadingHide()
+    ajaxGet(url + '/shownews', data, function (data) {
+        pageLoadingHide()
 
-            if (data.obj.inforList.length !== 0) {
-                // 设置当前频道下一页数字
-                const $listBox = $('#listBox' + channelId)
-                $listBox.data('page', data.obj.currentPage)
+        if (data.obj.inforList.length !== 0) {
+            // 设置当前频道下一页数字
+            const $listBox = $('#listBox' + channelId)
+            $listBox.data('page', data.obj.currentPage)
 
-                // 设置时间
-                let dataArr = data.obj.inforList
-                let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
-                let serve = originalDate + (3600000 * 8)
-                let date = new Date(serve)
-                let timestamp = date.getTime()
+            // 设置时间
+            let dataArr = data.obj.inforList
+            let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
+            let serve = originalDate + (3600000 * 8)
+            let date = new Date(serve)
+            let timestamp = date.getTime()
 
-                // banner html string
-                let swiperSlide = ''
+            // banner html string
+            let swiperSlide = ''
 
-                // list html string
-                let newsList = ''
+            // list html string
+            let newsList = ''
 
-                for (let i = 0; i < dataArr.length; i++) {
-                    const d = dataArr[i]
-                    if (recommend && i >= 4) {
-                        break
-                    }
+            for (let i = 0; i < dataArr.length; i++) {
+                const d = dataArr[i]
+                if (recommend && i >= 4) {
+                    break
+                }
 
-                    // banner
-                    let img = JSON.parse(d.coverPic)
-                    swiperSlide += `<div class="swiper-slide">
+                // banner
+                let img = JSON.parse(d.coverPic)
+                swiperSlide += `<div class="swiper-slide">
 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}><img src=${img.wap_big} alt=""></a>
 <span class="img-news-title">${d.title}</span>
 </div>`
 
-                    // list
-                    let time = getTime(d.publishTime, timestamp)
-                    const htmlStr = `<div class="news-list-more ">
+                // list
+                let time = getTime(d.publishTime, timestamp)
+                const htmlStr = `<div class="news-list-more ">
                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
                      <div class="title">${d.title}</div>
                      <div class="list-text">
@@ -321,11 +317,11 @@ function getNewsList(channelId, currentPage, type, recommend) {
                      <div class="cover-img-sma"><img src=${img.wap_small} alt=""></div>
                  </a>
               </div>`
-                    if (type !== 'addMore') {
-                        if (i > 0 || channelId !== navIndex[0].channelId) {
-                            newsList += htmlStr
-                        } else if (channelId === 0) {
-                            newsList += `<div class="news-list-first ">
+                if (type !== 'addMore') {
+                    if (i > 0 || channelId !== navIndex[0].channelId) {
+                        newsList += htmlStr
+                    } else if (channelId === 0) {
+                        newsList += `<div class="news-list-first ">
                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
                     <div class="cover-img"><img src=${img.wap_big} alt=""></div>
                     <div class="title">${d.title}</div>
@@ -335,26 +331,22 @@ function getNewsList(channelId, currentPage, type, recommend) {
                     </div>
                 </a>
             </div>`
-                        }
-                    } else {
-                        newsList += htmlStr
                     }
-                }
-
-                if (recommend) {
-                    // banner
-                    $('.newsWrap').html(swiperSlide)
                 } else {
-                    // list
-                    $listBox.append(newsList)
-                    calculateHeight(channelId)
+                    newsList += htmlStr
                 }
-            } else {
-                console.log('没有更多了')
             }
-        },
-        error: function () {
-            console.log('error')
+
+            if (recommend) {
+                // banner
+                $('.newsWrap').html(swiperSlide)
+            } else {
+                // list
+                $listBox.append(newsList)
+                calculateHeight(channelId)
+            }
+        } else {
+            swal('没有更多了!')
         }
     })
 }
@@ -363,37 +355,31 @@ let flashCurrentPage = null
 let flashPage = $('.btn-more-flash').data('type')
 
 function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
-    $.ajax({
-        type: 'GET',
-        url: url2 + '/showlives',
-        dataType: 'json',
-        async: false,
-        data: {
-            queryTime: queryTime,
-            pageSize: pageSize,
-            currentPage: currentPage
-        },
-        success: function (data) {
-            pageLoadingHide()
+    ajaxGet(url2 + '/showlives', {
+        queryTime: queryTime,
+        pageSize: pageSize,
+        currentPage: currentPage
+    }, function (data) {
+        pageLoadingHide()
 
-            let dataArr = data.obj.inforList
-            let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
-            let serve = originalDate + (3600000 * 8)
-            let date = new Date(serve)
-            let timestamp = date.getTime()
-            let time = getTime(timestamp, dataArr.publishTime)
-            $('.news-fash .time').html(time)
-            let livesList = ''
-            flashCurrentPage = data.obj.pageCount
-            dataArr.map(function (d, i) {
-                let time = (timestampToTime(d.createdTime).split(' ')[1]).split(':')
-                let year = (timestampToTime(d.createdTime).split(' ')[0]).split('-')
-                let allTime = type === 1 ? `${year[1] + '-' + timeNum(year[2])} ${timeNum(time[0])}:${timeNum(time[1])}` : `${timeNum(time[0])}:${timeNum(time[1])}`
-                const idName = i.toString() + data.obj.currentPage
-                let status = d.tag === 2 ? 'red' : ''
-                let url = d.url ? d.url : ''
-                let originalUrl = url !== '' ? 'block' : ''
-                livesList += `<div class="new-fash-list">
+        let dataArr = data.obj.inforList
+        let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
+        let serve = originalDate + (3600000 * 8)
+        let date = new Date(serve)
+        let timestamp = date.getTime()
+        let time = getTime(timestamp, dataArr.publishTime)
+        $('.news-fash .time').html(time)
+        let livesList = ''
+        flashCurrentPage = data.obj.pageCount
+        dataArr.map(function (d, i) {
+            let time = (timestampToTime(d.createdTime).split(' ')[1]).split(':')
+            let year = (timestampToTime(d.createdTime).split(' ')[0]).split('-')
+            let allTime = type === 1 ? `${year[1] + '-' + timeNum(year[2])} ${timeNum(time[0])}:${timeNum(time[1])}` : `${timeNum(time[0])}:${timeNum(time[1])}`
+            const idName = i.toString() + data.obj.currentPage
+            let status = d.tag === 2 ? 'red' : ''
+            let url = d.url ? d.url : ''
+            let originalUrl = url !== '' ? 'block' : ''
+            livesList += `<div class="new-fash-list">
                                     <div class="time-flash" data-time=${d.createdTime} id=${'flashNewsTime' + idName}><img src="../img/time-t.png" alt="">${allTime}</div>
                                     <div class="text-flash clearfix">
                                         <p class=${status}><span id=${'flashNewsCon' + idName} >${d.content}</span><a href=${url} class=${originalUrl}>「查看原文」</a></p>
@@ -401,18 +387,14 @@ function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
                                     </div>
                                     <div style="clear: both"></div>
                                 </div>`
-            })
-            if (more === 2) {
-                $('.lives-box').html(livesList)
-            } else {
-                $('.lives-box').append(livesList)
-            }
-
-            calculateHeight('Live')
-        },
-        error: function () {
-            console.log('error')
+        })
+        if (more === 2) {
+            $('.lives-box').html(livesList)
+        } else {
+            $('.lives-box').append(livesList)
         }
+
+        calculateHeight('Live')
     })
 }
 

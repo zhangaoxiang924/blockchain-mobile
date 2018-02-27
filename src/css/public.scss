@@ -5,6 +5,10 @@
  */
 @import "../../libs/scss/util-m";
 
+.lk-loading.ajax {
+    background: none;
+}
+
 .img-wrap {
     position: fixed;
     left: 0;
@@ -134,8 +138,9 @@
             line-height: rem(47);
             font-size: rem(30);
             margin: 0 auto;
-            word-wrap: break-word;
-            word-break: break-all;
+
+            /* word-wrap: break-word;
+            word-break: normal; */
         }
 
         .share-bottom {
@@ -192,3 +197,25 @@
         display: none;
     }
 }
+
+.swal2-popup {
+    padding: rem(40) rem(10) !important;
+    width: rem(320) !important;
+
+    .swal2-title {
+        font-size: rem(24) !important;
+    }
+
+    button.swal2-confirm,
+    button.swal2-cancel {
+        padding: rem(10) rem(40) !important;
+        height: rem(40) !important;
+        font-size: rem(24) !important;
+        outline: 0 !important;
+
+        &:focus {
+            outline: 0 !important;
+        }
+    }
+}
+
