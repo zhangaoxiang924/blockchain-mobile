@@ -307,11 +307,14 @@ function getNewsList(channelId, currentPage, type, recommend) {
 
                 // list
                 let time = getTime(d.publishTime, timestamp)
+                let author = `<div class="author clearfix"><sapn>${d.author}</sapn></div>`
+                author = ''
                 const htmlStr = `<div class="news-list-more ">
                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
                      <div class="title">${d.title}</div>
                      <div class="list-text">
-                        <div class="author clearfix"><sapn>${d.author}</sapn></div>
+                        ${author}
+                        <div class="author read-number clearfix"><sapn>${d.hotCounts}</sapn></div>
                         <div class="time clearfix"><span>${time}</span></div>
                      </div>
                      <div class="cover-img-sma"><img src=${img.wap_small} alt=""></div>

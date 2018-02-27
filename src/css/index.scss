@@ -367,9 +367,14 @@ body,
             }
         }
 
+        .read-number {
+            padding-left: rem(30);
+            background: url("../img/read-number.png") no-repeat left;
+            float: right;
+        }
+
         .time {
-            position: absolute;
-            right: 0;
+            float: left;
 
             span {
                 float: right;
