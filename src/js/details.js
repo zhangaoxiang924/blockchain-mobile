@@ -6,7 +6,7 @@
 import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
 import {
     getTime,
-    get,
+    ajaxGet,
     timestampToTime,
     formatDateMore,
     Animation,
@@ -40,7 +40,7 @@ $(function () {
 
     // 改变页面title
     let getDetails = (id, channelId) => {
-        get(url + '/getbyid', {
+        ajaxGet(url + '/getbyid', {
             id: id,
             channelId: channelId
         }, (data) => {
@@ -73,8 +73,7 @@ $(function () {
                                 </div>`
             author = ''
 
-            let readNumber = `<div class="read-number">${cont.current.readCounts}</div>`
-            readNumber = ''
+            let readNumber = `<div class="read-number">${cont.current.hotCounts}</div>`
 
             let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
                             <div class="list-text">
@@ -139,7 +138,7 @@ $(function () {
             $shareBox.height(conPadding + conHeight)
 
             html2canvas(document.getElementById('shareBox')).then(canvas => {
-                let imgUri = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream') // 获取生成的图片的url
+                let imgUri = canvas.toDataURL('image/jpeg') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)
                 $imgWrap.show()
             })
@@ -151,7 +150,7 @@ $(function () {
     })
 
     let newsCorrelation = (tags, newsCounds, id) => {
-        get(url + '/relatednews', {
+        ajaxGet(url + '/relatednews', {
             tags: tags,
             newsCounds: newsCounds,
             id: id
@@ -191,14 +190,5 @@ $(function () {
     })
     $('.back-top').on('click', function () {
         Animation()
-    })
-
-    // 返回按钮点击跳转
-    $('.back-prev-page').on('click', () => {
-        if (getQueryString('share')) {
-            window.location.href = 'http://m.huoxing24.com/'
-        } else {
-            history.go(-1)
-        }
     })
 })

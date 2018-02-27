@@ -73,7 +73,21 @@ const compareCalendar = (startDate, endDate) => {
     }
 }
 
-const get = (url, data, fn) => {
+const ajaxGet = (url, data, fn) => {
+    const ajaxLoadingStr = `<div class="lk-loading ajax active" id="ajaxLoading">
+    <div class="lk-loading-center">
+        <div class="lk-loading-center-absolute">
+            <div class="round round-one"></div>
+            <div class="round round-two"></div>
+            <div class="round round-three"></div>
+        </div>
+    </div>
+</div>`
+
+    if ($('#ajaxLoading').length === 0) {
+        $('body').append(ajaxLoadingStr)
+    }
+
     $.ajax({
         type: 'GET',
         url: url,
@@ -83,6 +97,7 @@ const get = (url, data, fn) => {
             console.log('error')
         },
         success: function (data) {
+            $('#ajaxLoading').remove()
             fn.call(window, data, url)
         }
     })
@@ -191,7 +206,7 @@ const scrollDirect = (fn) => {
 }
 
 export {
-    get,
+    ajaxGet,
     getTime,
     sevenDays,
     timestampToTime,
