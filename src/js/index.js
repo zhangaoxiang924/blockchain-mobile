@@ -43,6 +43,9 @@ const navIndex = [
     }, {
         title: '八点',
         channelId: '8'
+    }, {
+        title: '王峰十问',
+        channelId: '9'
     }
 ]
 
@@ -113,7 +116,7 @@ $(function () {
             slideChangeTransitionStart: function () {
                 $('.body-wrap .swiper-pagination-bullet').eq(this.activeIndex).children('i').addClass('active').parent().siblings().children('i').removeClass('active')
 
-                if (this.activeIndex >= 1) {
+                if (this.activeIndex >= 3) {
                     $('#hxWrapPage').addClass('active')
                 } else {
                     $('#hxWrapPage').removeClass('active')
