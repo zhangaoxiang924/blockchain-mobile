@@ -12,7 +12,7 @@ $(function () {
         {
             title: '微信公众号',
             img: '../img/wx.png',
-            cont: '火星财经(ID：huoxing24h)'
+            cont: 'huoxing24h'
         },
         {
             title: '微博',

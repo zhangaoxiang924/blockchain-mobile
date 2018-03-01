@@ -18,9 +18,11 @@ private: ['../css/public.css', '../css/contact-app.css']
     </div>
 </div>
 
-<%- include('./include/share') %>
+<%- include('./include/share', {
+app: false
+}) %>
 <%- include('../../libs/html/util-m/footer', {
-plugin: [''],
+plugin: [],
 private: ['../js/contact-app.js'],
 statistics: ''
 }) %>
