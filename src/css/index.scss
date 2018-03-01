@@ -106,7 +106,7 @@ body,
             height: 100%;
             background: none;
 
-            &:last-child {
+            &:nth-child(4) {
                 width: rem(105);
             }
 
