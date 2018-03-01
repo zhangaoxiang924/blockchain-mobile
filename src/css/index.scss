@@ -368,8 +368,9 @@ body,
         }
 
         .read-number {
-            padding-left: rem(30);
-            background: url("../img/read-number.png") no-repeat left;
+            padding-left: rem(45);
+            background: url("../img/read-number.svg") no-repeat left;
+            background-size: auto 140%;
             float: right;
         }
 

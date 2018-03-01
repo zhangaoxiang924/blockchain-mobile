@@ -118,7 +118,7 @@ const getTime = (publishTime, requestTime) => {
             return ''
         }
     }
-    let limit = parseInt((requestTime - publishTime))
+    let limit = parseInt((requestTime - publishTime)) / 1000
     let content = ''
     if (limit < 60) {
         content = '刚刚'
