@@ -29,6 +29,9 @@ const navIndex = [
         title: '产业',
         channelId: '2'
     }, {
+        title: '王峰十问',
+        channelId: '9'
+    }, {
         title: '技术',
         channelId: '6'
     }, {
@@ -43,9 +46,6 @@ const navIndex = [
     }, {
         title: '八点',
         channelId: '8'
-    }, {
-        title: '王峰十问',
-        channelId: '9'
     }
 ]
 
