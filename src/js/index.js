@@ -6,7 +6,7 @@
 import {pageLoadingHide, isPc} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
-import swal from 'sweetalert2'
+// import swal from 'sweetalert2'
 
 if (isPc()) {
     window.location.href = 'http://www.huoxing24.com'
@@ -160,11 +160,11 @@ $(function () {
     swiper2.init()
 
     /* $('.btn-more').click(function () {
-        const type = 'addMore'
-        const channelId = $(this).data('type')
-        const page = $('#listBox' + channelId).data('page')
-        getNewsList(channelId, page, type)
-    }) */
+     const type = 'addMore'
+     const channelId = $(this).data('type')
+     const page = $('#listBox' + channelId).data('page')
+     getNewsList(channelId, page, type)
+     }) */
 
     let flashCurrentPage = null
     let flashPage = $('.btn-more-flash').data('type')
@@ -198,6 +198,14 @@ $(function () {
         }
     })
 
+    /* $('.btn-more-flash').click(function () {
+        flashPage++
+        if (flashPage > flashCurrentPage) {
+            return false
+        }
+        getFlashNewsList('', 30, flashPage, 1)
+        moreState = true
+    }) */
     function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
         ajaxGet(url2 + '/showlives', {
             queryTime: queryTime,
@@ -322,73 +330,72 @@ $(function () {
     $('.back-top').on('click', function () {
         Animation()
     })
-})
 
-function calculateHeight(channelId) {
-    const $overAllBox = $('#overAllBox')
-    const windowHeight = parseInt($(window).height())
+    function calculateHeight(channelId) {
+        const $overAllBox = $('#overAllBox')
+        const windowHeight = parseInt($(window).height())
 
-    let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 20
+        let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 20
 
-    if (wHeight < windowHeight) {
-        $overAllBox.height(windowHeight)
-    } else {
-        $overAllBox.height(wHeight)
-    }
-}
-
-function getNewsList(channelId, currentPage, type, recommend) {
-    let data = {
-        currentPage: currentPage,
-        pageSize: 20,
-        channelId: channelId
-    }
-    if (recommend) {
-        data = {
-            pageSize: 4,
-            recommend: 1
+        if (wHeight < windowHeight) {
+            $overAllBox.height(windowHeight)
+        } else {
+            $overAllBox.height(wHeight)
         }
     }
 
-    ajaxGet(url + '/shownews', data, function (data) {
-        pageLoadingHide()
+    function getNewsList(channelId, currentPage, type, recommend) {
+        let data = {
+            currentPage: currentPage,
+            pageSize: 20,
+            channelId: channelId
+        }
+        if (recommend) {
+            data = {
+                pageSize: 4,
+                recommend: 1
+            }
+        }
 
-        if (data.obj.inforList.length !== 0) {
-            // 设置当前频道下一页数字
-            const $listBox = $('#listBox' + channelId)
-            $listBox.data('page', data.obj.currentPage)
+        ajaxGet(url + '/shownews', data, function (data) {
+            pageLoadingHide()
 
-            // 设置时间
-            let dataArr = data.obj.inforList
-            let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
-            let serve = originalDate + (3600000 * 8)
-            let date = new Date(serve)
-            let timestamp = date.getTime()
+            if (data.obj.inforList.length !== 0) {
+                // 设置当前频道下一页数字
+                const $listBox = $('#listBox' + channelId)
+                $listBox.data('page', data.obj.currentPage)
 
-            // banner html string
-            let swiperSlide = ''
+                // 设置时间
+                let dataArr = data.obj.inforList
+                let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
+                let serve = originalDate + (3600000 * 8)
+                let date = new Date(serve)
+                let timestamp = date.getTime()
 
-            // list html string
-            let newsList = ''
+                // banner html string
+                let swiperSlide = ''
 
-            for (let i = 0; i < dataArr.length; i++) {
-                const d = dataArr[i]
-                if (recommend && i >= 4) {
-                    break
-                }
+                // list html string
+                let newsList = ''
 
-                // banner
-                let img = JSON.parse(d.coverPic)
-                swiperSlide += `<div class="swiper-slide">
+                for (let i = 0; i < dataArr.length; i++) {
+                    const d = dataArr[i]
+                    if (recommend && i >= 4) {
+                        break
+                    }
+
+                    // banner
+                    let img = JSON.parse(d.coverPic)
+                    swiperSlide += `<div class="swiper-slide">
 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}><img src=${img.wap_big} alt=""></a>
 <span class="img-news-title">${d.title}</span>
 </div>`
 
-                // list
-                let time = getTime(d.publishTime, timestamp)
-                let author = `<div class="author clearfix"><sapn>${d.author}</sapn></div>`
-                author = ''
-                const htmlStr = `<div class="news-list-more ">
+                    // list
+                    let time = getTime(d.publishTime, timestamp)
+                    let author = `<div class="author clearfix"><sapn>${d.author}</sapn></div>`
+                    author = ''
+                    const htmlStr = `<div class="news-list-more ">
                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
                      <div class="title">${d.title}</div>
                      <div class="list-text">
@@ -399,11 +406,11 @@ function getNewsList(channelId, currentPage, type, recommend) {
                      <div class="cover-img-sma"><img src=${img.wap_small} alt=""></div>
                  </a>
               </div>`
-                if (type !== 'addMore') {
-                    if (i > 0 || channelId !== navIndex[0].channelId) {
-                        newsList += htmlStr
-                    } else if (channelId === 0) {
-                        newsList += `<div class="news-list-first ">
+                    if (type !== 'addMore') {
+                        if (i > 0 || channelId !== navIndex[0].channelId) {
+                            newsList += htmlStr
+                        } else if (channelId === 0) {
+                            newsList += `<div class="news-list-first ">
                 <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
                     <div class="cover-img"><img src=${img.wap_big} alt=""></div>
                     <div class="title">${d.title}</div>
@@ -413,25 +420,28 @@ function getNewsList(channelId, currentPage, type, recommend) {
                     </div>
                 </a>
             </div>`
+                        }
+                    } else {
+                        newsList += htmlStr
                     }
-                } else {
-                    newsList += htmlStr
                 }
-            }
 
-            if (recommend) {
-                // banner
-                $('.newsWrap').html(swiperSlide)
+                if (recommend) {
+                    // banner
+                    $('.newsWrap').html(swiperSlide)
+                } else {
+                    // list
+                    $listBox.append(newsList)
+                    calculateHeight(channelId)
+                }
             } else {
-                // list
-                $listBox.append(newsList)
-                calculateHeight(channelId)
+                // swal('没有更多了!')
+                $('#btnMore' + moreIndex).html('没有更多了!')
             }
-        } else {
-            swal('没有更多了!')
-        }
-    })
-}
+        })
+    }
+})
+
 // 小于10加0
 function timeNum(t) {
     if (t < 10) {
