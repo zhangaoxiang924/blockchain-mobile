@@ -20,7 +20,7 @@ const htmlPath = ''
 if (isPc()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
-        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}/${getQueryString('channelId')}`
+        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}`
     } else {
         window.location.href = 'http://www.huoxing24.com'
     }
@@ -39,15 +39,12 @@ $(function () {
     })
 
     // 改变页面title
-    let getDetails = (id, channelId) => {
+    let getDetails = (id) => {
         ajaxGet(url + '/getbyid', {
-            id: id,
-            channelId: channelId
+            id: id
         }, (data) => {
-            console.log(data)
-
             pageLoadingHide()
-
+            console.log(data)
             let cont = data.obj
             $('title').html(cont.current.title)
 
@@ -91,7 +88,7 @@ $(function () {
             $('.details-cont').html(content)
         })
     }
-    getDetails(getQueryString('id'), getQueryString('channelId'))
+    getDetails(getQueryString('id'))
 
     // 超出字数显示省略号
     const cutString = (str, len) => {
@@ -165,7 +162,7 @@ $(function () {
                 let time = getTime(d.publishTime, timestamp)
                 let img = JSON.parse(d.coverPic)
                 newsList += `<div class="news-list-more ">
-                                <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
+                                <a href=${htmlPath + '/details.html?id=' + d.id}>
                                     <div class="title">${cutString(d.title, 60)}</div>
                                     <div class="list-text">
                                         <div class="author clearfix"><span>${d.author}</span></div>
