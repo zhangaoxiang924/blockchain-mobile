@@ -198,6 +198,14 @@ $(function () {
         }
     })
 
+    /* $('.btn-more-flash').click(function () {
+        flashPage++
+        if (flashPage > flashCurrentPage) {
+            return false
+        }
+        getFlashNewsList('', 30, flashPage, 1)
+        moreState = true
+    }) */
     function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
         ajaxGet(url2 + '/showlives', {
             queryTime: queryTime,
