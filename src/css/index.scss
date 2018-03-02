@@ -83,11 +83,11 @@ body,
 
         $itemWidth: 620/7;
 
-        $bodyWrapWidth: 8 * $itemWidth;
+        $bodyWrapWidth: (8 * $itemWidth + 110);
 
         position: inherit;
         top: 0;
-        padding: 0 rem(20);
+        padding: 0 rem(10);
         width: rem($bodyWrapWidth);
         height: rem(90);
         line-height: rem(90);
@@ -95,7 +95,7 @@ body,
         transition: all 0.5s ease 0s;
 
         &.active {
-            transform: translateX(rem(640 - $bodyWrapWidth - 40));
+            transform: translateX(rem(640 - $bodyWrapWidth - 15));
         }
 
         span {
@@ -105,6 +105,10 @@ body,
             width: rem(620/7);
             height: 100%;
             background: none;
+
+            &:nth-child(4) {
+                width: rem(105);
+            }
 
             &.swiper-pagination-bullet {
                 margin: 0;
@@ -368,8 +372,9 @@ body,
         }
 
         .read-number {
-            padding-left: rem(30);
-            background: url("../img/read-number.png") no-repeat left;
+            padding-left: rem(45);
+            background: url("../img/read-number.svg") no-repeat left;
+            background-size: auto 140%;
             float: right;
         }
 

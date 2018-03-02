@@ -99,9 +99,9 @@
             .read-number {
                 position: absolute;
                 right: rem(100);
-                padding-left: rem(25);
-                background: url("../img/read-number.png") no-repeat left;
-                background-size: auto rem(22);
+                padding-left: rem(45);
+                background: url("../img/read-number.svg") no-repeat left;
+                background-size: auto 140%;
                 height: rem(36);
                 line-height: rem(40);
             }
@@ -140,6 +140,8 @@
             margin: 0 0 rem(15) 0;
             line-height: rem(50); // 规范编辑
             word-wrap: break-word;
+            word-break: break-all;
+            text-align: justify;
             font-size: rem(28) !important; // 规范编辑
 
             img {
