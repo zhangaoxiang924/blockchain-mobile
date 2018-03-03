@@ -41,7 +41,8 @@ $(function () {
     // 改变页面title
     let getDetails = (id) => {
         ajaxGet(url + '/getbyid', {
-            id: id
+            id: id,
+            channelId: 2
         }, (data) => {
             pageLoadingHide()
             console.log(data)

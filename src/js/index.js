@@ -26,6 +26,9 @@ const navIndex = [
         title: '快讯',
         channelId: ''
     }, {
+        title: '两会',
+        channelId: '10'
+    }, {
         title: '产业',
         channelId: '2'
     }, {
@@ -359,7 +362,7 @@ $(function () {
 
         ajaxGet(url + '/shownews', data, function (data) {
             pageLoadingHide()
-
+            console.log(channelId)
             if (data.obj.inforList.length !== 0) {
                 // 设置当前频道下一页数字
                 const $listBox = $('#listBox' + channelId)
