@@ -309,7 +309,9 @@ $(function () {
             }
 
             calculateHeight('Live')
-            fn()
+            if (fn) {
+                fn()
+            }
         })
     }
 
@@ -497,7 +499,9 @@ $(function () {
                     // list
                     $listBox.append(newsList)
                     calculateHeight(channelId)
-                    fn()
+                    if (fn) {
+                        fn()
+                    }
                 }
             } else {
                 swal('没有更多了!')
