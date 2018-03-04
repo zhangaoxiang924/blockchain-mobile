@@ -46,7 +46,6 @@ $(function () {
             channelId: 2
         }, (data) => {
             pageLoadingHide()
-            console.log(data)
             let cont = data.obj
             $('title').html(cont.current.title)
 
@@ -183,12 +182,14 @@ $(function () {
         adPlace: 2,
         type: 2
     }, (data) => {
-        console.log(data)
         const $adTitle = $('#adTitle')
         const $adUrl = $('#adUrl')
         const $adSrc = $('#adSrc')
 
         const obj = data.obj.inforList[0]
+        console.log(obj.img_url)
+        console.log(obj)
+
         $adTitle.text(obj.remake)
         $adUrl.attr('href', obj.url)
         $adSrc.attr('src', obj.img_url)
