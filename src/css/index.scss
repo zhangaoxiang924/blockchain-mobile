@@ -83,7 +83,7 @@ body,
 
         $itemWidth: 620/7;
 
-        $bodyWrapWidth: (8 * $itemWidth + 110);
+        $bodyWrapWidth: (9 * $itemWidth + 130);
 
         position: inherit;
         top: 0;
@@ -102,12 +102,12 @@ body,
             position: relative;
             display: block;
             float: left;
-            width: rem(620/7);
+            width: rem($itemWidth);
             height: 100%;
             background: none;
 
-            &:nth-child(4) {
-                width: rem(105);
+            &:nth-child(5) {
+                width: rem(125);
             }
 
             &.swiper-pagination-bullet {
