@@ -6,7 +6,7 @@
 import {pageLoadingHide, isPc} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
-// import swal from 'sweetalert2'
+import swal from 'sweetalert2'
 
 if (isPc()) {
     window.location.href = 'http://www.huoxing24.com'
@@ -55,15 +55,28 @@ const navIndex = [
 $(function () {
     if ($('#livesPage').length === 0) {
         // 初始化新闻列表
-        getNewsList(0, 1)
+        getNewsList({
+            channelId: 0,
+            currentPage: 1
+        })
 
         // 获取banner
-        getNewsList(0, 1, 'getBanner', true)
+        getNewsList({
+            channelId: 0,
+            currentPage: 1,
+            type: 'getBanner',
+            recommend: true
+        })
     }
 
     // app快讯页面 默认列表
     if ($('#livesPage').length !== 0) {
-        getFlashNewsList('', 30, 1, 1)
+        getFlashNewsList({
+            queryTime: '',
+            pageSize: 30,
+            currentPage: 1,
+            type: 1
+        })
     }
 
     // 快讯时间
@@ -78,15 +91,29 @@ $(function () {
     $('.fash-title span').on('click', function () {
         $(this).addClass('active').siblings().removeClass('active')
         if ($(this).index() === 1) {
-            getFlashNewsList('', 30, 1, 1, 2)
+            getFlashNewsList({
+                queryTime: '',
+                pageSize: 30,
+                currentPage: 1,
+                type: 1,
+                more: 2
+            })
+
             $('.btn-more-flash').css('display', 'block')
         } else {
             let date = new Date(dayArr[$(this).index() - 2])
             let time = Date.parse(date)
-            getFlashNewsList(time, 200, 1, 0, 2)
+            getFlashNewsList({
+                queryTime: time,
+                pageSize: 200,
+                currentPage: 1,
+                type: 0,
+                more: 2
+            })
         }
     })
-    let moreIndex = 0
+
+    // let moreIndex = 0
     let swiper = new Swiper('#hxwrap', {
         pagination: {
             el: '#hxWrapPage',
@@ -118,8 +145,8 @@ $(function () {
         on: {
             slideChangeTransitionStart: function () {
                 $('.body-wrap .swiper-pagination-bullet').eq(this.activeIndex).children('i').addClass('active').parent().siblings().children('i').removeClass('active')
-                moreIndex = this.activeIndex
-                if (this.activeIndex >= 3) {
+
+                if (this.activeIndex >= 4) {
                     $('#hxWrapPage').addClass('active')
                 } else {
                     $('#hxWrapPage').removeClass('active')
@@ -130,16 +157,28 @@ $(function () {
                 const moreNo = $('#listBox' + type).children('.news-list-more').length === 0
                 const firstNo = $('#listBox' + type).children('.news-list-first').length === 0
 
+                // moreIndex = this.activeIndex
+
                 if (type !== 0 && moreNo && firstNo) {
                     if (this.activeIndex !== 1) {
-                        getNewsList(type, 1)
+                        getNewsList({
+                            channelId: type,
+                            currentPage: 1
+                        })
                     } else {
                         /* let flashTime = new Date(sevenDays()[0])
                          let flashTimestamp = Date.parse(flashTime) */
-                        getFlashNewsList('', 30, 1, 1)
+                        const flashNo = $('.lives-box').children('.new-fash-list').length === 0
+                        if (flashNo) {
+                            getFlashNewsList({
+                                queryTime: '',
+                                pageSize: 30,
+                                currentPage: 1,
+                                type: 1
+                            })
+                        }
                     }
                 }
-
                 $(window).scrollTop(0)
 
                 if (this.activeIndex !== 1) {
@@ -162,54 +201,74 @@ $(function () {
     })
     swiper2.init()
 
-    /* $('.btn-more').click(function () {
-     const type = 'addMore'
-     const channelId = $(this).data('type')
-     const page = $('#listBox' + channelId).data('page')
-     getNewsList(channelId, page, type)
-     }) */
-
+    /* ---------------记载更多--------------- */
     let flashCurrentPage = null
     let flashPage = $('.btn-more-flash').data('type')
-    let moreState = true
-    $(window).on('scroll', function () {
+    // let moreState = true
+    /* $(window).on('scroll', function () {
         let btnMoreTop = $('#btnMore' + moreIndex).offset().top
         let nowtop = $(window).scrollTop() + $(window).height()
-        if (nowtop > btnMoreTop && moreIndex !== 1) {
-            if (moreState) {
-                moreState = false
-                setTimeout(() => {
-                    const type = 'addMore'
-                    const channelId = $('#btnMore' + moreIndex).data('type')
-                    const page = $('#listBox' + channelId).data('page')
-                    getNewsList(channelId, page, type)
-                    moreState = true
-                }, 500)
-            }
-        } else if (nowtop > btnMoreTop && moreIndex === 1) {
-            if (moreState) {
-                moreState = false
-                setTimeout(() => {
-                    flashPage++
-                    if (flashPage > flashCurrentPage) {
-                        return false
+
+        if (nowtop > btnMoreTop && moreState) {
+            moreState = false
+            if (moreIndex !== 1) {
+                const type = 'addMore'
+                const channelId = $('#btnMore' + moreIndex).data('type')
+                const page = $('#listBox' + channelId).data('page')
+                getNewsList({
+                    channelId: channelId,
+                    currentPage: page,
+                    type: type,
+                    fn: function () {
+                        moreState = true
                     }
-                    getFlashNewsList('', 30, flashPage, 1)
-                    moreState = true
-                }, 500)
+                })
+            } else {
+                flashPage++
+                if (flashPage > flashCurrentPage) {
+                    return false
+                }
+                getFlashNewsList({
+                    queryTime: '',
+                    pageSize: 30,
+                    currentPage: flashPage,
+                    type: 1,
+                    fn: function () {
+                        moreState = true
+                    }
+                })
             }
         }
+    }) */
+
+    $('.btn-more').click(function () {
+        const type = 'addMore'
+        const channelId = $(this).data('type')
+        const page = $('#listBox' + channelId).data('page')
+        getNewsList({
+            channelId: channelId,
+            currentPage: page,
+            type: type
+        })
     })
 
-    /* $('.btn-more-flash').click(function () {
+    $('.btn-more-flash').click(function () {
         flashPage++
         if (flashPage > flashCurrentPage) {
             return false
         }
-        getFlashNewsList('', 30, flashPage, 1)
-        moreState = true
-    }) */
-    function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
+        getFlashNewsList({
+            queryTime: '',
+            pageSize: 30,
+            currentPage: flashPage,
+            type: 1
+        })
+    })
+
+    /* --------------获取快讯列表-------------- */
+    function getFlashNewsList(obj) {
+        const {queryTime, pageSize, currentPage, type, more, fn} = obj
+
         ajaxGet(url2 + '/showlives', {
             queryTime: queryTime,
             pageSize: pageSize,
@@ -250,6 +309,9 @@ $(function () {
             }
 
             calculateHeight('Live')
+            if (fn) {
+                fn()
+            }
         })
     }
 
@@ -347,7 +409,8 @@ $(function () {
         }
     }
 
-    function getNewsList(channelId, currentPage, type, recommend) {
+    function getNewsList(obj) {
+        const {channelId, currentPage, type, recommend, fn} = obj
         let data = {
             currentPage: currentPage,
             pageSize: 20,
@@ -436,10 +499,13 @@ $(function () {
                     // list
                     $listBox.append(newsList)
                     calculateHeight(channelId)
+                    if (fn) {
+                        fn()
+                    }
                 }
             } else {
-                // swal('没有更多了!')
-                $('#btnMore' + moreIndex).html('没有更多了!')
+                swal('没有更多了!')
+                // $('#btnMore' + moreIndex).html('没有更多了!')
             }
         })
     }
