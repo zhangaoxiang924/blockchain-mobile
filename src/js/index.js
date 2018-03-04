@@ -26,8 +26,14 @@ const navIndex = [
         title: '快讯',
         channelId: ''
     }, {
+        title: '两会',
+        channelId: '10'
+    }, {
         title: '产业',
         channelId: '2'
+    }, {
+        title: '王峰十问',
+        channelId: '9'
     }, {
         title: '技术',
         channelId: '6'
@@ -49,15 +55,28 @@ const navIndex = [
 $(function () {
     if ($('#livesPage').length === 0) {
         // 初始化新闻列表
-        getNewsList(0, 1)
+        getNewsList({
+            channelId: 0,
+            currentPage: 1
+        })
 
         // 获取banner
-        getNewsList(0, 1, 'getBanner', true)
+        getNewsList({
+            channelId: 0,
+            currentPage: 1,
+            type: 'getBanner',
+            recommend: true
+        })
     }
 
     // app快讯页面 默认列表
     if ($('#livesPage').length !== 0) {
-        getFlashNewsList('', 30, 1, 1)
+        getFlashNewsList({
+            queryTime: '',
+            pageSize: 30,
+            currentPage: 1,
+            type: 1
+        })
     }
 
     // 快讯时间
@@ -72,15 +91,29 @@ $(function () {
     $('.fash-title span').on('click', function () {
         $(this).addClass('active').siblings().removeClass('active')
         if ($(this).index() === 1) {
-            getFlashNewsList('', 30, 1, 1, 2)
+            getFlashNewsList({
+                queryTime: '',
+                pageSize: 30,
+                currentPage: 1,
+                type: 1,
+                more: 2
+            })
+
             $('.btn-more-flash').css('display', 'block')
         } else {
             let date = new Date(dayArr[$(this).index() - 2])
             let time = Date.parse(date)
-            getFlashNewsList(time, 200, 1, 0, 2)
+            getFlashNewsList({
+                queryTime: time,
+                pageSize: 200,
+                currentPage: 1,
+                type: 0,
+                more: 2
+            })
         }
     })
 
+    // let moreIndex = 0
     let swiper = new Swiper('#hxwrap', {
         pagination: {
             el: '#hxWrapPage',
@@ -113,7 +146,7 @@ $(function () {
             slideChangeTransitionStart: function () {
                 $('.body-wrap .swiper-pagination-bullet').eq(this.activeIndex).children('i').addClass('active').parent().siblings().children('i').removeClass('active')
 
-                if (this.activeIndex >= 1) {
+                if (this.activeIndex >= 4) {
                     $('#hxWrapPage').addClass('active')
                 } else {
                     $('#hxWrapPage').removeClass('active')
@@ -124,16 +157,28 @@ $(function () {
                 const moreNo = $('#listBox' + type).children('.news-list-more').length === 0
                 const firstNo = $('#listBox' + type).children('.news-list-first').length === 0
 
+                // moreIndex = this.activeIndex
+
                 if (type !== 0 && moreNo && firstNo) {
                     if (this.activeIndex !== 1) {
-                        getNewsList(type, 1)
+                        getNewsList({
+                            channelId: type,
+                            currentPage: 1
+                        })
                     } else {
                         /* let flashTime = new Date(sevenDays()[0])
                          let flashTimestamp = Date.parse(flashTime) */
-                        getFlashNewsList('', 30, 1, 1)
+                        const flashNo = $('.lives-box').children('.new-fash-list').length === 0
+                        if (flashNo) {
+                            getFlashNewsList({
+                                queryTime: '',
+                                pageSize: 30,
+                                currentPage: 1,
+                                type: 1
+                            })
+                        }
                     }
                 }
-
                 $(window).scrollTop(0)
 
                 if (this.activeIndex !== 1) {
@@ -156,12 +201,119 @@ $(function () {
     })
     swiper2.init()
 
+    /* ---------------记载更多--------------- */
+    let flashCurrentPage = null
+    let flashPage = $('.btn-more-flash').data('type')
+    // let moreState = true
+    /* $(window).on('scroll', function () {
+        let btnMoreTop = $('#btnMore' + moreIndex).offset().top
+        let nowtop = $(window).scrollTop() + $(window).height()
+
+        if (nowtop > btnMoreTop && moreState) {
+            moreState = false
+            if (moreIndex !== 1) {
+                const type = 'addMore'
+                const channelId = $('#btnMore' + moreIndex).data('type')
+                const page = $('#listBox' + channelId).data('page')
+                getNewsList({
+                    channelId: channelId,
+                    currentPage: page,
+                    type: type,
+                    fn: function () {
+                        moreState = true
+                    }
+                })
+            } else {
+                flashPage++
+                if (flashPage > flashCurrentPage) {
+                    return false
+                }
+                getFlashNewsList({
+                    queryTime: '',
+                    pageSize: 30,
+                    currentPage: flashPage,
+                    type: 1,
+                    fn: function () {
+                        moreState = true
+                    }
+                })
+            }
+        }
+    }) */
+
     $('.btn-more').click(function () {
         const type = 'addMore'
         const channelId = $(this).data('type')
         const page = $('#listBox' + channelId).data('page')
-        getNewsList(channelId, page, type)
+        getNewsList({
+            channelId: channelId,
+            currentPage: page,
+            type: type
+        })
     })
+
+    $('.btn-more-flash').click(function () {
+        flashPage++
+        if (flashPage > flashCurrentPage) {
+            return false
+        }
+        getFlashNewsList({
+            queryTime: '',
+            pageSize: 30,
+            currentPage: flashPage,
+            type: 1
+        })
+    })
+
+    /* --------------获取快讯列表-------------- */
+    function getFlashNewsList(obj) {
+        const {queryTime, pageSize, currentPage, type, more, fn} = obj
+
+        ajaxGet(url2 + '/showlives', {
+            queryTime: queryTime,
+            pageSize: pageSize,
+            currentPage: currentPage
+        }, function (data) {
+            pageLoadingHide()
+
+            let dataArr = data.obj.inforList
+            let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
+            let serve = originalDate + (3600000 * 8)
+            let date = new Date(serve)
+            let timestamp = date.getTime()
+            let time = getTime(timestamp, dataArr.publishTime)
+            $('.news-fash .time').html(time)
+            let livesList = ''
+            flashCurrentPage = data.obj.pageCount
+            dataArr.map(function (d, i) {
+                let time = (timestampToTime(d.createdTime).split(' ')[1]).split(':')
+                let year = (timestampToTime(d.createdTime).split(' ')[0]).split('-')
+                let allTime = type === 1 ? `${year[1] + '-' + timeNum(year[2])} ${timeNum(time[0])}:${timeNum(time[1])}` : `${timeNum(time[0])}:${timeNum(time[1])}`
+                const idName = i.toString() + data.obj.currentPage
+                let status = d.tag === 2 ? 'red' : ''
+                let url = d.url ? d.url : ''
+                let originalUrl = url !== '' ? 'block' : ''
+                livesList += `<div class="new-fash-list">
+                                    <div class="time-flash" data-time=${d.createdTime} id=${'flashNewsTime' + idName}><img src="../img/time-t.png" alt="">${allTime}</div>
+                                    <div class="text-flash clearfix">
+                                        <p class=${status}><span id=${'flashNewsCon' + idName} >${d.content}</span><a href=${url} class=${originalUrl}>「查看原文」</a></p>
+                                        <div class="share" data-type=${idName} data-time=${d.createdTime}></div>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>`
+            })
+            if (more === 2) {
+                $('.lives-box').html(livesList)
+            } else {
+                $('.lives-box').append(livesList)
+            }
+
+            calculateHeight('Live')
+            if (fn) {
+                fn()
+            }
+        })
+    }
 
     // 获取汇率
     ajaxGet(url3 + '/total', {}, function (data) {
@@ -205,7 +357,7 @@ $(function () {
 
             html2canvas(document.getElementById('shareBox'), {
                 /* dpi: window.devicePixelRatio * 2,
-                scale: 1 * 2 */
+                 scale: 1 * 2 */
             }).then(canvas => {
                 let imgUri = canvas.toDataURL('image/jpeg') // 获取生成的图片的url
                 $imgCon.attr('src', imgUri)
@@ -243,74 +395,74 @@ $(function () {
     $('.back-top').on('click', function () {
         Animation()
     })
-})
 
-function calculateHeight(channelId) {
-    const $overAllBox = $('#overAllBox')
-    const windowHeight = parseInt($(window).height())
+    function calculateHeight(channelId) {
+        const $overAllBox = $('#overAllBox')
+        const windowHeight = parseInt($(window).height())
 
-    let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 20
+        let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 20
 
-    if (wHeight < windowHeight) {
-        $overAllBox.height(windowHeight)
-    } else {
-        $overAllBox.height(wHeight)
-    }
-}
-
-function getNewsList(channelId, currentPage, type, recommend) {
-    let data = {
-        currentPage: currentPage,
-        pageSize: 20,
-        channelId: channelId
-    }
-    if (recommend) {
-        data = {
-            pageSize: 4,
-            recommend: 1
+        if (wHeight < windowHeight) {
+            $overAllBox.height(windowHeight)
+        } else {
+            $overAllBox.height(wHeight)
         }
     }
 
-    ajaxGet(url + '/shownews', data, function (data) {
-        pageLoadingHide()
+    function getNewsList(obj) {
+        const {channelId, currentPage, type, recommend, fn} = obj
+        let data = {
+            currentPage: currentPage,
+            pageSize: 20,
+            channelId: channelId
+        }
+        if (recommend) {
+            data = {
+                pageSize: 4,
+                recommend: 1
+            }
+        }
 
-        if (data.obj.inforList.length !== 0) {
-            // 设置当前频道下一页数字
-            const $listBox = $('#listBox' + channelId)
-            $listBox.data('page', data.obj.currentPage)
+        ajaxGet(url + '/shownews', data, function (data) {
+            pageLoadingHide()
+            console.log(channelId)
+            if (data.obj.inforList.length !== 0) {
+                // 设置当前频道下一页数字
+                const $listBox = $('#listBox' + channelId)
+                $listBox.data('page', data.obj.currentPage)
 
-            // 设置时间
-            let dataArr = data.obj.inforList
-            let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
-            let serve = originalDate + (3600000 * 8)
-            let date = new Date(serve)
-            let timestamp = date.getTime()
+                // 设置时间
+                let dataArr = data.obj.inforList
+                let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
+                let serve = originalDate + (3600000 * 8)
+                let date = new Date(serve)
+                let timestamp = date.getTime()
 
-            // banner html string
-            let swiperSlide = ''
+                // banner html string
+                let swiperSlide = ''
 
-            // list html string
-            let newsList = ''
+                // list html string
+                let newsList = ''
 
-            for (let i = 0; i < dataArr.length; i++) {
-                const d = dataArr[i]
-                if (recommend && i >= 4) {
-                    break
-                }
+                for (let i = 0; i < dataArr.length; i++) {
+                    const d = dataArr[i]
+                    if (recommend && i >= 4) {
+                        break
+                    }
 
-                // banner
-                let img = JSON.parse(d.coverPic)
-                swiperSlide += `<div class="swiper-slide">
-<a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}><img src=${img.wap_big} alt=""></a>
+                    // banner
+                    let img = JSON.parse(d.coverPic)
+                    swiperSlide += `<div class="swiper-slide">
+<a href=${htmlPath + '/details.html?id=' + d.id}><img src=${img.wap_big} alt=""></a>
 <span class="img-news-title">${d.title}</span>
 </div>`
 
-                // list
-                let time = getTime(d.publishTime, timestamp)
-                let author = `<div class="author clearfix"><sapn>${d.author}</sapn></div>`
-                author = ''
-                const htmlStr = `<div class="news-list-more ">
-                <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
+                    // list
+                    let time = getTime(d.publishTime, timestamp)
+                    let author = `<div class="author clearfix"><sapn>${d.author}</sapn></div>`
+                    author = ''
+                    const htmlStr = `<div class="news-list-more ">
+                <a href=${htmlPath + '/details.html?id=' + d.id}>
                      <div class="title">${d.title}</div>
                      <div class="list-text">
                         ${author}
@@ -320,12 +472,12 @@ function getNewsList(channelId, currentPage, type, recommend) {
                      <div class="cover-img-sma"><img src=${img.wap_small} alt=""></div>
                  </a>
               </div>`
-                if (type !== 'addMore') {
-                    if (i > 0 || channelId !== navIndex[0].channelId) {
-                        newsList += htmlStr
-                    } else if (channelId === 0) {
-                        newsList += `<div class="news-list-first ">
-                <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
+                    if (type !== 'addMore') {
+                        if (i > 0 || channelId !== navIndex[0].channelId) {
+                            newsList += htmlStr
+                        } else if (channelId === 0) {
+                            newsList += `<div class="news-list-first ">
+                <a href=${htmlPath + '/details.html?id=' + d.id}>
                     <div class="cover-img"><img src=${img.wap_big} alt=""></div>
                     <div class="title">${d.title}</div>
                     <div class="list-text">
@@ -334,79 +486,29 @@ function getNewsList(channelId, currentPage, type, recommend) {
                     </div>
                 </a>
             </div>`
+                        }
+                    } else {
+                        newsList += htmlStr
                     }
-                } else {
-                    newsList += htmlStr
                 }
-            }
 
-            if (recommend) {
-                // banner
-                $('.newsWrap').html(swiperSlide)
+                if (recommend) {
+                    // banner
+                    $('.newsWrap').html(swiperSlide)
+                } else {
+                    // list
+                    $listBox.append(newsList)
+                    calculateHeight(channelId)
+                    if (fn) {
+                        fn()
+                    }
+                }
             } else {
-                // list
-                $listBox.append(newsList)
-                calculateHeight(channelId)
+                swal('没有更多了!')
+                // $('#btnMore' + moreIndex).html('没有更多了!')
             }
-        } else {
-            swal('没有更多了!')
-        }
-    })
-}
-
-let flashCurrentPage = null
-let flashPage = $('.btn-more-flash').data('type')
-
-function getFlashNewsList(queryTime, pageSize, currentPage, type, more) {
-    ajaxGet(url2 + '/showlives', {
-        queryTime: queryTime,
-        pageSize: pageSize,
-        currentPage: currentPage
-    }, function (data) {
-        pageLoadingHide()
-
-        let dataArr = data.obj.inforList
-        let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
-        let serve = originalDate + (3600000 * 8)
-        let date = new Date(serve)
-        let timestamp = date.getTime()
-        let time = getTime(timestamp, dataArr.publishTime)
-        $('.news-fash .time').html(time)
-        let livesList = ''
-        flashCurrentPage = data.obj.pageCount
-        dataArr.map(function (d, i) {
-            let time = (timestampToTime(d.createdTime).split(' ')[1]).split(':')
-            let year = (timestampToTime(d.createdTime).split(' ')[0]).split('-')
-            let allTime = type === 1 ? `${year[1] + '-' + timeNum(year[2])} ${timeNum(time[0])}:${timeNum(time[1])}` : `${timeNum(time[0])}:${timeNum(time[1])}`
-            const idName = i.toString() + data.obj.currentPage
-            let status = d.tag === 2 ? 'red' : ''
-            let url = d.url ? d.url : ''
-            let originalUrl = url !== '' ? 'block' : ''
-            livesList += `<div class="new-fash-list">
-                                    <div class="time-flash" data-time=${d.createdTime} id=${'flashNewsTime' + idName}><img src="../img/time-t.png" alt="">${allTime}</div>
-                                    <div class="text-flash clearfix">
-                                        <p class=${status}><span id=${'flashNewsCon' + idName} >${d.content}</span><a href=${url} class=${originalUrl}>「查看原文」</a></p>
-                                        <div class="share" data-type=${idName} data-time=${d.createdTime}></div>
-                                    </div>
-                                    <div style="clear: both"></div>
-                                </div>`
         })
-        if (more === 2) {
-            $('.lives-box').html(livesList)
-        } else {
-            $('.lives-box').append(livesList)
-        }
-
-        calculateHeight('Live')
-    })
-}
-
-$('.btn-more-flash').on('click', function () {
-    flashPage++
-    if (flashPage > flashCurrentPage) {
-        return false
     }
-    getFlashNewsList('', 30, flashPage, 1)
 })
 
 // 小于10加0

@@ -1,0 +1,118 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2018-03-01
+ * Description：about
+ */
+@import "../../libs/scss/rem";
+
+.about {
+    width: 100%;
+    height: auto;
+    color: #212121;
+    background: #fff;
+
+    .about-banner {
+        img {
+            width: 100%;
+            height: rem(246);
+        }
+    }
+
+    .about-media,
+    .about-collaborate {
+        width: 100%;
+
+        h6 {
+            width: 100%;
+            height: rem(90);
+            padding: 0 rem(25);
+            box-sizing: border-box;
+            background: #f5f5f5;
+            color: #bdbdbd;
+            font-size: rem(28);
+            line-height: rem(90);
+        }
+
+        .media-list,
+        .collaborateList-list {
+            width: 100%;
+            padding: 0 rem(25);
+            box-sizing: border-box;
+
+            li {
+                width: 100%;
+                height: rem(100);
+                border-bottom: rem(1) #f5f5f5 solid;
+                line-height: rem(100);
+                font-size: rem(24);
+
+                span {
+                    display: inline-block;
+
+                    &.title {
+                        color: #212121;
+                        float: left;
+                    }
+
+                    &.cont {
+                        color: #757575;
+                        float: right;
+                    }
+                }
+
+                img {
+                    float: left;
+                    display: inline-block;
+                    margin-top: rem(34);
+                    margin-right: rem(15);
+                }
+            }
+
+            li:nth-child(1) {
+                img {
+                    width: rem(34);
+                    height: rem(30);
+                }
+            }
+
+            li:nth-child(2) {
+                img {
+                    width: rem(34);
+                    height: rem(29);
+                }
+            }
+
+            li:nth-child(3) {
+                img {
+                    width: rem(31);
+                    height: rem(32);
+                }
+            }
+        }
+    }
+
+    .about-collaborate {
+        width: 100%;
+
+        h6 {
+            width: 100%;
+            height: rem(90);
+            padding: 0 rem(25);
+            box-sizing: border-box;
+            background: #f5f5f5;
+            color: #bdbdbd;
+            font-size: rem(28);
+            line-height: rem(90);
+        }
+
+        .collaborateList-list {
+            li:nth-child(1) {
+                img {
+                    width: rem(32);
+                    height: rem(31);
+                }
+            }
+        }
+    }
+}
+

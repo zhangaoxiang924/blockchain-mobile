@@ -16,11 +16,12 @@ import {
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
+let apiInfo = '/info'
 const htmlPath = ''
 if (isPc()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
-        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}/${getQueryString('channelId')}`
+        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}`
     } else {
         window.location.href = 'http://www.huoxing24.com'
     }
@@ -39,15 +40,12 @@ $(function () {
     })
 
     // 改变页面title
-    let getDetails = (id, channelId) => {
+    let getDetails = (id) => {
         ajaxGet(url + '/getbyid', {
             id: id,
-            channelId: channelId
+            channelId: 2
         }, (data) => {
-            console.log(data)
-
             pageLoadingHide()
-
             let cont = data.obj
             $('title').html(cont.current.title)
 
@@ -91,7 +89,7 @@ $(function () {
             $('.details-cont').html(content)
         })
     }
-    getDetails(getQueryString('id'), getQueryString('channelId'))
+    getDetails(getQueryString('id'))
 
     // 超出字数显示省略号
     const cutString = (str, len) => {
@@ -165,7 +163,7 @@ $(function () {
                 let time = getTime(d.publishTime, timestamp)
                 let img = JSON.parse(d.coverPic)
                 newsList += `<div class="news-list-more ">
-                                <a href=${htmlPath + '/details.html?id=' + d.id + '&channelId=' + d.channelId}>
+                                <a href=${htmlPath + '/details.html?id=' + d.id}>
                                     <div class="title">${cutString(d.title, 60)}</div>
                                     <div class="list-text">
                                         <div class="author clearfix"><span>${d.author}</span></div>
@@ -178,6 +176,23 @@ $(function () {
             $('.news-list-box').html(newsList)
         })
     }
+
+    // 广告
+    ajaxGet(apiInfo + '/ad/showad', {
+        adPlace: 2,
+        type: 2
+    }, (data) => {
+        const $adTitle = $('#adTitle')
+        const $adUrl = $('#adUrl')
+        const $adSrc = $('#adSrc')
+
+        const obj = data.obj.inforList[0]
+        const imgSrc = obj.img_url
+
+        $adTitle.text(obj.remake)
+        $adUrl.attr('href', obj.url)
+        $adSrc.attr('src', imgSrc)
+    })
 
     // 返回顶部
     $(window).on('scroll', function () {
