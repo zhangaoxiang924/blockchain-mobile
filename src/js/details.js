@@ -16,6 +16,7 @@ import {
 import html2canvas from 'html2canvas'
 
 let url = '/info/news'
+let apiInfo = '/info'
 const htmlPath = ''
 if (isPc()) {
     let href = window.location.href
@@ -176,6 +177,22 @@ $(function () {
             $('.news-list-box').html(newsList)
         })
     }
+
+    // 广告
+    ajaxGet(apiInfo + '/ad/showad', {
+        adPlace: 2,
+        type: 2
+    }, (data) => {
+        console.log(data)
+        const $adTitle = $('#adTitle')
+        const $adUrl = $('#adUrl')
+        const $adSrc = $('#adSrc')
+
+        const obj = data.obj.inforList[0]
+        $adTitle.text(obj.remake)
+        $adUrl.attr('href', obj.url)
+        $adSrc.attr('src', obj.img_url)
+    })
 
     // 返回顶部
     $(window).on('scroll', function () {
