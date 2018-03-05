@@ -182,17 +182,20 @@ $(function () {
         adPlace: 2,
         type: 2
     }, (data) => {
-        const $adTitle = $('#adTitle')
-        const $adUrl = $('#adUrl')
-        const $adSrc = $('#adSrc')
-
-        const obj = data.obj.inforList[0]
-        console.log(obj.img_url)
-        console.log(obj)
-
-        $adTitle.text(obj.remake)
-        $adUrl.attr('href', obj.url)
-        $adSrc.attr('src', obj.img_url)
+        const obj = data.obj.inforList
+        let list = ''
+        obj.map((item) => {
+            list += `<div class="block-ad">
+                        <div class="block-ad-title">
+                            <h3>${item.remake}</h3>
+                            <span>广告</span>
+                        </div>
+                        <div class="block-ad-con">
+                            <a href="${item.url}"><img src="${item.img_url}"/></a>
+                        </div>
+                    </div>`
+        })
+        $('.advertising').append(list)
     })
 
     // 返回顶部
