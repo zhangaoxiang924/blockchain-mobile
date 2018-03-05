@@ -222,7 +222,7 @@ $(function () {
         adPlace: 2,
         type: 2
     }, (data) => {
-        const obj = data.obj.inforList
+        const obj = data.obj[2]
         let list = ''
         obj.map((item) => {
             list += `<div class="block-ad">
