@@ -27,46 +27,29 @@ if (isPc()) {
     }
 }
 
-const musicList = [
-    {
-        title: 'Memories',
-        singer: 'Approaching Nirvana',
-        cover: 'http://p1.music.126.net/-Rt_0o6k71V_-OZUjpi_6Q==/6641050232203243.jpg',
-        src: 'http://qqma.tingge123.com:83/123/2016/10/青蛙乐队 - 小跳蛙.mp3',
-        lyric: null
-    }, {
-        title: 'Don t Look',
-        singer: 'Usher',
-        cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
-        src: 'http://qqma.tingge123.com:83/20081119/甜甜的.mp3',
-        lyric: null
-    }, {
-        title: 'Don t Losdfgsdfgok',
-        singer: 'Usher',
-        cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
-        src: 'http://qqma.tingge123.com:83/123/2014/12/无字碑-张靓颖.mp3',
-        lyric: null
-    }
-]
+// let musicList = [
+//     {
+//         title: 'Memories',
+//         singer: 'Approaching Nirvana',
+//         cover: 'http://p1.music.126.net/-Rt_0o6k71V_-OZUjpi_6Q==/6641050232203243.jpg',
+//         src: 'http://qqma.tingge123.com:83/123/2016/10/青蛙乐队 - 小跳蛙.mp3',
+//         lyric: null
+//     }, {
+//         title: 'Don t Look',
+//         singer: 'Usher',
+//         cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
+//         src: 'http://qqma.tingge123.com:83/20081119/甜甜的.mp3',
+//         lyric: null
+//     }, {
+//         title: 'Don t Losdfgsdfgok',
+//         singer: 'Usher',
+//         cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
+//         src: 'http://qqma.tingge123.com:83/123/2014/12/无字碑-张靓颖.mp3',
+//         lyric: null
+//     }
+// ]
 
 $(function () {
-    const smusic = new SMusic({
-        musicList: musicList,
-        autoPlay: true,
-        defaultMode: 1,
-        callback: function (obj) {
-            console.log(obj)
-            /*
-            {title: "赤血长殷", singer: "王凯", cover: "http://data.smohan.net/upload/other/cxcy/cover.jpg", src: "http://data.smohan.net/upload/other/cxcy/music.mp3", index: 4}
-            */
-        }
-    })
-    console.log(smusic)
-
-    $('.audio-list-btn').click(function () {
-        $('.m-music-list-wrap').toggle()
-    })
-
     const $huoxingTop = $('#huoxingTop')
     scrollDirect(function (direction) {
         if (direction === 'down') {
@@ -85,6 +68,39 @@ $(function () {
             id: id,
             channelId: 2
         }, (data) => {
+            let audio = data.obj.current.audio
+            let musicList = []
+            if (audio && audio !== '' && audio.indexOf('[') > -1) {
+                if (JSON.parse(audio).length !== 0) {
+                    JSON.parse(audio).map(function (item, index) {
+                        musicList.push({
+                            title: item.fileName,
+                            singer: '',
+                            cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
+                            src: item.fileUrl,
+                            lyric: null
+                        })
+                    })
+                    const smusic = new SMusic({
+                        musicList: musicList,
+                        autoPlay: true,
+                        defaultMode: 1,
+                        callback: function (obj) {
+                            /*
+                             {title: "赤血长殷", singer: "王凯", cover: "http://data.smohan.net/upload/other/cxcy/cover.jpg", src: "http://data.smohan.net/upload/other/cxcy/music.mp3", index: 4}
+                             */
+                        }
+                    })
+                    console.log(smusic)
+                }
+            } else {
+                $('.audio-wrap').css('display', 'none')
+            }
+
+            $('.audio-list-btn').click(function () {
+                $('.m-music-list-wrap').toggle()
+            })
+
             pageLoadingHide()
             let cont = data.obj
             $('title').html(cont.current.title)
