@@ -28,6 +28,8 @@ private: ['../css/public.css', '../css/details.css']
         <p></p>
     </div>
 
+    <div class="audio-wrap"><%- include('./include/smusic') %></div>
+
     <div class="simditor">
         <div class="details-cont simditbaor-body">
             <!--<p>疲弱的经济数据和美国政治前景不确定性加剧了美元跌势。周二公布的数据显示，美国1月里奇蒙德制造业指数自2017年11月历史高位30大幅下跌至14，连续两个月跌幅创2006年以来最大幅度。</p>-->
@@ -67,7 +69,7 @@ private: ['../css/public.css', '../css/details.css']
 app: false
 }) %>
 <%- include('../../libs/html/util-m/footer', {
-plugin: [''],
+plugin: [ '../js/smusic.js'],
 private: ['../js/details.js'],
 statistics: 'https://s22.cnzz.com/z_stat.php?id=1272858809&web_id=1272858809'
 }) %>
