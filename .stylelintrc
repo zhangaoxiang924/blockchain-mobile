@@ -2,7 +2,8 @@
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
     "./src/css/swiper.min.scss",
-    "./src/css/simditor.scss"
+    "./src/css/simditor.scss",
+    "./src/css/public/*.*"
   ],
   "rules": {
     "indentation": 4,
