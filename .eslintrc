@@ -28,7 +28,8 @@
     "CONFIG": true,
     "$": true,
     "wx": true,
-    "Swiper": true
+    "Swiper": true,
+    "SMusic": true
   },
   "env": {
     "browser": true,
