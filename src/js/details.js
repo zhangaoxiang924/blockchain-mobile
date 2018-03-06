@@ -92,6 +92,8 @@ $(function () {
                         }
                     })
                     console.log(smusic)
+                } else {
+                    $('.audio-wrap').css('display', 'none')
                 }
             } else {
                 $('.audio-wrap').css('display', 'none')
