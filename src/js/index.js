@@ -6,7 +6,7 @@
 import {pageLoadingHide, isPc} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
-import swal from 'sweetalert2'
+// import swal from 'sweetalert2'
 
 if (isPc()) {
     window.location.href = 'http://www.huoxing24.com'
@@ -24,7 +24,7 @@ const navIndex = [
         channelId: '0'
     }, {
         title: '快讯',
-        channelId: ''
+        channelId: '100' // 假的channelId
     }, {
         title: '两会',
         channelId: '10'
@@ -113,7 +113,8 @@ $(function () {
         }
     })
 
-    // let moreIndex = 0
+    let moreIndex = 0
+    let moreState = true
     let swiper = new Swiper('#hxwrap', {
         pagination: {
             el: '#hxWrapPage',
@@ -157,8 +158,8 @@ $(function () {
                 const moreNo = $('#listBox' + type).children('.news-list-more').length === 0
                 const firstNo = $('#listBox' + type).children('.news-list-first').length === 0
 
-                // moreIndex = this.activeIndex
-
+                moreIndex = navIndex[this.activeIndex].channelId
+                moreState = true
                 if (type !== 0 && moreNo && firstNo) {
                     if (this.activeIndex !== 1) {
                         getNewsList({
@@ -204,14 +205,12 @@ $(function () {
     /* ---------------记载更多--------------- */
     let flashCurrentPage = null
     let flashPage = $('.btn-more-flash').data('type')
-    // let moreState = true
-    /* $(window).on('scroll', function () {
+    $(window).on('scroll', function () {
         let btnMoreTop = $('#btnMore' + moreIndex).offset().top
         let nowtop = $(window).scrollTop() + $(window).height()
-
         if (nowtop > btnMoreTop && moreState) {
             moreState = false
-            if (moreIndex !== 1) {
+            if (moreIndex !== '100') {
                 const type = 'addMore'
                 const channelId = $('#btnMore' + moreIndex).data('type')
                 const page = $('#listBox' + channelId).data('page')
@@ -225,9 +224,6 @@ $(function () {
                 })
             } else {
                 flashPage++
-                if (flashPage > flashCurrentPage) {
-                    return false
-                }
                 getFlashNewsList({
                     queryTime: '',
                     pageSize: 30,
@@ -236,10 +232,10 @@ $(function () {
                     fn: function () {
                         moreState = true
                     }
-                })
+                }, 500)
             }
         }
-    }) */
+    })
 
     $('.btn-more').click(function () {
         const type = 'addMore'
@@ -275,7 +271,6 @@ $(function () {
             currentPage: currentPage
         }, function (data) {
             pageLoadingHide()
-
             let dataArr = data.obj.inforList
             let originalDate = new Date($.ajax({async: false}).getResponseHeader('Date'))
             let serve = originalDate + (3600000 * 8)
@@ -307,7 +302,6 @@ $(function () {
             } else {
                 $('.lives-box').append(livesList)
             }
-
             calculateHeight('Live')
             if (fn) {
                 fn()
@@ -425,7 +419,6 @@ $(function () {
 
         ajaxGet(url + '/shownews', data, function (data) {
             pageLoadingHide()
-            console.log(channelId)
             if (data.obj.inforList.length !== 0) {
                 // 设置当前频道下一页数字
                 const $listBox = $('#listBox' + channelId)
@@ -504,8 +497,8 @@ $(function () {
                     }
                 }
             } else {
-                swal('没有更多了!')
-                // $('#btnMore' + moreIndex).html('没有更多了!')
+                // swal('没有更多了!')
+                $('#btnMore' + moreIndex).html('没有更多了!')
             }
         })
     }
