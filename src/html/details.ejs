@@ -28,7 +28,7 @@ private: ['../css/public.css', '../css/details.css']
         <p></p>
     </div>
 
-    <div class="audio-wrap"><%- include('./include/smusic') %></div>
+    <div class="audio-wrap"><%- include('./include/jplayer') %></div>
 
     <div class="simditor">
         <div class="details-cont simditbaor-body">
@@ -69,7 +69,7 @@ private: ['../css/public.css', '../css/details.css']
 app: false
 }) %>
 <%- include('../../libs/html/util-m/footer', {
-plugin: [ '../js/smusic.js'],
+plugin: ['../js/jquery-3.2.1.min.js', '../js/jquery.jplayer.min.js'],
 private: ['../js/details.js'],
 statistics: 'https://s22.cnzz.com/z_stat.php?id=1272858809&web_id=1272858809'
 }) %>
