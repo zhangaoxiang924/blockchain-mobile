@@ -76,34 +76,22 @@ $(function () {
                         musicList.push({
                             title: item.fileName,
                             singer: '',
-                            cover: 'http://p1.music.126.net/ldpRUbUReUBh45wJIqfHng==/7748258441443132.jpg',
+                            cover: '',
                             src: item.fileUrl,
                             lyric: null
                         })
                     })
-
-                    console.log(musicList[0].src)
-                    console.log(musicList[0].title)
-
-                    $('#jquery_jplayer_1').jPlayer({
-                        ready: function (event) {
-                            $(this).jPlayer('setMedia', {
-                                title: musicList[0].title,
-                                // m4a: 'http://jplayer.org/audio/m4a/Miaow-07-Bubble.m4a',
-                                // oga: 'http://jplayer.org/audio/ogg/Miaow-07-Bubble.ogg',
-                                mp3: musicList[0].src
-                            })
-                        },
-                        swfPath: './jplayer',
-                        supplied: 'mp3, m4a, oga',
-                        wmode: 'window',
-                        useStateClassSkin: true,
-                        autoBlur: false,
-                        smoothPlayBar: true,
-                        keyEnabled: true,
-                        remainingDuration: true,
-                        toggleDuration: true
+                    const smusic = new SMusic({
+                        musicList: musicList,
+                        autoPlay: true,
+                        defaultMode: 1,
+                        callback: function (obj) {
+                            /*
+                             {title: "赤血长殷", singer: "王凯", cover: "http://data.smohan.net/upload/other/cxcy/cover.jpg", src: "http://data.smohan.net/upload/other/cxcy/music.mp3", index: 4}
+                             */
+                        }
                     })
+                    console.log(smusic)
                 } else {
                     $('.audio-wrap').css('display', 'none')
                 }
