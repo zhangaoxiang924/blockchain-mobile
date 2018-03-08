@@ -74,7 +74,7 @@ $(function () {
                 if (JSON.parse(audio).length !== 0) {
                     JSON.parse(audio).map(function (item, index) {
                         musicList.push({
-                            title: item.fileName,
+                            title: $.trim(item.fileName.split('.')[0]),
                             singer: '',
                             cover: '',
                             src: item.fileUrl,
