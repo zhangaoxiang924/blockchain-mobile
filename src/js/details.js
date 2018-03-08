@@ -83,7 +83,7 @@ $(function () {
                     })
                     const smusic = new SMusic({
                         musicList: musicList,
-                        autoPlay: true,
+                        autoPlay: false,
                         defaultMode: 1,
                         callback: function (obj) {
                             /*
