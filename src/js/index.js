@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：index
  */
-import {pageLoadingHide, isPc} from '../../libs/js/utils'
+import {pageLoadingHide, isPc, isIos, isAndroid, isWeixin} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
 // import swal from 'sweetalert2'
@@ -502,6 +502,28 @@ $(function () {
             }
         })
     }
+
+    // 下载
+    let iosUrl = ''
+    let andUrl = ''
+    let downLoad = $('.b-down')
+
+    downLoad.on('click', function () {
+        if (isIos()) {
+            downLoad.attr('href', iosUrl)
+        }
+        if (isAndroid()) {
+            downLoad.attr('href', andUrl)
+        }
+        if (isWeixin() && isAndroid()) {
+            $('.hint').show()
+            return false
+        }
+    })
+
+    $('.hint').on('click', function () {
+        $('.hint').hide()
+    })
 })
 
 // 小于10加0
