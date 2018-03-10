@@ -243,10 +243,11 @@ $(function () {
         const obj = data.obj[2]
         let list = ''
         obj.map((item) => {
+            console.log(item.useType)
             list += `<div class="block-ad">
                         <div class="block-ad-title">
                             <h3>${item.remake}</h3>
-                            <span>广告</span>
+                            ${item.useType === 1 ? '<span>广告</span>' : ''}
                         </div>
                         <div class="block-ad-con">
                             <a href="${item.url}"><img src="${item.img_url}"/></a>
