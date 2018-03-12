@@ -31,7 +31,7 @@ body,
     }
 }
 
-.bottom-down {
+.m-bottom {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -51,13 +51,11 @@ body,
         }
     }
 
-    .b-down {
-        position: absolute;
-        display: inline-block;
-        right: rem(27);
-        top: rem(14);
+    .m-btn {
         width: rem(144);
         height: rem(60);
+        background: red;
+        right: rem(25);
 
         img {
             width: 100%;

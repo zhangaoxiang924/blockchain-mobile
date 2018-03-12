@@ -269,4 +269,5 @@ $(function () {
     $('.back-top').on('click', function () {
         Animation()
     })
+    alert(0)
 })
