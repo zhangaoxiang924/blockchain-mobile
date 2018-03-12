@@ -219,3 +219,39 @@
     }
 }
 
+.bottom-down {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: rem(96);
+    background: #fff;
+    z-index: 99999;
+
+    .b-logo {
+        position: absolute;
+        left: rem(27);
+        top: rem(14);
+        width: rem(233);
+        height: rem(69);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    a {
+        position: absolute;
+        display: inline-block;
+        right: rem(27);
+        top: rem(14);
+        width: rem(144);
+        height: rem(60);
+        background: url("../img/down-btn.png") no-repeat;
+        background-size: 100%;
+        color: #fff;
+        text-align: center;
+        line-height: rem(60);
+        font-size: rem(24);
+    }
+}
+

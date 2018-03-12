@@ -14,7 +14,7 @@ if (isPc()) {
 
 let url = '/info/news'
 let url2 = '/info/lives'
-let url3 = '/market/coin'
+// let url3 = '/market/coin'
 const htmlPath = ''
 
 // 频道分类数组
@@ -202,6 +202,17 @@ $(function () {
     })
     swiper2.init()
 
+    // 三个栏目
+    $('#eightClock').on('click', function () {
+        swiper.slideTo(9)
+    })
+    $('#tenQuestions').on('click', function () {
+        swiper.slideTo(4)
+    })
+    $('#twoSessions').on('click', function () {
+        swiper.slideTo(2)
+    })
+
     /* ---------------记载更多--------------- */
     let flashCurrentPage = null
     let flashPage = $('.btn-more-flash').data('type')
@@ -310,7 +321,7 @@ $(function () {
     }
 
     // 获取汇率
-    ajaxGet(url3 + '/total', {}, function (data) {
+    /* ajaxGet(url3 + '/total', {}, function (data) {
         ajaxGet(url3 + '/financerate', {}, function (dataIn) {
             let coinStr = ''
             data.data.coin.map(function (d, i) {
@@ -325,7 +336,7 @@ $(function () {
 
             $('#coinList').html(coinStr)
         })
-    })
+    }) */
 
     // 快讯分享
     const $shareBox = $('#shareBox')
@@ -394,7 +405,7 @@ $(function () {
         const $overAllBox = $('#overAllBox')
         const windowHeight = parseInt($(window).height())
 
-        let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 20
+        let wHeight = parseInt($('#pageConWrap' + channelId).height()) + 80
 
         if (wHeight < windowHeight) {
             $overAllBox.height(windowHeight)
