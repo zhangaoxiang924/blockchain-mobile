@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：details
  */
-import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
+import {getQueryString, pageLoadingHide, isPc, isIos, isAndroid} from '../../libs/js/utils'
 import {
     getTime,
     ajaxGet,
@@ -268,5 +268,23 @@ $(function () {
     })
     $('.back-top').on('click', function () {
         Animation()
+    })
+
+    // 下载
+    let iosUrl = 'https://www.pgyer.com/huoxing24_ios'
+    let andUrl = 'https://www.pgyer.com/huoxing24_android'
+    let downLoad = $('.b-down')
+
+    downLoad.on('click', function () {
+        if (isIos()) {
+            downLoad.attr('href', iosUrl)
+        }
+        if (isAndroid()) {
+            downLoad.attr('href', andUrl)
+        }
+        /* if (isWeixin() && isAndroid()) {
+         $('.hint').show()
+         return false
+         } */
     })
 })
