@@ -13,7 +13,7 @@ module.exports = {
     publicPath: 'http://m.huoxing24.com',
     vendors: [],
     proxy: [
-        proxy(['/*/*/*', '/*/*'], {
+        proxy(['/*/*/*'], {
             target: 'http://m.huoxing24.com',
             // target: 'http://m.huoxing24.vip',
             // target: 'http://47.52.210.208',
