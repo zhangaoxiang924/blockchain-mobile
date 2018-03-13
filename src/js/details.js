@@ -131,16 +131,18 @@ $(function () {
 
             let readNumber = `<div class="read-number">${cont.current.hotCounts}</div>`
 
-            let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
-                            <div class="list-text">
-                                ${author}
-                                <div class="time clearfix"><span>${time}</span></div>
-                                ${readNumber}
-                                <div
+            let shareBtn = `<div
                                 class="share-btn"
                                 data-synopsis="${synopsis}"
                                 data-time="${formatDateMore(cont.current.publishTime)}"></div>
                             </div>`
+            shareBtn = ''
+
+            let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
+                            <div class="list-text">
+                                ${author}
+                                <div class="time clearfix"><span>${time}</span></div>
+                                ${readNumber + shareBtn}`
 
             let content = cont.current.content
             $('.details-header').html(header)
