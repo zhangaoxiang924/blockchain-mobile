@@ -8,15 +8,15 @@ const proxy = require('http-proxy-middleware')
  * publicPath (1:此处publicPath;   2:libs/scss/util-pc或libs/scss/util-m;   3:自定义JS中加载的图片--src/js/public/public)
  */
 module.exports = {
-    host: '192.168.84.44',
+    host: '192.168.84.43',
     port: '8060',
     publicPath: 'http://m.huoxing24.com',
     vendors: [],
     proxy: [
         proxy(['/*/*/*'], {
-            // target: 'http://m.huoxing24.com',
+            target: 'http://m.huoxing24.com',
             // target: 'http://m.huoxing24.vip',
-            target: 'http://47.52.210.208',
+            // target: 'http://47.52.210.208',
             changeOrigin: true
         })
     ]
