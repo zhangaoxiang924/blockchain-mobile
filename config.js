@@ -9,7 +9,7 @@ const proxy = require('http-proxy-middleware')
  */
 module.exports = {
     host: '192.168.84.43',
-    port: '8060',
+    port: '8090',
     publicPath: 'http://m.huoxing24.com',
     vendors: [],
     proxy: [
