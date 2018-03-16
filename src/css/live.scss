@@ -12,12 +12,13 @@
     .banner-box {
         position: relative;
         width: 100%;
-        height: rem(475);
+        height: rem(478);
+        background: #eee;
 
         img {
             &.banner-img {
                 width: 100%;
-                height: rem(475);
+                height: rem(478);
             }
         }
 
@@ -108,15 +109,29 @@
                 padding: 0 rem(10);
             }
 
-            font {
-                display: inline-block;
-                height: rem(40);
-                padding: 0 rem(20);
+            .lives-state {
                 font-size: rem(24);
-                line-height: rem(40);
-                background: #4fb07a;
                 margin-left: rem(5);
-                border-radius: rem(30) rem(30);
+
+                font {
+                    display: block;
+                    height: rem(40);
+                    line-height: rem(40);
+                    padding: 0 rem(20);
+                    border-radius: rem(30) rem(30);
+
+                    &.c0 {
+                        background: #ee4d5c;
+                    }
+
+                    &.c1 {
+                        background: #4fb07a;
+                    }
+
+                    &.c2 {
+                        background: #59626c;
+                    }
+                }
             }
         }
     }
@@ -150,9 +165,12 @@
         }
     }
 
+    $aHeight:600;
+
     .inform-box {
+        position: relative;
         width: 100%;
-        height: auto;
+        min-height: rem($aHeight);
         background: #eee;
         padding: rem(25);
         box-sizing: border-box;
@@ -166,81 +184,238 @@
             margin-bottom: rem(25);
         }
 
-        .inform-cont {
+        .details-box {
             width: 100%;
-            margin-bottom: rem(40);
+            height: 100%;
 
-            .inform-portrait {
-                width: rem(70);
-                height: rem(70);
-                float: left;
+            .inform-cont {
+                width: 100%;
+                margin-bottom: rem(40);
 
-                img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 100%;
-                }
-            }
+                .inform-portrait {
+                    width: rem(70);
+                    height: rem(70);
+                    float: left;
 
-            .inform-right-cont {
-                position: relative;
-                width: rem(515);
-                height: 100%;
-                float: right;
-
-                .inform-cont-top {
-                    width: 100%;
-                    height: rem(35);
-
-                    p {
-                        width: 50%;
-                        float: left;
-
-                        &.name {
-                            color: #121212;
-                            font-size: rem(24);
-                            padding-left: rem(10);
-                            box-sizing: border-box;
-                        }
-
-                        &.time {
-                            color: #747474;
-                            font-size: rem(22);
-                            text-align: right;
-                        }
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 100%;
                     }
                 }
 
-                .r-arrow {
-                    position: absolute;
-                    top: 25px;
-                    left: 0;
-                    width: 0;
-                    height: 0;
-                    border-width: rem(20) rem(20) rem(20) rem(0);
-                    border-style: solid;
-                    border-color: transparent #fff transparent transparent;
+                .inform-right-cont {
+                    position: relative;
+                    width: rem(515);
+                    height: 100%;
+                    float: right;
+
+                    .inform-cont-top {
+                        width: 100%;
+                        height: rem(35);
+
+                        p {
+                            width: 50%;
+                            float: left;
+
+                            &.name {
+                                color: #121212;
+                                font-size: rem(24);
+                                padding-left: rem(10);
+                                box-sizing: border-box;
+                            }
+
+                            &.time {
+                                color: #747474;
+                                font-size: rem(22);
+                                text-align: right;
+                            }
+                        }
+                    }
+
+                    .r-arrow {
+                        position: absolute;
+                        top: 25px;
+                        left: 0;
+                        width: 0;
+                        height: 0;
+                        border-width: rem(20) rem(20) rem(20) rem(0);
+                        border-style: solid;
+                        border-color: transparent #fff transparent transparent;
+                    }
+
+                    .inform-cont-text {
+                        float: right;
+                        width: rem(450);
+                        padding: rem(25);
+                        background: #fff;
+                        border-radius: rem(5);
+                        font-size: rem(26);
+                        color: #303030;
+
+                        p {
+                            line-height: rem(40);
+                            margin-bottom: rem(10);
+                            text-align: justify;
+                            word-break: break-all;
+
+                            img {
+                                width: 100%;
+                                height: auto;
+                                margin-top: rem(20);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .not-message {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: rem(36);
+            padding-top: 20%;
+            box-sizing: border-box;
+            color: #999;
+        }
+    }
+
+    .live-box {
+        width: 100%;
+        height: 100%;
+
+        .live-list {
+            width: rem(600);
+            padding: rem(25) 0 rem(5);
+            margin: 0 auto;
+
+            .list {
+                position: relative;
+                width: rem(290);
+                height: rem(300);
+                background: #fff;
+                float: left;
+                margin-bottom: rem(20);
+
+                &:nth-child(2n) {
+                    margin-left: rem(20);
                 }
 
-                .inform-cont-text {
-                    float: right;
-                    width: rem(450);
-                    padding: rem(25);
-                    background: #fff;
-                    border-radius: rem(5);
+                p {
+                    width: 100%;
+                    color: #262424;
                     font-size: rem(24);
-                    color: #303030;
 
-                    p {
-                        line-height: rem(50);
+                    &.list-img {
+                        width: rem(290);
+                        height: rem(190);
 
                         img {
-                            width: 100%;
-                            margin-top: rem(20);
+                            width: rem(290);
+                            height: rem(190);
+                        }
+                    }
+
+                    &.list-text {
+                        width: rem(250);
+                        height: rem(70);
+                        overflow: hidden;
+                        margin: rem(20) auto;
+                        line-height: rem(36);
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    &.list-state {
+                        display: inline-block;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+
+                        font {
+                            position: absolute;
+                            right: 0;
+                            top: rem(150);
+                            display: -webkit-inline-box;
+                            height: rem(40);
+                            line-height: rem(40);
+                            padding: 0 rem(20);
+                            border-radius: rem(30) rem(30);
+                            color: #fff;
+
+                            &.c0 {
+                                background: #ee4d5c;
+                            }
+
+                            &.c1 {
+                                background: #4fb07a;
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+
+    .live-ewm {
+        position: fixed;
+        z-index: 100;
+        top: 30%;
+        left: 50%;
+        margin-left: rem(-197);
+        width: rem(393);
+        height: rem(414);
+        background: url("../img/ewm-bg.png") no-repeat;
+        background-size: 100%;
+        display: none;
+
+        &.show {
+            display: block;
+        }
+
+        p {
+            position: absolute;
+            left: 50%;
+            margin-left: rem(-81);
+            top: rem(90);
+            width: rem(144);
+            height: rem(144);
+            border: rem(1) solid #e5e5e5;
+            padding: 8px;
+
+            img {
+                width: rem(144);
+                height: rem(144);
+            }
+        }
+
+        span {
+            position: absolute;
+            width: 100%;
+            top: rem(290);
+            text-align: center;
+            font-size: rem(23);
+            color: #8a8a8a;
+        }
+    }
+
+    .live-shade {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+
+        &.show {
+            display: block;
         }
     }
 }

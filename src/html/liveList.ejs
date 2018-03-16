@@ -7,33 +7,31 @@ private: ['../css/live.css']
 }) %>
 <div class="wrap">
     <div class="banner-box">
-        <img class="banner-img" src="../img/banner.jpg" alt="">
-        <div class="introduction-btn"><span><img src="../img/left-l.png" alt=""></span>直播简介</div>
+        <img class="banner-img" src="../img/live-banner.jpg" alt="">
+        <!-- <div class="introduction-btn"><span><img src="../img/left-l.png" alt=""></span>直播简介</div>
         <div class="introduction-cont"><span id="left-btn"><img src="../img/right-r.png" alt=""></span>
             <p>直播简介直播简，介直播简介直播，简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介。</p></div>
-        <div class="live-time"><p class="time">开始时间：<span>2018-03-07 22:00</span></p><font>直播中...</font></div>
+        <div class="live-time"><p class="time">开始时间：<span>2018-03-07 22:00</span></p><font>直播中...</font></div> -->
     </div>
     <div class="inform-btn">
-        <p>参与讨论</p>
+        <p class="wx-btn" id="wxBtn">参与讨论</p>
         <p><a href="http://m.huoxing24.com/">进入官网</a></p>
     </div>
-    <div class="inform-box">
-        <div class="inform-title">图文直播</div>
-        <div class="inform-cont clearfix">
-            <div class="inform-portrait"><img src="../img/banner.jpg" alt=""></div>
-            <div class="inform-right-cont">
-                <div class="inform-cont-top">
-                    <p class="name">火星财经</p>
-                    <p class="time">2018-03-07 19:55</p>
-                </div>
-                <p class="r-arrow"></p>
-                <div class="inform-cont-text">
-                    <p>金沙江创投董事总经理，拥有复旦大学的世界经济学硕士学位，上海交通大学通信工程学士学位。朱啸虎专注于互联网、无线和企业IT投资。</p>
-                    <p><img src="../img/banner.jpg" alt=""></p>
-                </div>
-            </div>
+    <div class="live-box">
+        <div class="live-list clearfix">
+            <!-- <div class="list">
+                <a href="/html/liveDetails.html">
+                    <p class="list-img"><img src="../img/list-01.png" alt=""></p>
+                    <p class="list-text">介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介直播简介</p>
+                </a>
+            </div> -->
         </div>
     </div>
+    <div class="live-ewm">
+        <p><img src="../img/live-ewm.jpg" alt=""></p>
+        <span>长按识别二维码加入微信群聊</span>
+    </div>
+    <div class="live-shade" id="liveShade"></div>
 </div>
 <%- include('../../libs/html/util-m/footer', {
 plugin: [''],

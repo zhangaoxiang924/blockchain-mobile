@@ -68,6 +68,7 @@ $(function () {
             id: id,
             channelId: 2
         }, (data) => {
+            console.log(data)
             let audio = data.obj.current.audio
             let musicList = []
             if (audio && audio !== '' && audio.indexOf('[') > -1) {
