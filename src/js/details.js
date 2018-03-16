@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：details
  */
-import {getQueryString, pageLoadingHide, isPc, isIos, isAndroid} from '../../libs/js/utils'
+import {getQueryString, pageLoadingHide, isPc, isIos, isWeixin, isAndroid} from '../../libs/js/utils'
 import {
     getTime,
     ajaxGet,
@@ -18,7 +18,7 @@ import html2canvas from 'html2canvas'
 let url = '/info/news'
 let apiInfo = '/info'
 const htmlPath = ''
-if (isPc()) {
+if (isPc() && !isWeixin()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
         window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}`
