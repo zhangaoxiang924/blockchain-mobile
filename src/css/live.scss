@@ -8,12 +8,12 @@
 .wrap {
     width: 100%;
     overflow: hidden;
+    background: #eee;
 
     .banner-box {
         position: relative;
         width: 100%;
         height: rem(478);
-        background: #eee;
 
         img {
             &.banner-img {
@@ -189,10 +189,13 @@
             height: 100%;
 
             .inform-cont {
+                position: relative;
                 width: 100%;
                 margin-bottom: rem(40);
 
                 .inform-portrait {
+                    position: absolute;
+                    top: rem(30);
                     width: rem(70);
                     height: rem(70);
                     float: left;
@@ -327,33 +330,36 @@
                         line-height: rem(36);
                         text-overflow: ellipsis;
                         display: -webkit-box;
+                        background: #fff;
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
                     }
 
                     &.list-state {
-                        display: inline-block;
                         position: absolute;
-                        right: 0;
                         top: 0;
+                        left: 0;
+                        height: rem(68);
+                        width: rem(68);
 
                         font {
-                            position: absolute;
-                            right: 0;
-                            top: rem(150);
-                            display: -webkit-inline-box;
-                            height: rem(40);
-                            line-height: rem(40);
-                            padding: 0 rem(20);
-                            border-radius: rem(30) rem(30);
-                            color: #fff;
+                            display: block;
+                            height: rem(68);
+                            width: rem(68);
 
                             &.c0 {
-                                background: #ee4d5c;
+                                background: url("../img/about-to.png") no-repeat;
+                                background-size: 100%;
                             }
 
                             &.c1 {
-                                background: #4fb07a;
+                                background: url("../img/underway.png") no-repeat;
+                                background-size: 100%;
+                            }
+
+                            &.c2 {
+                                background: url("../img/over.png") no-repeat;
+                                background-size: 100%;
                             }
                         }
                     }

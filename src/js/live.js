@@ -9,6 +9,7 @@ import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
 let websocketUrl = 'ws://www.huoxing24.vip/push/websocket/text'
+const htmlPath = '/html'
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {
@@ -36,6 +37,7 @@ $(function () {
         }
         return t
     }
+
     const rem = (value) => {
         return (value / 24) + 'rem'
     }
@@ -56,16 +58,19 @@ $(function () {
                 dataList.map((item, index) => {
                     switch (item.webcast.status) {
                         case 0:
-                            listText = '<font class="c0">即将开始</font>'
+                            listText = '<font class="c0"></font>'
                             break
                         case 1:
-                            listText = '<font class="c1">进行中...</font>'
+                            listText = '<font class="c1"></font>'
+                            break
+                        case 2:
+                            listText = '<font class="c2"></font>'
                             break
                         default:
                             listText = ''
                     }
                     list += `<div class="list">
-                                <a href="/html/liveDetails.html?castId=${item.webcast.castId}&status=${item.webcast.status}">
+                                <a href="${htmlPath}/liveDetails.html?castId=${item.webcast.castId}&status=${item.webcast.status}">
                                     <p class="list-img"><img src=${item.webcast.coverPic} alt=""></p>
                                     <p class="list-text">${item.webcast.title}</p>
                                     <p class="list-state">${listText}</p>
@@ -155,6 +160,7 @@ $(function () {
         // 关闭WebSocket连接
         const closeWebSocket = () => {
             websocket.close()
+            // alert('链接断开，请刷新页面...')
         }
 
         // 连接发生错误的回调方法
@@ -165,11 +171,14 @@ $(function () {
         // 连接成功建立的回调方法
         websocket.onopen = () => {
             setMessageInnerHTML('WebSocket连接成功')
+            /* setInterval(() => {
+                websocket.send(`{"type": 0, "castId": ${castId}}`)
+            }, 59000) */
             websocket.send(`{"type": 0, "castId": ${castId}}`)
         }
 
         // 接收到消息的回调方法
-        websocket.onmessage = function (event) {
+        websocket.onmessage = (event) => {
             // setMessageInnerHTML(event.data)
             let dataArr = JSON.parse(event.data)
             let contList = ''
@@ -182,8 +191,9 @@ $(function () {
                 $('img.banner-img').attr('src', bannerMessage.backImage)
                 $('.introduction-cont p').html(bannerMessage.desc)
                 $('.live-time p span').html(year + ' ' + timeNum(hour[0]) + ' : ' + timeNum(hour[1]))
+                console.log(dataArr)
                 dataArr.data.contentList.map((item, index) => {
-                    let time = timestampToTime(item.user.createTime)
+                    let time = timestampToTime(item.content.createTime)
                     contList += `<div class="inform-cont clearfix" data-id=${item.content.contentId}>
                         <div class="inform-portrait"><img src=${item.user.headUrl} alt=""></div>
                         <div class="inform-right-cont">
@@ -220,13 +230,11 @@ $(function () {
                 })
                 $('.details-box').html(classArr)
             } else if (dataArr.type === 3) {
-                let redactArr = ''
                 $('.inform-cont').each(function (i, d) {
-                    if ($('.inform-cont').eq(i).data('id') !== dataArr.data.contentId) {
-                        redactArr += $(d).get(0).outerHTML
+                    if ($(d).data('id') === dataArr.data.contentId) {
+                        $(d).find('.inform-cont-text').html(dataArr.data.content)
                     }
                 })
-                $('.details-box').html(redactArr)
             } else if (dataArr.type === 4) {
                 stateText = '<font class="c2">已结束</font>'
             } else if (dataArr.type === 5) {
@@ -244,6 +252,7 @@ $(function () {
         // 连接关闭的回调方法
         websocket.onclose = () => {
             setMessageInnerHTML('WebSocket连接关闭')
+            // alert('链接断开，请刷新页面...')
         }
 
         // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
