@@ -1,0 +1,227 @@
+@charset "utf-8";
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #ef6a6c;
+}
+
+@import "../../libs/scss/rem";
+@import "./public/smusic";
+
+#willesPlay {
+    margin: 0 auto rem(100);
+    position: relative;
+    background: #e5e6e8;
+
+    .playHeader {
+        width: 100%;
+        height: rem(80);
+        border-top-left-radius: 5px;
+
+        .videoName {
+            font-size: 16px;
+            width: 100%;
+            height: rem(80);
+            line-height: rem(80);
+            text-align: center;
+            margin: 0 auto;
+            color: #7a7f82;
+        }
+
+        .otherControl {
+            float: right;
+            position: relative;
+
+            span {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+                font-size: 20px;
+                cursor: pointer;
+                background: red;
+
+                &:nth-child(1) {
+                    font-size: 28px;
+                    color: #ef6a6c;
+                }
+            }
+        }
+    }
+
+    .volumeBar {
+        width: 26px;
+        height: 100px;
+        background: #f1f2f2;
+        border-radius: 4px;
+        cursor: pointer;
+
+        .volumewrap {
+            background: #a2a7aa;
+            width: 8px;
+            height: 80px;
+            position: absolute;
+            bottom: 10px;
+            left: 9px;
+            border-radius: 4px;
+        }
+
+        .progress {
+            background: none;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 4px;
+        }
+    }
+
+    .playControll {
+        position: absolute;
+        z-index: 2147483650;
+        width: 100%;
+        height: 48px;
+        bottom: -48px;
+        border-radius: 0 0 rem(3) rem(3);
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+
+        .playPause {
+            position: absolute;
+            width: rem(40);
+            height: rem(44);
+            left: rem(10);
+            top: rem(20);
+
+            img {
+                width: rem(40);
+                height: rem(44);
+            }
+
+            &.playIcon {
+                float: left;
+                background-position: 0 -32px;
+            }
+        }
+
+        .timebar {
+            position: relative;
+            float: left;
+            width: calc(100% - 145px);
+            line-height: 48px;
+
+            span {
+                float: left;
+                width: rem(100);
+                text-align: center;
+
+                &.currentTime {
+                    position: absolute;
+                    left: rem(60);
+                    top: rem(0);
+                }
+
+                &.duration {
+                    position: absolute;
+                    right: rem(-230);
+                    top: rem(0);
+                }
+            }
+
+            .progress {
+                position: absolute;
+                left: rem(160);
+                top: rem(40);
+                width: 90%;
+                height: rem(10);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .playContent {
+        position: relative;
+        height: auto;
+        overflow: hidden;
+        cursor: pointer;
+
+        .turnoff {
+            position: absolute;
+            z-index: 10;
+            right: -40px;
+            top: 50%;
+            margin-top: -90px;
+        }
+
+        .playTip {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            text-align: center;
+            line-height: 110px;
+            top: 50%;
+            left: 50%;
+            margin-left: -55px;
+            margin-top: -55px;
+            // background: url("../img/v-play.png") no-repeat;
+            z-index: 100;
+            background-size: 100%;
+            font-size: 60px;
+            cursor: pointer;
+        }
+
+        .v-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .progress-bar-danger {
+        background-color: #0e224a !important;
+    }
+
+    .progress-bar-striped {
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-size: 40px 40px;
+    }
+
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 12px;
+        line-height: 20px;
+        color: #fff;
+        text-align: center;
+        background-color: #337ab7;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        -webkit-transition: width 0.6s ease;
+        transition: width 0.6s ease;
+    }
+
+    .progress {
+        height: 20px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+}

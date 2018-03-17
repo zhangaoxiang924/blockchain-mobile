@@ -9,7 +9,7 @@ import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
 let websocketUrl = 'ws://www.huoxing24.vip/push/websocket/text'
-const htmlPath = '/html'
+const htmlPath = ''
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {

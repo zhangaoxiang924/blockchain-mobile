@@ -99,6 +99,13 @@ $(function () {
             } else {
                 $('.audio-wrap').css('display', 'none')
             }
+            let video = data.obj.current.video
+            if (video && video !== '') {
+                $('.video-wrap').css('display', 'block')
+                $('#playVideo source').attr('src', video)
+            } else {
+                $('.video-wrap').css('display', 'none')
+            }
 
             $('.audio-list-btn').click(function () {
                 $('.m-music-list-wrap').toggle()

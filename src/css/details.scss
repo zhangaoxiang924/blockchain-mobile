@@ -158,6 +158,20 @@
     }
 }
 
+.video-wrap {
+    background: #fff;
+    display: none;
+
+    video {
+        position: inherit;
+        background: #fcfcfc;
+        height: auto;
+        width: 100%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+}
+
 .details {
     position: relative;
     width: 100%;
