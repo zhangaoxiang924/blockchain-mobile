@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：details
  */
-import {getQueryString, pageLoadingHide, isPc} from '../../libs/js/utils'
+import {getQueryString, pageLoadingHide, isPc, isIos, isWeixin, isAndroid} from '../../libs/js/utils'
 import {
     getTime,
     ajaxGet,
@@ -18,7 +18,7 @@ import html2canvas from 'html2canvas'
 let url = '/info/news'
 let apiInfo = '/info'
 const htmlPath = ''
-if (isPc()) {
+if (isPc() && !isWeixin()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
         window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}`
@@ -68,6 +68,7 @@ $(function () {
             id: id,
             channelId: 2
         }, (data) => {
+            console.log(data)
             let audio = data.obj.current.audio
             let musicList = []
             if (audio && audio !== '' && audio.indexOf('[') > -1) {
@@ -83,7 +84,7 @@ $(function () {
                     })
                     const smusic = new SMusic({
                         musicList: musicList,
-                        autoPlay: true,
+                        autoPlay: false,
                         defaultMode: 1,
                         callback: function (obj) {
                             /*
@@ -97,6 +98,13 @@ $(function () {
                 }
             } else {
                 $('.audio-wrap').css('display', 'none')
+            }
+            let video = data.obj.current.video
+            if (video && video !== '') {
+                $('.video-wrap').css('display', 'block')
+                $('#playVideo source').attr('src', video)
+            } else {
+                $('.video-wrap').css('display', 'none')
             }
 
             $('.audio-list-btn').click(function () {
@@ -131,16 +139,18 @@ $(function () {
 
             let readNumber = `<div class="read-number">${cont.current.hotCounts}</div>`
 
-            let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
-                            <div class="list-text">
-                                ${author}
-                                <div class="time clearfix"><span>${time}</span></div>
-                                ${readNumber}
-                                <div
+            let shareBtn = `<div
                                 class="share-btn"
                                 data-synopsis="${synopsis}"
                                 data-time="${formatDateMore(cont.current.publishTime)}"></div>
                             </div>`
+            shareBtn = ''
+
+            let header = `<h6 data-time=${shadeTime} data-synopsis=${synopsis} id='flashNewsTime'>${cont.current.title}</h6>
+                            <div class="list-text">
+                                ${author}
+                                <div class="time clearfix"><span>${time}</span></div>
+                                ${readNumber + shareBtn}`
 
             let content = cont.current.content
             $('.details-header').html(header)
@@ -268,5 +278,23 @@ $(function () {
     })
     $('.back-top').on('click', function () {
         Animation()
+    })
+
+    // 下载
+    let iosUrl = 'https://www.pgyer.com/huoxing24_ios'
+    let andUrl = 'https://www.pgyer.com/huoxing24_android'
+    let downLoad = $('.b-down')
+
+    downLoad.on('click', function () {
+        if (isIos()) {
+            downLoad.attr('href', iosUrl)
+        }
+        if (isAndroid()) {
+            downLoad.attr('href', andUrl)
+        }
+        /* if (isWeixin() && isAndroid()) {
+         $('.hint').show()
+         return false
+         } */
     })
 })

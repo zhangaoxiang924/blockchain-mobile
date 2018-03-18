@@ -173,7 +173,7 @@ const isPc = () => {
     const Agents = ['android', 'iphone', 'ipad', 'ipod', 'windows phone']
     let flag = true
     for (let i = 0; i < Agents.length; i++) {
-        if (userAgent.indexOf(Agents[i]) > 0) {
+        if (userAgent.indexOf(Agents[i]) > -1) {
             flag = false
             break
         }
@@ -185,7 +185,7 @@ const isIos = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
     let flag = false
-    if (userAgent.indexOf('iphone') > 0 || userAgent.indexOf('ipad') > 0) {
+    if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1) {
         flag = true
     }
     return flag
@@ -195,7 +195,7 @@ const isAndroid = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
     let flag = false
-    if (userAgent.indexOf('android') > 0) {
+    if (userAgent.indexOf('android') > -1) {
         flag = true
     }
     return flag
@@ -205,7 +205,7 @@ const isPad = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
     let flag = false
-    if (userAgent.indexOf('ipad') > 0) {
+    if (userAgent.indexOf('ipad') > -1) {
         flag = true
     }
     return flag
@@ -215,7 +215,7 @@ const isWeixin = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
     let flag = false
-    if (userAgent.indexOf('micromessenger') > 0) {
+    if (userAgent.indexOf('micromessenger') > -1) {
         flag = true
     }
     return flag

@@ -60,10 +60,10 @@
 .page-app .img-con-mask,
 .page-app .img-con img,
 .page-app .img-con {
-    pointer-events: none;
+    /* pointer-events: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    user-select: none;
+    user-select: none; */
 }
 
 .share-box-wrap {
@@ -219,3 +219,61 @@
     }
 }
 
+.bottom-down {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: rem(96);
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+
+    .b-logo {
+        position: absolute;
+        left: rem(27);
+        top: rem(16);
+        height: rem(69);
+
+        p {
+            float: left;
+
+            &:nth-child(1) {
+                img {
+                    width: rem(68);
+                    height: rem(69);
+                }
+            }
+
+            &:nth-child(2) {
+                width: rem(170);
+                color: #fff;
+                margin-left: rem(15);
+                line-height: rem(34);
+
+                span {
+                    &:nth-child(1) {
+                        font-size: rem(24);
+                    }
+
+                    &:nth-child(2) {
+                        font-size: rem(22);
+                    }
+                }
+            }
+        }
+    }
+
+    a {
+        position: absolute;
+        display: inline-block;
+        right: rem(27);
+        top: rem(20);
+        width: rem(144);
+        height: rem(60);
+        background: url("../img/down-btn.png") no-repeat;
+        background-size: 100%;
+        color: #fff;
+        text-align: center;
+        line-height: rem(60);
+        font-size: rem(24);
+    }
+}
