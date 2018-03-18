@@ -99,6 +99,7 @@ $(function () {
             } else {
                 $('.audio-wrap').css('display', 'none')
             }
+
             let video = data.obj.current.video
             if (video && video !== '') {
                 $('.video-wrap').css('display', 'block')
