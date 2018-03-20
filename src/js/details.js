@@ -99,11 +99,30 @@ $(function () {
             } else {
                 $('.audio-wrap').css('display', 'none')
             }
-
+            let videoArr = []
             let video = data.obj.current.video
-            if (video && video !== '') {
-                $('.video-wrap').css('display', 'block')
-                $('#playVideo source').attr('src', video)
+            if (video && video !== '' && audio.indexOf('[') > -1) {
+                if (JSON.parse(video).length !== 0) {
+                    JSON.parse(video).map(function (item, index) {
+                        videoArr.push({
+                            src: item.fileUrl,
+                            artist: '',
+                            name: $.trim(item.fileName.split('.')[0]),
+                            img: '',
+                            id: item.uid
+                        })
+                    })
+                }
+            }
+            if (videoArr.length !== 0) {
+                console.log(videoArr[0].src)
+                $('.video-wrap ').css('display', 'block')
+                $('.video-wrap video').attr(
+                    {
+                        'poster': JSON.parse(data.obj.current.coverPic).video_m,
+                        'src': videoArr.src
+                    }
+                )
             } else {
                 $('.video-wrap').css('display', 'none')
             }

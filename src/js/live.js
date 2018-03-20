@@ -9,7 +9,7 @@ import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
 let websocketUrl = 'ws://www.huoxing24.vip/push/websocket/text'
-const htmlPath = ''
+const htmlPath = '/html'
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {
@@ -86,7 +86,7 @@ $(function () {
     let castId = getQueryString('castId')
     let status = getQueryString('status')
     if (!isCastId && !isStatus) {
-        getDetails(-3, 10, 1)
+        getDetails(-3, 40, 1)
     }
     let stateText = ''
     if (isCastId && isStatus) {
@@ -95,7 +95,7 @@ $(function () {
                 stateText = '<font class="c0">即将开始</font>'
                 break
             case '1':
-                stateText = '<font class="c1">进行中...</font>'
+                stateText = '<font class="c1">直播中...</font>'
                 break
             case '2':
                 stateText = '<font class="c2">已结束</font>'
@@ -191,7 +191,6 @@ $(function () {
                 $('img.banner-img').attr('src', bannerMessage.backImage)
                 $('.introduction-cont p').html(bannerMessage.desc)
                 $('.live-time p span').html(year + ' ' + timeNum(hour[0]) + ' : ' + timeNum(hour[1]))
-                console.log(dataArr)
                 dataArr.data.contentList.map((item, index) => {
                     let time = timestampToTime(item.content.createTime)
                     contList += `<div class="inform-cont clearfix" data-id=${item.content.contentId}>
@@ -238,7 +237,7 @@ $(function () {
             } else if (dataArr.type === 4) {
                 stateText = '<font class="c2">已结束</font>'
             } else if (dataArr.type === 5) {
-                stateText = '<font class="c1">进行中...</font>'
+                stateText = '<font class="c1">直播中...</font>'
             }
             $('.lives-state').html(stateText)
 

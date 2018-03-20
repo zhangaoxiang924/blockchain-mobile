@@ -159,13 +159,25 @@
 }
 
 .video-wrap {
+    position: relative;
     background: #fff;
     display: none;
+
+    .video-img {
+        position: absolute;
+        width: 100%;
+        height: rem(300);
+        z-index: 10;
+
+        img {
+            width: 100%;
+            height: rem(300);
+        }
+    }
 
     video {
         position: inherit;
         background: #fcfcfc;
-        height: auto;
         width: 100%;
         overflow: hidden;
         margin: 0 auto;
