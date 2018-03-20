@@ -8,8 +8,8 @@ import {pageLoadingHide, getQueryString} from '../../libs/js/utils'
 import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
-let websocketUrl = 'ws://www.huoxing24.vip/push/websocket/text'
-const htmlPath = '/html'
+let websocketUrl = 'ws://www.huoxing24.com/push/websocket/text'
+const htmlPath = ''
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {
@@ -251,7 +251,7 @@ $(function () {
         // 连接关闭的回调方法
         websocket.onclose = () => {
             setMessageInnerHTML('WebSocket连接关闭')
-            // alert('链接断开，请刷新页面...')
+            alert('链接断开，请刷新页面...')
         }
 
         // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
