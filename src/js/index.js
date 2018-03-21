@@ -26,9 +26,6 @@ const navIndex = [
         title: '快讯',
         channelId: '100' // 假的channelId
     }, {
-        title: '两会',
-        channelId: '10'
-    }, {
         title: '产业',
         channelId: '2'
     }, {

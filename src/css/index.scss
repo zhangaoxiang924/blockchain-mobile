@@ -100,7 +100,7 @@ body,
 
         $itemWidth: 620/7;
 
-        $bodyWrapWidth: (9 * $itemWidth + 130);
+        $bodyWrapWidth: (8 * $itemWidth + 130);
 
         position: inherit;
         top: 0;
@@ -123,7 +123,7 @@ body,
             height: 100%;
             background: none;
 
-            &:nth-child(5) {
+            &:nth-child(4) {
                 width: rem(125);
             }
 
