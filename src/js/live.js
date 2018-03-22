@@ -9,7 +9,7 @@ import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
 let websocketUrl = 'ws://www.huoxing24.com/push/websocket/text'
-const htmlPath = '/html'
+const htmlPath = ''
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {
@@ -53,8 +53,6 @@ $(function () {
             fresh: Math.random()
         }, (data) => {
             if (data.code === 1) {
-                console.log('记载了')
-                console.log(data)
                 let dataList = data.data.inforList
                 let list = ''
                 let listText = ''

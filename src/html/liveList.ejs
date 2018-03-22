@@ -35,6 +35,17 @@ private: ['../css/live.css']
     <div class="live-shade" id="liveShade"></div>
 </div>
 <script>
+    $(function () {
+        let isPageHide = false
+        window.addEventListener('pageshow', function () {
+            if (isPageHide) {
+                window.location.reload()
+            }
+        })
+        window.addEventListener('pagehide', function () {
+            isPageHide = true
+        })
+    })
 </script>
 <%- include('../../libs/html/util-m/footer', {
 plugin: [''],
