@@ -9,7 +9,7 @@ import {ajaxGet, timestampToTime} from '../js/public/public'
 let url = '/push/text/room/list'
 let url2 = '/push/text/room/content/list'
 let websocketUrl = 'ws://www.huoxing24.com/push/websocket/text'
-const htmlPath = ''
+const htmlPath = '/html'
 $(function () {
     pageLoadingHide()
     $('.introduction-btn').on('click', function () {
@@ -49,9 +49,12 @@ $(function () {
         ajaxGet(url, {
             status: status,
             pageSize: pageSize,
-            currentPage: currentPage
+            currentPage: currentPage,
+            fresh: Math.random()
         }, (data) => {
             if (data.code === 1) {
+                console.log('记载了')
+                console.log(data)
                 let dataList = data.data.inforList
                 let list = ''
                 let listText = ''
@@ -172,8 +175,8 @@ $(function () {
         websocket.onopen = () => {
             setMessageInnerHTML('WebSocket连接成功')
             /* setInterval(() => {
-                websocket.send(`{"type": 0, "castId": ${castId}}`)
-            }, 59000) */
+             websocket.send(`{"type": 0, "castId": ${castId}}`)
+             }, 59000) */
             websocket.send(`{"type": 0, "castId": ${castId}}`)
         }
 
@@ -260,6 +263,7 @@ $(function () {
             closeWebSocket()
         }
     }
+
     // let websocket = null
     // // 判断当前浏览器是否支持WebSocket
     // if ('WebSocket' in window) {
