@@ -1,0 +1,125 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2017-08-29 19:30
+ * Description：index
+ */
+@import "../../libs/scss/util-m";
+
+.wrap {
+    width: 100%;
+    overflow: hidden;
+    background: #eee;
+
+    .title {
+        text-align: center;
+        height: rem(123);
+        overflow: hidden;
+
+        .cn-title {
+            font-weight: bold;
+            font-size: rem(32);
+            margin: rem(30) auto rem(8);
+        }
+
+        .en-title {
+            color: #9a9a9a;
+            font-size: rem(16);
+        }
+    }
+
+    .bta-timeline {
+        width: 100%;
+        height: rem(478);
+        background: url("../img/bta-timeline-bg.jpg") no-repeat center / 100% 100%;
+    }
+
+    .bta-hot-content {
+        width: 100%;
+        height: rem(730);
+        background: #fff;
+
+        .hot-swiper {
+            width: 100%;
+            text-align: center;
+
+            .swiper-item {
+                display: inline-block;
+                width: rem(500);
+                height: rem(281);
+                position: relative;
+
+                .mode {
+                    display: inline-block;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 40%;
+                    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.3), transparent);
+                }
+
+                .news-title {
+                    width: 90%;
+                    position: absolute;
+                    bottom: rem(20);
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    color: #fff;
+                    font-size: rem(28);
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .live-news-section {
+        width: rem(500);
+        margin: rem(40) auto 0;
+
+        .live-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: rem(56);
+            color: #fff;
+            background: #ffae00;
+            padding: 0 rem(20);
+            font-size: rem(28);
+
+            img {
+                width: rem(76);
+                height: rem(15);
+            }
+        }
+
+        .live-swiper {
+            height: rem(180);
+
+            .live-content {
+                margin-top: rem(22);
+                font-size: rem(28);
+                line-height: rem(40);
+            }
+        }
+    }
+
+    .newsList-section {
+        width: 100%;
+        height: auto;
+    }
+
+    .lecture-guests {
+        width: 100%;
+        height: rem(780);
+        background: #fff;
+    }
+}

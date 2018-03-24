@@ -1,0 +1,95 @@
+<%- include('../../libs/html/util-m/header', {
+title: '火星财经-区块链先锋门户',
+description: '火星财经是集新闻、资讯、行情、数据等区块链信息等专业服务平台，致力于为区块链创业者以及数字货币投资者提供最新最及时的项目报道、投资顾问、项目分析、市场行情',
+keywords: '区块链，区块链项目，区块链是什么，区块链概念股，区块链论坛，区块链社区，区块链服务，区块链培训，区块链资讯，区块链活动，区块链市场，区块链投资，区块链百科，虚拟币，数字货币，挖矿，虚拟币是什么，数字货币是什么，怎么挖矿，挖矿是什么，coinmarketcap，比特币，比特币今日价格，比特币交易平台，莱特币，以太坊',
+plugin: ['../css/swiper.min.css'],
+private: ['../css/public.css', '../css/bta.css', '../css/bta-head.css', '../css/bta-newsList.css']
+}) %>
+<div class="wrap">
+    <%- include('./include/bta-head') %>
+    <div class="bta-timeline">
+
+    </div>
+    <div class="bta-hot-content">
+        <div class="title">
+            <p class="cn-title">峰会热点</p>
+            <p class="en-title">IMPORTANT NEWS</p>
+        </div>
+        <div class="swiper-container hot-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="swiper-item">
+                        <span class="mode"></span>
+                        <img src="../img/bta-hot-itemImg.png" alt="">
+                        <p class="news-title">
+                            区块链技术六大核心算法心算法心算法区块链技术六大核心算法心算法心算法
+                        </p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-item">
+                        <span class="mode"></span>
+                        <img src="../img/bta-hot-itemImg.png" alt="">
+                        <p class="news-title">
+                            区块链技术六大核心算法心算法心算法区块链技术六大核心算法心算法心算法
+                        </p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-item">
+                        <span class="mode"></span>
+                        <img src="../img/bta-hot-itemImg.png" alt="">
+                        <p class="news-title">
+                            区块链技术六大核心算法心算法心算法区块链技术六大核心算法心算法心算法
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="live-news-section">
+            <div class="live-title">
+                <p class="text">快讯</p>
+                <img src="../img/more.png" alt="">
+            </div>
+            <div class="swiper-container live-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="live-content">
+                            <span class="create-time">3分钟前</span>
+                            <span class="separate"> | </span>
+                            <span class="content">随着区块链的广受关注，各种相关的分享和探讨让人目不暇接，本篇文章将详细介绍区块链的六大核心算法。随着区块链的广受 </span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="live-content">
+                            <span class="create-time">3分钟前</span>
+                            <span class="separate"> | </span>
+                            <span class="content">随着区块链的广受关注，各种相关的分享和探讨让人目不暇接，本篇文章将详细介绍区块链的六大核心算法。随着区块链的广受 </span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="live-content">
+                            <span class="create-time">3分钟前</span>
+                            <span class="separate"> | </span>
+                            <span class="content">随着区块链的广受关注，各种相关的分享和探讨让人目不暇接，本篇文章将详细介绍区块链的六大核心算法。随着区块链的广受 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newsList-section">
+        <%- include('./include/bta-newsList') %>
+    </div>
+    <div class="lecture-guests">
+        <div class="title">
+            <p class="cn-title">演讲嘉宾</p>
+            <p class="en-title">GUESTS</p>
+        </div>
+    </div>
+</div>
+<%- include('../../libs/html/util-m/footer', {
+plugin: ['../js/swiper.min.js'],
+private: ['../js/bta.js'],
+statistics: ''
+}) %>

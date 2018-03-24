@@ -205,6 +205,18 @@ const scrollDirect = (fn) => {
     }, false)
 }
 
+// 判断是否为对象字符串
+const isJsonString = (str) => {
+    try {
+        if (typeof JSON.parse(str) === 'object') {
+            return true
+        }
+    } catch (e) {
+        // console.log(e)
+    }
+    return false
+}
+
 export {
     ajaxGet,
     getTime,
@@ -214,5 +226,6 @@ export {
     Animation,
     compareCalendar,
     compareTime,
-    scrollDirect
+    scrollDirect,
+    isJsonString
 }
