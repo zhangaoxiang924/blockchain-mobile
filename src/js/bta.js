@@ -12,6 +12,10 @@ let url = '/info/topic'
 // const htmlPath = ''
 $(function () {
     pageLoadingHide()
+    let currentPage = 1
+    let moreState = true
+    let totalPage = 1
+    let INLIST = window.location.href.indexOf('btaList') !== -1
     // 热点轮播
     let hot = new Swiper('.hot-swiper', {
         autoplay: {
@@ -19,7 +23,7 @@ $(function () {
             stopOnLastSlide: false,
             disableOnInteraction: false
         },
-        spaceBetween: -70,
+        spaceBetween: -60,
         initialSlide: 1,
         observer: true,
         preventClicks: false,
@@ -33,7 +37,6 @@ $(function () {
             stopOnLastSlide: false,
             disableOnInteraction: false
         },
-        initialSlide: 1,
         observer: true,
         direction: 'vertical',
         preventClicks: false,
@@ -42,15 +45,26 @@ $(function () {
     console.log(live, hot)
 
     // 新闻列表
-    ajaxGet(url + '/detail', {
-        type: 3,
-        id: '2018031315490692386'
-    }, function (data) {
-        let newsList = data.obj.newsList.inforList
-        let liContent = ''
-        newsList.map((item, index) => {
-            let pic = isJsonString(item.coverPic) ? JSON.parse(item.coverPic) : ''
-            liContent += `<li class="news-item" data-id=${item.id}>
+    const getNewsList = (obj) => {
+        const {currentPage, type, fn} = obj
+        if (currentPage > totalPage) {
+            $('#news-more').html(INLIST ? '已加载全部~' : '查看更多').addClass('grey')
+            return false
+        }
+        let data = {
+            currentPage: currentPage,
+            pageSize: INLIST ? 10 : 4,
+            type: 3,
+            id: '2018031315490692386'
+        }
+
+        ajaxGet(url + '/detail', data, function (data) {
+            let newsList = data.obj.newsList.inforList
+            totalPage = data.obj.newsList.pageCount
+            let liContent = ''
+            newsList.map((item, index) => {
+                let pic = isJsonString(item.coverPic) ? JSON.parse(item.coverPic) : ''
+                liContent += `<li class="news-item" data-id=${item.id}>
                         <p class="news-img">
                             <img src=${pic.wap_small} alt="">
                         </p>
@@ -60,12 +74,25 @@ $(function () {
                         </div>
                         <p class="news-date">${getTime(item.publishTime, Date.parse(new Date()))}</p>
                     </li>`
+            })
+            if (type === 'addMore') {
+                $('.news-content').append(liContent)
+            } else {
+                $('.news-content').html(liContent)
+            }
+            if (fn) {
+                fn()
+            }
         })
-        $('.news-content').html(liContent)
+    }
+
+    getNewsList({
+        currentPage: 1,
+        type: ''
     })
 
     // 推荐新闻轮播
-    ajaxGet('/info/news/shownews', {
+    !INLIST && ajaxGet('/info/news/shownews', {
         currentPage: 1,
         pageSize: 5,
         recommend: 1,
@@ -88,14 +115,66 @@ $(function () {
         $('.hot-swiper .swiper-wrapper').html(swiperSlide)
     })
 
-    $('body').on('click', '.news-content .news-item', function (e) {
-        console.log(123)
+    // 快讯
+    !INLIST && ajaxGet('/info/lives/showlives', {
+        queryTime: '',
+        currentPage: 1,
+        pageSize: 5
+    }, function (data) {
+        let newsList = data.obj.inforList
+        let swiperSlide = ''
+        newsList.map((item, index) => {
+            swiperSlide += `<div class="swiper-slide" data-id=${item.id}>
+                    <div class="live-content">
+                            <span class="create-time">${getTime(item.createdTime, Date.parse(new Date()))}</span>
+                            <span class="separate"> | </span>
+                            <span class="content">${item.content}</span>
+                    </div>
+                </div>`
+        })
+        $('.live-swiper .swiper-wrapper').html(swiperSlide)
+    })
+
+    $('.news-content').on('click', '.news-item', function (e) {
         e.preventDefault()
         window.location.href = '/details.html?id=' + $(e.currentTarget).attr('data-id')
     })
 
-    $('body').on('click', '.hot-swiper .swiper-wrapper .swiper-slide', function (e) {
+    $('.hot-swiper').on('click', '.swiper-wrapper .swiper-slide', function (e) {
         e.preventDefault()
         window.location.href = '/details.html?id=' + $(e.currentTarget).attr('data-id')
+    })
+
+    $('.live-more-btn').click(() => {
+        window.location.href = '/html?from=bta'
+    })
+
+    $('.news-more').click(() => {
+        if (INLIST) {
+            getNewsList({
+                currentPage: ++currentPage,
+                type: 'addMore',
+                fn: function () {
+                    moreState = true
+                }
+            })
+        } else {
+            window.location.href = '/html/btaList.html'
+        }
+    })
+    INLIST && $(window).on('scroll', function () {
+        let btnMoreTop = $('#news-more').offset().top
+        let nowtop = $(window).scrollTop() + $(window).height()
+        if (nowtop > btnMoreTop && moreState) {
+            moreState = false
+            let page = ++currentPage
+            getNewsList({
+                currentPage: page,
+                type: 'addMore',
+                fn: function () {
+                    moreState = true
+                }
+            })
+        }
     })
 })

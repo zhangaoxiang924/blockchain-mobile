@@ -3,7 +3,7 @@
  * Time：2018-01-29
  * Description：index
  */
-import {pageLoadingHide, isPc, isIos, isAndroid} from '../../libs/js/utils'
+import {pageLoadingHide, isPc, isIos, isAndroid, getQueryString} from '../../libs/js/utils'
 import {getTime, sevenDays, timestampToTime, formatDateMore, Animation, ajaxGet} from '../js/public/public'
 import html2canvas from 'html2canvas'
 // import swal from 'sweetalert2'
@@ -242,6 +242,10 @@ $(function () {
         }
     })
     swiper.init()
+
+    if (getQueryString('from') === 'bta') {
+        swiper.slideTo(1)
+    }
 
     let swiper2 = new Swiper('#newsWrap', {
         /* pagination: {

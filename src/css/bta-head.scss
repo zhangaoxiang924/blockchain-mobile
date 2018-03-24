@@ -89,5 +89,9 @@
         font-size: rem(28);
         background: linear-gradient(to right, #03a1ef, #216dec);
         margin-bottom: rem(25);
+
+        &.grey {
+            background: #5a5a5a;
+        }
     }
 }
