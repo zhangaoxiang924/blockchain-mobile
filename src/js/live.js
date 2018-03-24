@@ -49,7 +49,8 @@ $(function () {
         ajaxGet(url, {
             status: status,
             pageSize: pageSize,
-            currentPage: currentPage
+            currentPage: currentPage,
+            fresh: Math.random()
         }, (data) => {
             if (data.code === 1) {
                 let dataList = data.data.inforList
@@ -172,8 +173,8 @@ $(function () {
         websocket.onopen = () => {
             setMessageInnerHTML('WebSocket连接成功')
             /* setInterval(() => {
-                websocket.send(`{"type": 0, "castId": ${castId}}`)
-            }, 59000) */
+             websocket.send(`{"type": 0, "castId": ${castId}}`)
+             }, 59000) */
             websocket.send(`{"type": 0, "castId": ${castId}}`)
         }
 
@@ -260,6 +261,7 @@ $(function () {
             closeWebSocket()
         }
     }
+
     // let websocket = null
     // // 判断当前浏览器是否支持WebSocket
     // if ('WebSocket' in window) {

@@ -6,6 +6,7 @@ plugin: [''],
 private: ['../css/live.css']
 }) %>
 <div class="wrap">
+    <input type="hidden" id="refreshed" value="no">
     <div class="banner-box">
         <img class="banner-img" src="../img/live-banner.jpg" alt="">
         <!-- <div class="introduction-btn"><span><img src="../img/left-l.png" alt=""></span>直播简介</div>
@@ -33,6 +34,19 @@ private: ['../css/live.css']
     </div>
     <div class="live-shade" id="liveShade"></div>
 </div>
+<script>
+    $(function () {
+        let isPageHide = false
+        window.addEventListener('pageshow', function () {
+            if (isPageHide) {
+                window.location.reload()
+            }
+        })
+        window.addEventListener('pagehide', function () {
+            isPageHide = true
+        })
+    })
+</script>
 <%- include('../../libs/html/util-m/footer', {
 plugin: [''],
 private: ['../js/live.js'],
