@@ -21,7 +21,7 @@ const htmlPath = ''
 if (isPc() && !isWeixin()) {
     let href = window.location.href
     if (href.indexOf('details') !== -1) {
-        window.location.href = `http://www.huoxing24.com/#/newsdetail/${getQueryString('id')}`
+        window.location.href = `http://www.huoxing24.com/newsdetail?id=${getQueryString('id')}`
     } else {
         window.location.href = 'http://www.huoxing24.com'
     }
