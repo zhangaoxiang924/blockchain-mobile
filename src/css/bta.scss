@@ -29,6 +29,14 @@ html {
     overflow: hidden;
     background: #eee;
 
+    .no-data {
+        height: rem(300);
+        line-height: rem(300);
+        color: #7e899f;
+        font-size: rem(25);
+        text-align: center;
+    }
+
     .menu-btn {
         width: rem(42);
         height: rem(32);
