@@ -14,8 +14,8 @@ let getInvite = (id) => {
         passportid: id
     }, (data) => {
         console.log(id)
-        if (data.code === '1') {
-            $('.invite-name span').html(data.obj.nickName)
+        if (data.code === 1) {
+            $('.invite-name').append(data.obj.nickName)
             // 设置参数方式
             let qrcode = new QRCode('qrcode', {
                 text: '邀请你加入火星财经关注区块链第一手信息',

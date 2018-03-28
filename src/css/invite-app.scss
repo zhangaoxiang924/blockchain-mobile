@@ -54,22 +54,19 @@
     .invite-name {
         position: absolute;
         top: rem(650);
-        width: 100%;
-        text-align: center;
+        width: rem(460);
         line-height: rem(50);
         font-size: rem(40);
-        color: #fff;
+        left: rem(90);
+        color: #8afffe;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
 
-        span {
-            display: inline-block;
-            width: rem(350);
-            overflow: hidden;
-            color: #8afffe;
-            text-overflow: ellipsis;
-            white-space: normal;
-            vertical-align: bottom;
-            margin-top: rem(5);
-            padding-left: rem(10);
+        p {
+            height: rem(50);
+            line-height: rem(50);
         }
     }
 
