@@ -1,0 +1,27 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2017-08-29 19:30
+ * Description：index
+ */
+@import "../../libs/scss/util-m";
+
+.bta-head-wrap {
+    width: 100%;
+    height: rem(600);
+    overflow: hidden;
+    background: url("../img/bta-bg1.jpg") no-repeat center / 100% 100%;
+
+    img {
+        display: block;
+    }
+
+    .slogan {
+        width: rem(568);
+        margin: rem(178) auto 0;
+    }
+
+    .master {
+        width: rem(304);
+        margin: rem(98) auto 0;
+    }
+}

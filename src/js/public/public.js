@@ -205,6 +205,7 @@ const scrollDirect = (fn) => {
     }, false)
 }
 
+<<<<<<< HEAD
 // 验证手机号
 const isPoneAvailable = (pone) => {
     const myreg = /^[1][3,4,5,7,8][0-9]{9}$/
@@ -214,6 +215,20 @@ const isPoneAvailable = (pone) => {
         return true
     }
 }
+=======
+// 判断是否为对象字符串
+const isJsonString = (str) => {
+    try {
+        if (typeof JSON.parse(str) === 'object') {
+            return true
+        }
+    } catch (e) {
+        // console.log(e)
+    }
+    return false
+}
+
+>>>>>>> 326dfee4ad1054d99d477bf42856f91de171ba4f
 export {
     ajaxGet,
     getTime,
@@ -224,5 +239,9 @@ export {
     compareCalendar,
     compareTime,
     scrollDirect,
+<<<<<<< HEAD
     isPoneAvailable
+=======
+    isJsonString
+>>>>>>> 326dfee4ad1054d99d477bf42856f91de171ba4f
 }

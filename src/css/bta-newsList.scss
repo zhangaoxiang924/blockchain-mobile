@@ -1,0 +1,128 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2017-08-29 19:30
+ * Description：index
+ */
+@import "../../libs/scss/util-m";
+
+html {
+    touch-action: manipulation;
+}
+
+@mixin bg {
+    background: linear-gradient(150deg, #50dfe0 10%, #746acf 70%);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@mixin bd {
+    border: 1px solid #fff;
+    border-image: linear-gradient(145deg, #50dfe0 10%, #746acf 70%) 1 1;
+}
+
+.newsList {
+    background: url("../img/bta-bg2.jpg");
+}
+
+.news-list-wrap {
+    width: rem(600);
+    min-height: rem(500);
+    margin: 0 auto;
+    padding-bottom: rem(20);
+
+    .news-content {
+        width: 100%;
+
+        .news-item {
+            position: relative;
+            height: auto;
+            width: 100%;
+            font-size: 0;
+            padding: rem(20) 0;
+            border-bottom: 1px solid #0f2f49;
+
+            &:first-child {
+                border-top: 1px solid #0f2f49;
+            }
+
+            .news-img {
+                display: inline-block;
+                width: rem(210);
+                height: rem(141);
+                overflow: hidden;
+
+                img {
+                    min-width: 100%;
+                    min-height: 100%;
+                    max-width: 150%;
+                    max-height: 150%;
+                }
+            }
+
+            .news-item-content {
+                margin-left: rem(15);
+                vertical-align: top;
+                display: inline-block;
+                width: rem(360);
+                position: relative;
+                text-align: justify;
+                word-break: break-all;
+
+                .news-item-title {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    margin: 0 0 rem(5);
+                    line-height: rem(42);
+                    font-size: rem(30);
+                    color: rgba(255, 255, 255, 0.9);
+                }
+
+                .news-item-desc {
+                    color: #7e899f;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    font-size: rem(20);
+                    line-height: rem(30);
+                }
+            }
+
+            .news-date {
+                color: #c2c2c2;
+                font-size: rem(20);
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: rem(20);
+                margin-bottom: rem(25);
+                margin-right: rem(10);
+                text-align: right;
+            }
+        }
+    }
+
+    .news-more {
+        @include bd;
+
+        width: rem(400);
+        height: rem(80);
+        line-height: rem(80);
+        margin: rem(20) auto rem(20);
+        text-align: center;
+        font-size: rem(28);
+
+        span {
+            @include bg;
+        }
+
+        &.grey {
+            color: #c7c7c7;
+        }
+    }
+}
