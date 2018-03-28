@@ -64,6 +64,23 @@ body,
     color: #757575;
     background: #f5f5f5;
 
+    .index-ad {
+        width: rem(630);
+        margin: 0 auto;
+        height: auto;
+
+        .href-btn {
+            display: inline-block;
+            width: 100%;
+            height: auto;
+
+            img {
+                width: 100%;
+                border-radius: rem(10);
+            }
+        }
+    }
+
     .back-top {
         position: fixed;
         bottom: rem(100);

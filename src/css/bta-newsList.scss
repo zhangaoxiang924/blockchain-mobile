@@ -71,11 +71,8 @@ html {
                 .news-item-title {
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
+                    white-space: nowrap;
                     margin: 0 0 rem(5);
-                    line-height: rem(42);
                     font-size: rem(30);
                     color: rgba(255, 255, 255, 0.9);
                 }
@@ -100,7 +97,7 @@ html {
                 right: 0;
                 width: 100%;
                 height: rem(20);
-                margin-bottom: rem(25);
+                margin-bottom: rem(20);
                 margin-right: rem(10);
                 text-align: right;
             }
