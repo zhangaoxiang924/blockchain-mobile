@@ -577,10 +577,6 @@ $(function () {
         if (isAndroid()) {
             downLoad.attr('href', andUrl)
         }
-        /* if (isWeixin() && isAndroid()) {
-            $('.hint').show()
-            return false
-        } */
     })
 
     /* $('.hint').on('click', function () {

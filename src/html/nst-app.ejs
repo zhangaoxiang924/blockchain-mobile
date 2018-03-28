@@ -1,0 +1,72 @@
+<%- include('../../libs/html/util-m/header', {
+title: '24小时全天候区块链财经门户',
+description: '火星财经是集新闻、资讯、行情、数据等区块链信息等专业服务平台，致力于为区块链创业者以及数字货币投资者提供最新最及时的项目报道、投资顾问、项目分析、市场行情',
+keywords: '区块链，区块链项目，区块链是什么，区块链概念股，区块链论坛，区块链社区，区块链服务，区块链培训，区块链资讯，区块链活动，区块链市场，区块链投资，区块链百科，虚拟币，数字货币，挖矿，虚拟币是什么，数字货币是什么，怎么挖矿，挖矿是什么，coinmarketcap，比特币，比特币今日价格，比特币交易平台，莱特币，以太坊',
+plugin: [''],
+private: ['../css/public.css', '../css/nst-app.css']
+}) %>
+
+<div class="nst-app">
+    <div class="nst-operation">
+        <h6>日常操作：</h6>
+        <p>1.阅读新闻获得5NST，每篇新闻只能获得一次</p>
+        <p>2.评论成功获得2NST，每篇新闻只能获得一次</p>
+        <p>3.分享新闻或快讯成功获得2NST，每篇新闻或者快讯只能获得一次，最多可获得20NST</p>
+        <p>4.评论因违规而被删除的情况下回收NST</p>
+    </div>
+    <div class="nst-introduce">
+        <h6>注册登录：</h6>
+        <p>在不同的阶段，登录注册可获得NST不同，具体NST数量请看下表</p>
+        <div class="tab-introduce">
+            <span class="title">注册与邀请于邀请具体NST</span>
+            <table>
+                <tr class="first">
+                    <td>当前用户总数</td>
+                    <td>注册获得NST</td>
+                    <td>邀请人NST</td>
+                    <td>被邀请人NST</td>
+                </tr>
+                <tr>
+                    <td>1-1w</td>
+                    <td>9000</td>
+                    <td>300</td>
+                    <td>600</td>
+                </tr>
+                <tr>
+                    <td>1w-5w</td>
+                    <td>7000</td>
+                    <td>200</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td>5w-10w</td>
+                    <td>3000</td>
+                    <td>100</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>10w-20w</td>
+                    <td>2000</td>
+                    <td>80</td>
+                    <td>160</td>
+                </tr>
+                <tr>
+                    <td>20w+</td>
+                    <td>800</td>
+                    <td>20</td>
+                    <td>40</td>
+                </tr>
+            </table>
+            <span class="remark">注：一名用户只能成功邀请5名其他用户</span>
+        </div>
+    </div>
+</div>
+
+<%- include('./include/share', {
+app: false
+}) %>
+<%- include('../../libs/html/util-m/footer', {
+plugin: [],
+private: ['../js/nst-app.js'],
+statistics: ''
+}) %>
