@@ -8,7 +8,7 @@ import {
     ajaxGet
 } from '../js/public/public'
 pageLoadingHide()
-let id = '24ab75bba4564567844ef146a47fe2bf'
+let id = getQueryString('passportid')
 let getInvite = (id) => {
     ajaxGet('/passport/account/getinvitecard', {
         passportid: id
