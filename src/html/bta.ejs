@@ -3,36 +3,51 @@ title: '火星财经-区块链先锋门户',
 description: '火星财经是集新闻、资讯、行情、数据等区块链信息等专业服务平台，致力于为区块链创业者以及数字货币投资者提供最新最及时的项目报道、投资顾问、项目分析、市场行情',
 keywords: '区块链，区块链项目，区块链是什么，区块链概念股，区块链论坛，区块链社区，区块链服务，区块链培训，区块链资讯，区块链活动，区块链市场，区块链投资，区块链百科，虚拟币，数字货币，挖矿，虚拟币是什么，数字货币是什么，怎么挖矿，挖矿是什么，coinmarketcap，比特币，比特币今日价格，比特币交易平台，莱特币，以太坊',
 plugin: ['../css/swiper.min.css'],
-private: ['../css/public.css', '../css/bta.css', '../css/bta-head.css', '../css/bta-newsList.css']
+private: ['../css/public.css', '../css/bta.css', '../css/footer.css', '../css/bta-head.css', '../css/bta-newsList.css']
 }) %>
 <div class="wrap">
-    <%- include('./include/bta-head') %>
-    <div class="bta-timeline">
-
-    </div>
-    <div class="bta-hot-content">
-        <div class="title">
-            <p class="cn-title">峰会热点</p>
-            <p class="en-title">IMPORTANT NEWS</p>
+    <div class="menu-btn"></div>
+    <div class="menu-modal">
+        <span class="close-modal"></span>
+        <div class="net-title">
+            <a href="http://www.huoxing24.com">火星财经</a>
+            <a href="#home" class="active">峰会首页</a>
+            <a href="#news">峰会新闻</a>
+            <a href="#hot">峰会热点</a>
+            <a href="#agenda">峰会议程</a>
+            <a href="#lecture">现场嘉宾</a>
+            <!--<a href="#home">现场图集</a>-->
+            <!--<a name="pic" id="pic"></a>-->
         </div>
-        <div class="swiper-container hot-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="swiper-item">
-                        <span class="mode"></span>
-                        <img src="../img/bta-hot-itemImg.png" alt="">
-                        <p class="news-title">— —</p>
+    </div>
+    <a name="home" id="home"></a>
+    <%- include('./include/bta-head') %>
+    <div class="bta-body">
+        <div class="bta-hot-content">
+            <a name="hot" id="hot"></a>
+            <div class="title">
+                <p class="cn-title">峰会热点</p>
+                <p class="en-title">IMPORTANT NEWS</p>
+            </div>
+            <div class="swiper-container hot-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-item">
+                            <span class="mode"></span>
+                            <img src="../img/bta-hot-itemImg.png" alt="">
+                            <p class="news-title">— —</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="live-news-section">
-            <div class="live-title">
-                <p class="text">快讯</p>
-                <img class="live-more-btn" src="../img/more.png" alt="">
+            <div class="title">
+                <p class="cn-title">实时快讯</p>
+                <p class="en-title">NEWS FLASH</p>
             </div>
-            <div class="swiper-container live-swiper">
-                <div class="swiper-wrapper">
+            <div class="live-swiper">
+                <div class="live-wrapper">
                     <div class="swiper-slide">
                         <div class="live-content">
                             <span class="create-time">— —</span>
@@ -42,16 +57,115 @@ private: ['../css/public.css', '../css/bta.css', '../css/bta-head.css', '../css/
                     </div>
                 </div>
             </div>
+            <p class="live-more">
+                <span>查看更多</span>
+            </p>
         </div>
-    </div>
-    <div class="newsList-section">
-        <%- include('./include/bta-newsList') %>
-    </div>
-    <div class="lecture-guests">
-        <div class="title">
-            <p class="cn-title">演讲嘉宾</p>
-            <p class="en-title">GUESTS</p>
+        <div class="newsList-section">
+            <%- include('./include/bta-newsList') %>
         </div>
+        <div class="agenda-section">
+            <a name="agenda" id="agenda"></a>
+            <div class="title">
+                <p class="cn-title">峰会议程</p>
+                <p class="en-title">AGENDA</p>
+            </div>
+            <div class="date-btn">
+                <span class="left-btn active">3月30日</span>
+                <span class="left-btn">3月31日</span>
+            </div>
+            <div class="left-btn-swiper dynamic-swiper active">
+                <div class="swiper-container left-swiper-body swiper-body">
+                    <div class="swiper-wrapper left-wrapper">
+                        <div class="swiper-slide">
+                            <table class="swiper-item forenoon">
+                                <tbody>
+                                    <tr>
+                                        <td class="agenda-data">09:00-11:00</td>
+                                        <td class="agenda-title">议题：30通证派第66天</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="agenda-desc">嘉宾：元道    NEO创始人、On-chain分布科技创始人兼CEO </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="swiper-item lunch">
+                                <tr>
+                                    <td class="agenda-data">12:00-13:00</td>
+                                    <td class="agenda-title">午餐</td>
+                                </tr>
+                            </table>
+                            <table class="swiper-item afternoon">
+                                <tr>
+                                    <td class="agenda-data">09:00-11:00</td>
+                                    <td class="agenda-title">议题：通证派第66天</td>
+                                </tr>
+                            </table>
+                            <table class="swiper-item dinner">
+                                <tr>
+                                    <td class="agenda-data">18:00-20:30</td>
+                                    <td class="agenda-title">BTA百人会晚宴（仅限VIP嘉宾）</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="agenda-desc">吴声 （主持人）   场景实验室创始人</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-btn-swiper dynamic-swiper">
+                <div class="swiper-container right-swiper-title swiper-title">
+                    <div class="swiper-wrapper"></div>
+                </div>
+                <div class="swiper-container right-swiper-body swiper-body">
+                    <div class="swiper-wrapper"></div>
+                </div>
+            </div>
+        </div>
+        <div class="initiator-section">
+            <div class="title">
+                <p class="cn-title">发起人</p>
+                <p class="en-title">INITIATOR</p>
+            </div>
+            <ul class="initiator-content">
+                <li class="initiator-item">
+                    <img src='../img/2.jpg' alt="">
+                    <p class="initiator-name">王 峰</p>
+                    <p class="initiator-desc">火星财经发起人、蓝港互动创始人</p>
+                </li>
+                <li class="initiator-item">
+                    <img src='../img/1.jpg' alt="">
+                    <p class="initiator-name">蒋 涛</p>
+                    <p class="initiator-desc">CSDN创始人&董事长、极客帮创始合伙人</p>
+                </li>
+                <li class="initiator-item">
+                    <img src='../img/3.jpg' alt="">
+                    <p class="initiator-name">元 道</p>
+                    <p class="initiator-desc">中关村区块链产业联盟理事长</p>
+                </li>
+                <li class="initiator-item">
+                    <img src='../img/4.jpg' alt="">
+                    <p class="initiator-name">孟 岩</p>
+                    <p class="initiator-desc">CSDN副总裁、柏链道捷CEO</p>
+                </li>
+            </ul>
+        </div>
+        <div class="lecture-guests">
+            <a name="lecture" id="lecture"></a>
+            <div class="title">
+                <p class="cn-title">演讲嘉宾</p>
+                <p class="en-title">GUESTS</p>
+            </div>
+            <div class="swiper-container lecture-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-active"></div>
+                </div>
+            </div>
+        </div>
+        <%- include('./include/footer') %>
     </div>
 </div>
 <%- include('../../libs/html/util-m/footer', {

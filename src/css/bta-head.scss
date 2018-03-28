@@ -5,93 +5,23 @@
  */
 @import "../../libs/scss/util-m";
 
-.news-list-wrap {
-    width: rem(600);
-    margin: 0 auto;
+.bta-head-wrap {
+    width: 100%;
+    height: rem(600);
+    overflow: hidden;
+    background: url("../img/bta-bg1.jpg") no-repeat center / 100% 100%;
 
-    .news-content {
-        width: 100%;
-
-        .news-item {
-            position: relative;
-            height: auto;
-            width: 100%;
-            background: #fff;
-            font-size: 0;
-            margin-bottom: rem(20);
-
-            .news-img {
-                display: inline-block;
-                width: rem(210);
-                height: rem(210);
-                overflow: hidden;
-
-                img {
-                    min-width: 100%;
-                    min-height: 100%;
-                    max-width: 150%;
-                    max-height: 150%;
-                }
-            }
-
-            .news-item-content {
-                margin-left: rem(15);
-                vertical-align: top;
-                display: inline-block;
-                width: rem(360);
-                position: relative;
-                text-align: justify;
-                word-break: break-all;
-
-                .news-item-title {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
-                    margin: rem(15) 0 rem(5);
-                    line-height: rem(42);
-                    font-size: rem(30);
-                }
-
-                .news-item-desc {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
-                    font-size: rem(20);
-                    line-height: rem(30);
-                    color: #c2c2c2;
-                }
-            }
-
-            .news-date {
-                color: #c2c2c2;
-                font-size: rem(20);
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                width: 100%;
-                height: rem(20);
-                margin: rem(15);
-                text-align: right;
-            }
-        }
+    img {
+        display: block;
     }
 
-    .news-more {
-        width: rem(600);
-        height: rem(80);
-        line-height: rem(80);
-        color: #fff;
-        text-align: center;
-        font-size: rem(28);
-        background: linear-gradient(to right, #03a1ef, #216dec);
-        margin-bottom: rem(25);
+    .slogan {
+        width: rem(568);
+        margin: rem(178) auto 0;
+    }
 
-        &.grey {
-            background: #5a5a5a;
-        }
+    .master {
+        width: rem(304);
+        margin: rem(98) auto 0;
     }
 }

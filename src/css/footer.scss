@@ -1,0 +1,133 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2017-08-29 19:30
+ * Description：index
+ */
+@import "../../libs/scss/util-m";
+
+.footer-section {
+    -webkit-text-size-adjust: none !important;
+    border-top: 1px solid #0b1d47;
+    //height: rem(280);
+    width: 100%;
+    margin-top: rem(40);
+
+    .ad {
+        padding-left: rem(30);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: rem(22);
+        margin: rem(20) 0 rem(10);
+    }
+
+    .contact-us {
+        padding: 0 rem(30);
+        font-size: rem(20);
+        color: #929bbd;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        a {
+            width: 60%;
+            display: inline-block;
+            padding: rem(15) 0;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+            &.qq,
+            &.tel {
+                width: 40%;
+            }
+        }
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #0b1d47;
+        margin-top: rem(30);
+        height: rem(86);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+
+        .qrCode {
+            display: none;
+            width: rem(150);
+            height: rem(170);
+            background: rgb(245, 245, 245);
+            position: absolute;
+            right: rem(95);
+            bottom: rem(80);
+            text-align: center;
+            border-radius: rem(8);
+
+            &.active {
+                display: block;
+            }
+
+            span {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: rem(10);
+                margin: auto;
+                color: #666;
+                font-size: rem(18);
+            }
+
+            img {
+                width: rem(126);
+                height: rem(126);
+                position: absolute;
+                right: 0;
+                top: rem(20);
+                left: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            &:before {
+                position: absolute;
+                content: '';
+                width: 0;
+                height: 0;
+                bottom: rem(-20);
+                left: 0;
+                right: 0;
+                margin: auto;
+                border: rem(10) solid transparent;
+                border-top: rem(10) solid #fff;
+            }
+        }
+
+        .copyright {
+            font-size: rem(16);
+            color: #929bbd;
+        }
+
+        .line-us {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: rem(210);
+
+            .wx {
+                width: rem(41);
+                height: rem(34);
+            }
+
+            .tg {
+                width: rem(36);
+                height: rem(30);
+                padding: 0 rem(10);
+                border-right: 1px solid #182951;
+                border-left: 1px solid #182951;
+            }
+
+            .wb {
+                width: rem(40);
+                height: rem(32);
+            }
+        }
+    }
+}
