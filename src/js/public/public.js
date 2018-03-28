@@ -205,6 +205,15 @@ const scrollDirect = (fn) => {
     }, false)
 }
 
+// 验证手机号
+const isPoneAvailable = (pone) => {
+    const myreg = /^[1][3,4,5,7,8][0-9]{9}$/
+    if (!myreg.test(pone)) {
+        return false
+    } else {
+        return true
+    }
+}
 // 判断是否为对象字符串
 const isJsonString = (str) => {
     try {
@@ -227,5 +236,6 @@ export {
     compareCalendar,
     compareTime,
     scrollDirect,
+    isPoneAvailable,
     isJsonString
 }

@@ -14,6 +14,7 @@ if (isPc()) {
 
 let url = '/info/news'
 let url2 = '/info/lives'
+let apiInfo = '/info'
 // let url3 = '/market/coin'
 const htmlPath = ''
 
@@ -119,6 +120,21 @@ $(function () {
             recommend: true
         })
     }
+
+    // 广告
+    ajaxGet(apiInfo + '/ad/showad', {
+        adPlace: 1,
+        type: 2
+    }, (data) => {
+        const obj = data.obj[1]
+        let list = ''
+        obj.map((item) => {
+            list += `<a class="href-btn" href="${item.url}">
+                        <img src="${item.img_url}" alt="">
+                    </a>`
+        })
+        $('.index-ad').append(list)
+    })
 
     // app快讯页面 默认列表
     if ($('#livesPage').length !== 0) {
@@ -581,10 +597,6 @@ $(function () {
         if (isAndroid()) {
             downLoad.attr('href', andUrl)
         }
-        /* if (isWeixin() && isAndroid()) {
-            $('.hint').show()
-            return false
-        } */
     })
 
     /* $('.hint').on('click', function () {

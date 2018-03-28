@@ -1,0 +1,100 @@
+/**
+ * Author：zhoushuanglong
+ * Time：2018-03-01
+ * Description：about
+ */
+@import "../../libs/scss/rem";
+
+.invite-app {
+    position: relative;
+    width: rem(640);
+    height: rem(1138);
+    background: url("../img/invite-bg.jpg") center no-repeat;
+    background-size: 100%;
+
+    .invite-logo {
+        position: absolute;
+        top: rem(50);
+        left: 50%;
+        margin-left: rem(-64);
+        width: rem(128);
+        height: rem(30);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .invite-slogan {
+        position: absolute;
+        top: rem(216);
+        left: 50%;
+        margin-left: rem(-252);
+        width: rem(504);
+        height: rem(199);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .invite-title {
+        position: absolute;
+        top: rem(750);
+        left: 50%;
+        margin-left: rem(-226);
+        width: rem(452);
+        height: rem(105);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .invite-name {
+        position: absolute;
+        top: rem(650);
+        width: rem(460);
+        line-height: rem(50);
+        font-size: rem(40);
+        left: rem(90);
+        color: #8afffe;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+
+        p {
+            height: rem(50);
+            line-height: rem(50);
+        }
+    }
+
+    .invite-ewm {
+        position: absolute;
+        top: rem(870);
+        width: rem(640);
+        height: rem(253);
+
+        .ewm {
+            position: absolute;
+            left: rem(60);
+            top: rem(50);
+            width: rem(135);
+            height: rem(135);
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .ewm-bg {
+            width: rem(640);
+            height: rem(253);
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

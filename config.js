@@ -14,9 +14,8 @@ module.exports = {
     vendors: [],
     proxy: [
         proxy(['/*/*/*', '/*/*/*/*', '/*/*/*/*/*'], {
-            // target: 'http://m.huoxing24.com',
+            target: 'http://m.huoxing24.com',
             // target: 'http://m.huoxing24.vip',
-            target: 'http://www.huoxing24.vip',
             // target: 'http://47.52.210.208:8182',
             changeOrigin: true
         })

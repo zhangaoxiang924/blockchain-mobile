@@ -853,6 +853,10 @@ $(function () {
 
         ajaxGet(url + '/shownews', data, function (data) {
             let newsList = data.obj.inforList
+            if (newsList.length === 0) {
+                $('.news-content').html(`<p class="no-data">暂无相关新闻</p>`)
+                return false
+            }
             totalPage = data.obj.pageCount
             let liContent = ''
             newsList.map((item, index) => {
@@ -916,6 +920,10 @@ $(function () {
         pageSize: 5
     }, function (data) {
         let newsList = data.obj.inforList
+        if (newsList.length === 0) {
+            $('.live-swiper .live-wrapper').html(`<p class="no-data">暂无相关快讯</p>`)
+            return false
+        }
         let swiperSlide = ''
         newsList.map((item, index) => {
             swiperSlide += `<div class="live-slide" data-id=${item.id}>
@@ -940,7 +948,7 @@ $(function () {
     })
 
     $('.live-more').click(function () {
-        window.location.href = '/html?from=bta'
+        window.location.href = '/?from=bta'
     })
 
     $('.news-more').click(() => {
@@ -953,7 +961,7 @@ $(function () {
                 }
             })
         } else {
-            window.location.href = '/html/btaList.html'
+            window.location.href = '/btaList.html'
         }
     })
 
