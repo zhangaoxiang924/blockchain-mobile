@@ -34,6 +34,13 @@ private: ['../css/live.css']
     </div>
     <div class="live-shade" id="liveShade"></div>
 </div>
+
+<%- include('../../libs/html/util-m/footer', {
+plugin: [''],
+private: ['../js/live.js'],
+statistics: ''
+}) %>
+
 <script>
     $(function () {
         let isPageHide = false
@@ -47,8 +54,3 @@ private: ['../css/live.css']
         })
     })
 </script>
-<%- include('../../libs/html/util-m/footer', {
-plugin: [''],
-private: ['../js/live.js'],
-statistics: ''
-}) %>
