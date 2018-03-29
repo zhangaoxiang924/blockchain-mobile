@@ -54,6 +54,11 @@ $(function () {
             },
             success: function (data) {
                 console.log(data)
+                if (data.code === -8) {
+                    hintText.html('该手机号已经注册')
+                } else if (data.code === 1) {
+                    codeTime(document.getElementById('btnCode'))
+                }
             }
         })
     }
@@ -73,6 +78,7 @@ $(function () {
             }, 1000)
         }
     }
+    
     document.getElementById('btnCode').onclick = function () {
         if ($.trim($('#phonenum').val()) === '') {
             hintText.html('手机号不能为空')
@@ -80,7 +86,6 @@ $(function () {
             if (isPoneAvailable($.trim($('#phonenum').val())) === false) {
                 hintText.html('请输入正确的手机号')
             } else {
-                codeTime(this)
                 getCode(86, $.trim($('#phonenum').val()))
             }
         }

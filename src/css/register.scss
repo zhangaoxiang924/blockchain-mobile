@@ -25,9 +25,12 @@
         padding: rem(25);
 
         p {
+            width: 100%;
             line-height: rem(40);
             color: #999;
+            padding-top: rem(30);
             font-size: rem(26);
+            text-align: center;
 
             span {
                 color: #333;
@@ -36,12 +39,12 @@
 
         ul {
             width: 100%;
-            margin-top: rem(50);
+            margin-top: rem(30);
 
             li {
                 position: relative;
                 width: 100%;
-                height: rem(85);
+                height: rem(80);
                 border-bottom: rem(1) #dedede solid;
 
                 input {

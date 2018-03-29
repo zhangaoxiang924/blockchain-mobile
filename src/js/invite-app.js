@@ -13,8 +13,9 @@ let getInvite = (id) => {
     ajaxGet('/passport/account/getinvitecard', {
         passportid: id
     }, (data) => {
-        console.log(id)
+        console.log(data)
         if (data.code === 1) {
+            let integral = data.obj.registerBonus + data.obj.giveBonus
             $('.invite-name').append(data.obj.nickName)
             // 设置参数方式
             let qrcode = new QRCode('qrcode', {
@@ -27,7 +28,7 @@ let getInvite = (id) => {
             })
             // 使用 API
             qrcode.clear()
-            qrcode.makeCode(`http://m.huoxing24.com/register.html?passportid=${id}&inviteCode=${data.obj.inviteCode}&giveBonus=${data.obj.giveBonus}`)
+            qrcode.makeCode(`http://m.huoxing24.com/register.html?passportid=${id}&inviteCode=${data.obj.inviteCode}&giveBonus=${integral}`)
         }
     })
 }
