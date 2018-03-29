@@ -128,7 +128,7 @@ $(function () {
     }, (data) => {
         const obj = data.obj[1]
         let list = ''
-        obj.map((item) => {
+        obj && obj.length !== 0 && obj.map((item) => {
             list += `<a class="href-btn" href="${item.url}">
                         <img src="${item.img_url}" alt="">
                     </a>`

@@ -48,14 +48,14 @@ html {
             .news-img {
                 display: inline-block;
                 width: rem(210);
-                height: rem(141);
+                height: rem(118);
                 overflow: hidden;
 
                 img {
                     min-width: 100%;
                     min-height: 100%;
-                    max-width: 150%;
-                    max-height: 150%;
+                    //max-width: 150%;
+                    //max-height: 150%;
                 }
             }
 
@@ -73,7 +73,7 @@ html {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     margin: 0 0 rem(5);
-                    font-size: rem(30);
+                    font-size: rem(28);
                     color: rgba(255, 255, 255, 0.9);
                 }
 
@@ -85,7 +85,7 @@ html {
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
                     font-size: rem(20);
-                    line-height: rem(30);
+                    line-height: rem(26);
                 }
             }
 
@@ -94,7 +94,7 @@ html {
                 font-size: rem(20);
                 position: absolute;
                 bottom: 0;
-                right: 0;
+                right: rem(8);
                 width: 100%;
                 height: rem(20);
                 margin-bottom: rem(20);
